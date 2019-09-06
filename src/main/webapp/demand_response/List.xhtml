@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListConsumerRecommendationTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="ConsumerRecommendationListForm">
+                <p:panel header="#{bundle.ListConsumerRecommendationTitle}">
+                    <p:dataTable id="datalist" value="#{consumerRecommendationController.items}" var="item"
+                                 selectionMode="single" selection="#{consumerRecommendationController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.id}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListConsumerRecommendationTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListConsumerRecommendationTitle_notifCode}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.notifCode}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListConsumerRecommendationTitle_severity}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.severity}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListConsumerRecommendationTitle_shortDescription}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.shortDescription}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListConsumerRecommendationTitle_longDescription}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.longDescription}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListConsumerRecommendationTitle_emitter}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.emitter}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListConsumerRecommendationTitle_createdOn}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.createdOn}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListConsumerRecommendationTitle_status}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.status}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListConsumerRecommendationTitle_reduceIntervalStart}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.reduceIntervalStart}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListConsumerRecommendationTitle_reduceIntervalStop}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.reduceIntervalStop}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListConsumerRecommendationTitle_quantity}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.quantity}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListConsumerRecommendationTitle_confirmedDate}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.confirmedDate}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListConsumerRecommendationTitle_confirmationStatus}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.confirmationStatus}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListConsumerRecommendationTitle_reduceDayOfWeek}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.reduceDayOfWeek}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListConsumerRecommendationTitle_clientId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.clientId}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{consumerRecommendationController.prepareCreate}" update=":ConsumerRecommendationCreateForm" oncomplete="PF('ConsumerRecommendationCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":ConsumerRecommendationViewForm" oncomplete="PF('ConsumerRecommendationViewDialog').show()" disabled="#{empty consumerRecommendationController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":ConsumerRecommendationEditForm" oncomplete="PF('ConsumerRecommendationEditDialog').show()" disabled="#{empty consumerRecommendationController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{consumerRecommendationController.destroy}" update=":growl,datalist" disabled="#{empty consumerRecommendationController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

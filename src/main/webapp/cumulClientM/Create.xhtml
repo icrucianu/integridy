@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CumulClientMCreateDlg" widgetVar="CumulClientMCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateCumulClientMTitle}">
+            <h:form id="CumulClientMCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{cumulClientMController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateCumulClientMLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{cumulClientMController.selected.id}" title="#{bundle.CreateCumulClientMTitle_id}" required="true" requiredMessage="#{bundle.CreateCumulClientMRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.CreateCumulClientMLabel_activePow}" for="activePow" />
+                        <p:inputText id="activePow" value="#{cumulClientMController.selected.activePow}" title="#{bundle.CreateCumulClientMTitle_activePow}" />
+                        <p:outputLabel value="#{bundle.CreateCumulClientMLabel_co2}" for="co2" />
+                        <p:inputText id="co2" value="#{cumulClientMController.selected.co2}" title="#{bundle.CreateCumulClientMTitle_co2}" />
+                        <p:outputLabel value="#{bundle.CreateCumulClientMLabel_consumedActivePow}" for="consumedActivePow" />
+                        <p:inputText id="consumedActivePow" value="#{cumulClientMController.selected.consumedActivePow}" title="#{bundle.CreateCumulClientMTitle_consumedActivePow}" />
+                        <p:outputLabel value="#{bundle.CreateCumulClientMLabel_consumedReactivePow}" for="consumedReactivePow" />
+                        <p:inputText id="consumedReactivePow" value="#{cumulClientMController.selected.consumedReactivePow}" title="#{bundle.CreateCumulClientMTitle_consumedReactivePow}" />
+                        <p:outputLabel value="#{bundle.CreateCumulClientMLabel_createdTime}" for="createdTime" />
+                        <p:calendar id="createdTime" pattern="MM/dd/yyyy HH:mm:ss" value="#{cumulClientMController.selected.createdTime}" title="#{bundle.EditCumulClientMTitle_createdTime}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateCumulClientMLabel_dayCost}" for="dayCost" />
+                        <p:inputText id="dayCost" value="#{cumulClientMController.selected.dayCost}" title="#{bundle.CreateCumulClientMTitle_dayCost}" />
+                        <p:outputLabel value="#{bundle.CreateCumulClientMLabel_deviceNumber}" for="deviceNumber" />
+                        <p:inputText id="deviceNumber" value="#{cumulClientMController.selected.deviceNumber}" title="#{bundle.CreateCumulClientMTitle_deviceNumber}" />
+                        <p:outputLabel value="#{bundle.CreateCumulClientMLabel_downTime}" for="downTime" />
+                        <p:inputText id="downTime" value="#{cumulClientMController.selected.downTime}" title="#{bundle.CreateCumulClientMTitle_downTime}" />
+                        <p:outputLabel value="#{bundle.CreateCumulClientMLabel_energyMismatch}" for="energyMismatch" />
+                        <p:inputText id="energyMismatch" value="#{cumulClientMController.selected.energyMismatch}" title="#{bundle.CreateCumulClientMTitle_energyMismatch}" />
+                        <p:outputLabel value="#{bundle.CreateCumulClientMLabel_energyMismatchRatio}" for="energyMismatchRatio" />
+                        <p:inputText id="energyMismatchRatio" value="#{cumulClientMController.selected.energyMismatchRatio}" title="#{bundle.CreateCumulClientMTitle_energyMismatchRatio}" />
+                        <p:outputLabel value="#{bundle.CreateCumulClientMLabel_nightCost}" for="nightCost" />
+                        <p:inputText id="nightCost" value="#{cumulClientMController.selected.nightCost}" title="#{bundle.CreateCumulClientMTitle_nightCost}" />
+                        <p:outputLabel value="#{bundle.CreateCumulClientMLabel_saidi}" for="saidi" />
+                        <p:inputText id="saidi" value="#{cumulClientMController.selected.saidi}" title="#{bundle.CreateCumulClientMTitle_saidi}" />
+                        <p:outputLabel value="#{bundle.CreateCumulClientMLabel_phaseVoltage}" for="phaseVoltage" />
+                        <p:inputText id="phaseVoltage" value="#{cumulClientMController.selected.phaseVoltage}" title="#{bundle.CreateCumulClientMTitle_phaseVoltage}" />
+                        <p:outputLabel value="#{bundle.CreateCumulClientMLabel_reactivePow}" for="reactivePow" />
+                        <p:inputText id="reactivePow" value="#{cumulClientMController.selected.reactivePow}" title="#{bundle.CreateCumulClientMTitle_reactivePow}" />
+                        <p:outputLabel value="#{bundle.CreateCumulClientMLabel_sendInterval}" for="sendInterval" />
+                        <p:inputText id="sendInterval" value="#{cumulClientMController.selected.sendInterval}" title="#{bundle.CreateCumulClientMTitle_sendInterval}" />
+                        <p:outputLabel value="#{bundle.CreateCumulClientMLabel_thdd}" for="thdd" />
+                        <p:inputText id="thdd" value="#{cumulClientMController.selected.thdd}" title="#{bundle.CreateCumulClientMTitle_thdd}" />
+                        <p:outputLabel value="#{bundle.CreateCumulClientMLabel_upTime}" for="upTime" />
+                        <p:inputText id="upTime" value="#{cumulClientMController.selected.upTime}" title="#{bundle.CreateCumulClientMTitle_upTime}" />
+                        <p:outputLabel value="#{bundle.CreateCumulClientMLabel_voltageDeviation}" for="voltageDeviation" />
+                        <p:inputText id="voltageDeviation" value="#{cumulClientMController.selected.voltageDeviation}" title="#{bundle.CreateCumulClientMTitle_voltageDeviation}" />
+                        <p:outputLabel value="#{bundle.CreateCumulClientMLabel_idx12hours}" for="idx12hours" />
+                        <p:inputText id="idx12hours" value="#{cumulClientMController.selected.idx12hours}" title="#{bundle.CreateCumulClientMTitle_idx12hours}" />
+                        <p:outputLabel value="#{bundle.CreateCumulClientMLabel_idx15minutes}" for="idx15minutes" />
+                        <p:inputText id="idx15minutes" value="#{cumulClientMController.selected.idx15minutes}" title="#{bundle.CreateCumulClientMTitle_idx15minutes}" />
+                        <p:outputLabel value="#{bundle.CreateCumulClientMLabel_idx1day}" for="idx1day" />
+                        <p:inputText id="idx1day" value="#{cumulClientMController.selected.idx1day}" title="#{bundle.CreateCumulClientMTitle_idx1day}" />
+                        <p:outputLabel value="#{bundle.CreateCumulClientMLabel_idx1hour}" for="idx1hour" />
+                        <p:inputText id="idx1hour" value="#{cumulClientMController.selected.idx1hour}" title="#{bundle.CreateCumulClientMTitle_idx1hour}" />
+                        <p:outputLabel value="#{bundle.CreateCumulClientMLabel_idx1month}" for="idx1month" />
+                        <p:inputText id="idx1month" value="#{cumulClientMController.selected.idx1month}" title="#{bundle.CreateCumulClientMTitle_idx1month}" />
+                        <p:outputLabel value="#{bundle.CreateCumulClientMLabel_idx1week}" for="idx1week" />
+                        <p:inputText id="idx1week" value="#{cumulClientMController.selected.idx1week}" title="#{bundle.CreateCumulClientMTitle_idx1week}" />
+                        <p:outputLabel value="#{bundle.CreateCumulClientMLabel_idx1year}" for="idx1year" />
+                        <p:inputText id="idx1year" value="#{cumulClientMController.selected.idx1year}" title="#{bundle.CreateCumulClientMTitle_idx1year}" />
+                        <p:outputLabel value="#{bundle.CreateCumulClientMLabel_idx3month}" for="idx3month" />
+                        <p:inputText id="idx3month" value="#{cumulClientMController.selected.idx3month}" title="#{bundle.CreateCumulClientMTitle_idx3month}" />
+                        <p:outputLabel value="#{bundle.CreateCumulClientMLabel_idx6hours}" for="idx6hours" />
+                        <p:inputText id="idx6hours" value="#{cumulClientMController.selected.idx6hours}" title="#{bundle.CreateCumulClientMTitle_idx6hours}" />
+                        <p:outputLabel value="#{bundle.CreateCumulClientMLabel_idx6month}" for="idx6month" />
+                        <p:inputText id="idx6month" value="#{cumulClientMController.selected.idx6month}" title="#{bundle.CreateCumulClientMTitle_idx6month}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{cumulClientMController.create}" value="#{bundle.Save}" update="display,:CumulClientMListForm:datalist,:growl" oncomplete="handleSubmit(args,'CumulClientMCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="CumulClientMCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

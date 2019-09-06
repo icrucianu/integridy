@@ -1,0 +1,320 @@
+.panel-grid{
+    border:none;
+}
+.usermenubtn ui-button{
+    border:none !important ;
+    background: #ffffff !important;
+    
+}
+.styleButtonTransparent .ui-button{
+  background-color: #fffff!important;  
+  background: #FFFFFF!important;
+  border:none!important;
+  /*color: #E3E3E3;*/
+  font-weight: bold;
+}
+
+.styleIntegridyMenuItem .ui-menuitem{
+  background-color: #fffff!important;  
+  background: #FFFFFF!important;
+  /*border:none!important;*/
+  /*color: #E3E3E3;*/
+  font-weight: bold;
+}
+.ui-widget {
+    font-size: 12px !important;
+}
+.ui-layout-unit .ui-layout-unit-content{
+    padding:0px !important;
+}
+
+/* Panels */
+.content-panel{
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    padding:20px 20px 20px 20px;
+}
+.content-panel-header {
+    width: 100%;
+    padding:20px 20px 20px 20px;
+    border-bottom:1px solid #E5E5E5;
+}
+.content-panel .content{
+    padding:20px;
+}
+
+.h2-title{
+    width: 100%;
+    color:darkgreen;
+    font-weight: bold;
+    font-size: 22px;
+}
+.h2-subtitle{
+    width: 100%;
+    color:darkgreen;
+    font-size: 18px;
+}
+.h3-title{
+    width: 100%;
+    color:darkgreen;
+    font-weight: bold;
+    font-size: 17px;
+}
+.h3-subtitle{
+    width: 100%;
+    color:darkgreen;
+    font-size: 14px;
+}
+
+.account-button-edit{
+    text-align: center;
+    width: 73.1px;
+    height: 32px;
+    border-color: #59568B;
+    border: 1px;
+    opacity: 100%;
+    border-radius: 4px 4px 4px 4px;
+    position: relative; 
+    font-family: "Segoe UI", sans-serif;
+    color: #fff;
+    opacity: 100%;
+     }
+ 
+
+/*Left navigation container*/
+.navigationMenuContainer{
+    border-radius: 0px !important;
+    padding: 0px !important;
+    border:0px !important;
+    text-align: center;
+}
+.navigationMenuContainer .ui-layout-unit-content{
+    background-color: #FFFFFF;
+}
+.navigationMenuContainer img{
+    margin-top:15px !important;
+}
+
+
+/* Top navigation bar*/
+.topNavigationPanel{
+    background: #5EA928;
+    border:0px !important;
+    padding:5px;
+    border-radius: 0px !important;
+}
+.toggleNavigationMenu{
+    font-size:25px;
+    color:#ffffff;
+    transition: 0.1s ease-in-out;
+}
+.toggleNavigationMenu:hover{
+    cursor:pointer;
+    color:#5EA928;
+}
+.currentPageTitle{
+    font-size:19px;
+    padding-left: 10px;
+    color:#ffffff;
+}
+.sign-out-container{
+    float:right;
+    color:#FFFFFF;
+    margin-top: 3px;
+    font-size:18px;
+    transition: 0.1s ease-in-out;
+}
+.sign-out-container span{
+    font-size:15px;
+    margin-right: 5px;
+}
+
+.sign-out-container:hover{
+    cursor:pointer;
+    color: #0D0D0D;
+}
+
+/*Main layout*/
+.mainLayout{
+    margin:0px !important;
+    padding:0px !important;
+    border:none !important;
+}
+.mainLayout .ui-layout-unit-content {
+    background: #FFFFFF !important;
+}
+
+/*Login*/
+.login-header{
+    color: #493737;
+    font-family: "Calibri";
+    font-size:19px;
+    float:left;
+    font-weight: bolder;
+    position:relative;
+    margin:0px;
+}
+.login-input{
+    width:230px;
+    padding-left:10px !important;
+    padding-right:10px !important;
+    padding-top:8px !important;
+    padding-bottom: 8px !important;
+    border:1px solid #CECECE !important;
+    border-radius:4px !important;
+}
+.login-input:focus{
+    outline-color: #929292 !important;
+    outline-width: 1px !important;
+}
+.login-button{
+    font-weight: normal !important;
+    font-size: 14px !important;
+    width:250px;
+    border: 1px solid #5EA928;
+    color: #fff;
+    background: #5EA928;
+    padding-top:8px !important;
+    padding-bottom:8px !important;
+    margin-top:10px;
+    border-radius: 3px;
+    text-shadow: none !important;
+    box-shadow: none !important;
+}
+.login-button:hover{
+    background: #74a950;
+    cursor: pointer;
+    box-shadow: none !important;
+}
+.login-button:focus{
+    outline:none !important;
+    box-shadow: none !important;
+    outline-color: #5EA928;
+}
+.login-changePwd{
+    margin-top:10px;
+    float:right;
+    color:#26272D;
+    font-family: "Calibri Light";
+    font-weight: bold;
+    font-size:13px;
+    text-decoration: none;
+}
+.login-changePwd:hover{
+    text-decoration: underline;
+}
+.panelGridCenter {
+    margin: 0px auto;
+    border:none;
+}
+.registerPanel .ui-widget-content{
+    background: none !important;
+    border-color: #F4F4F4 !important;
+}
+.registerPanel .ui-panelgrid-cell{
+    padding-left:0px !important;
+    padding-right: 0px !important;
+}
+.integridyAuthForm{
+    background:#F4F4F4;
+    margin-top: 5%;
+}
+.integridyAuthForm .ui-message {
+    text-align: left !important;
+    border:none !important; 
+    padding-left:10px;
+    padding-right:10px;
+    padding-top:5px;
+    padding-bottom:5px;
+    border-radius: 3px !important;
+    margin:0px !important;
+}
+.integridyAuthForm .ui-messages-error, .ui-message-error{
+    background-color:#EE2F41 !important;
+}
+.integridyAuthForm .ui-message-error-detail{
+    color:#ffffff !important;
+}
+.integridyAuthForm .ui-message-error-icon{
+    /*display:none !important;*/
+    background: url(../resources/images/ets-error-icon.png) no-repeat !important;
+    background-size: 10px;
+}
+
+.integridyHeaderGrid.ui-panelgrid>*>tr,
+.integridyHeaderGrid.ui-panelgrid .ui-panelgrid-cell {
+    border: none;
+   
+}
+
+.integridyRecommendationsGrid.ui-panelgrid>*>tr,
+.integridyRecommendationsGrid.ui-panelgrid .ui-panelgrid-cell {
+    border: none;
+    vertical-align: top;
+   
+}
+.ets-login-error{
+    font-family: "Calibri Light";
+    font-size:15px;
+    color: #ffffff;
+    border-radius: 3px;
+    width:250px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top:5px;
+    padding-bottom:5px;
+    background: #EF3340;
+}
+
+
+/*Error pages*/
+.ets-error-header{
+    font-family: "Calibri";
+    font-weight: bold;
+    font-size: 40px;
+    
+}
+.error-form-wrapper{
+    box-shadow: 0 20px 35px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    margin:0px auto;
+    width:500px;
+    height:550px;
+    background: #ffffff;
+}
+.error-form-header-wrapper{
+    width:100%;
+    background: #EE2F41;
+    text-align: center;
+    color:#ffffff;
+    padding-top: 10px;
+    padding-bottom:10px;
+}
+
+.error-form-logo-wrapper{
+    width:100%;
+    text-align:center;
+    margin-top: 10%;
+    margin-bottom:10%;
+}
+
+.error-form-error-description{
+    font-family: "Calibri";
+    font-weight: bold;
+    font-size: 19px;
+    text-align: center;
+}
+
+.table_title {
+    font-weight: bold !important;
+    text-decoration: underline !important;
+    font-size: 16px !important;
+}
+
+.table_title_dr {/*pentru pagina de Demand Response*/
+    font-weight: bold !important;
+    font-size: 16px !important;
+}
+
+.table_font_bold{
+    font-weight: bold !important;
+}

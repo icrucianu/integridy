@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+
+
+    <ui:composition template="/mainframe.xhtml">
+        <ui:define name="title">
+            <h:outputText value="Action log"></h:outputText>
+            <h:outputStylesheet library="css" name="bootstrap.css"/>
+            <h:outputStylesheet library="css" name="tabstyle.css"/>
+        </ui:define>
+
+        <script src="/js/jquery-3.3.1.min.js"></script>
+        <script src="/js/popper.min.js"></script>
+        <script src="/js/bootstrap.min.js"></script>
+        
+        <ui:define name="body">
+            <h:form id="ActionLogForm">
+
+        
+            <p:panelGrid columns="5" layout="grid" styleClass="ets-dashboard-primary">
+                <p:column>
+                    <h:outputText  value="#{actionLogController.consumersNumber}" styleClass="dash-info"/> <br/><br/>
+                    <h:outputText value="Consumers" styleClass="dash-info-description"/>
+                </p:column>
+                <p:column>
+                    <h:outputText value="#{actionLogController.registerdConsumptionRecords}" styleClass="dash-info"/> <br/><br/>
+                    <h:outputText value="Consumption records" styleClass="dash-info-description"/>
+                </p:column>
+                <p:column>
+                    <h:outputText  value="#{actionLogController.dsoNotificationsNumber}" styleClass="dash-info"/> <br/><br/>
+                    <h:outputText value="DSO Notifications" styleClass="dash-info-description"/>
+                </p:column>
+                <p:column>
+                    <h:outputText value="#{actionLogController.consumerNotificationsNumber}" styleClass="dash-info"/> <br/><br/>
+                    <h:outputText value="Consumption Notifications" styleClass="dash-info-description"/>
+                </p:column>
+                <p:column>
+                    <h:outputText value="#{actionLogController.usersLoggedInNumber}" styleClass="dash-info"/> <br/><br/>
+                    <h:outputText value="User Loggins" styleClass="dash-info-description"/>
+                </p:column>
+            </p:panelGrid>
+                <p:panel header="Action Log View">
+        <p:panelGrid id="filterPanel" columns="7">
+             <p:outputLabel value="User:" />
+             <p:selectOneMenu value="#{actionLogController.selectedUser}" filter="true" filterMatchMode="contains">
+                  <f:selectItem itemLabel="Select One" itemValue="" />
+                 <f:selectItems var="user" value="#{usersController.items}" itemLabel="#{user.username}" itemValue="#{user}"/>
+             </p:selectOneMenu>
+             <p:outputLabel value="Start date:" />
+             <p:calendar pattern="dd.MM.yyyy HH:mm" value="#{actionLogController.startDate}"/>
+            <p:outputLabel value="End date:" />
+            <p:calendar  pattern="dd.MM.yyyy HH:mm" value="#{actionLogController.endDate}"/>
+            <p:commandButton value="Filter" actionListener="#{actionLogController.filter()}" update="actionLogData" /> 
+        </p:panelGrid>
+            
+        </p:panel>
+        
+        <p:dataTable id="actionLogData" value="#{actionLogController.model}" var="item"
+                                         selectionMode="single" selection="#{actionLogController.selected}"
+                                         paginator="true"
+                                         rowKey="#{item.id}"
+                                         rows="20"
+                                         widgetVar="actionLogDataWidget"
+                                         scrollable="true"
+                                         paginatorPosition="bottom"
+                                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}  Exporters"
+                                         lazy="true"
+                                         >
+                                <f:facet name="Exporters">
+                                  
+                                         <h:commandLink>
+                                            <p:graphicImage library="images" name="excel.png"/>
+                                            <p:dataExporter type="xls" target="actionLogData" fileName="#{actionLogController.reportName}" />
+                                         </h:commandLink>
+
+                                         <h:commandLink>
+                                             <p:graphicImage library="images" name="pdf.png" width="24"/>
+                                             <p:dataExporter type="pdf" target="actionLogData" fileName="#{actionLogController.reportName}"/>
+                                         </h:commandLink>
+
+                                         <h:commandLink>
+                                             <p:graphicImage library="images" name="csv.png" width="24"/>
+                                             <p:dataExporter type="csv" target="actionLogData" fileName="#{actionLogController.reportName}" />
+                                         </h:commandLink>
+
+                                         <h:commandLink>
+                                             <p:graphicImage library="images" name="xml.png" width="24"/>
+                                             <p:dataExporter type="xml" target="actionLogData" fileName="#{actionLogController.reportName}" />
+                                         </h:commandLink>
+                                    
+                                 </f:facet>
+            <p:column headerText="Date">
+                <h:outputText value="#{item.actionDate}" style="float:right">
+                    <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" timeZone="GMT+2"/>
+                                    </h:outputText>
+                                </p:column>
+            <p:column headerText="User Name">
+                <h:outputText value="#{item.userId.username}" style="float:right"/>
+            </p:column>
+            <p:column headerText="Action">
+                <h:outputText value="#{item.actionName}" style="float:right"/>
+            </p:column>
+             <p:column headerText="Page">
+                 <h:outputText value="#{item.page}" style="float:right"/>
+            </p:column>
+             
+             
+        </p:dataTable>
+                
+                
+                
+        </h:form>
+            <h:outputScript library="js" name="bootstrap.js" />
+        </ui:define>
+
+    </ui:composition>
+
+
+</html>

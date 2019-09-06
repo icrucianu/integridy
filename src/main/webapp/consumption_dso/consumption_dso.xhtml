@@ -1,0 +1,1468 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+
+
+    <ui:composition template="/mainframe.xhtml">
+        <ui:define name="title">
+            <h:outputText value="Consumption dso"></h:outputText>
+            <h:outputStylesheet library="css" name="bootstrap.css"/>
+            <h:outputStylesheet library="css" name="tabstyle.css"/>
+        </ui:define>
+
+        <script src="/js/jquery-3.3.1.min.js"></script>
+        <script src="/js/popper.min.js"></script>
+        <script src="/js/bootstrap.min.js"></script>
+        
+        <ui:define name="body">
+            <style>
+                .tab-content > .tab-pane:not(.active),
+                .pill-content > .pill-pane:not(.active) {
+                    display: block !important;
+                    height: 0 !important;
+                    overflow-y: hidden !important;
+                } 
+            </style>
+          
+            <div class="tableContainer">
+                <div id="navTab">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="nav-item">
+                            <a href="#currentConsumption" class="nav-link-active" data-toggle="tab" role="tab" aria-controls="currentConsumption" aria-selected="true">CURRENT</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#dailyConsumption" class="nav-link" data-toggle="tab" role="tab" aria-controls="dailyConsumption" aria-selected="false">DAILY</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#weeklyConsumption" class="nav-link" data-toggle="tab" role="tab" aria-controls="weeklyConsumption" aria-selected="fase">WEEKLY</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#monthlyConsumption" class="nav-link" data-toggle="tab" role="tab" aria-controls="monthlyConsumption" aria-selected="fase">MONTHLY</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#yearlyConsumption" class="nav-link" data-toggle="tab" role="tab" aria-controls="yearlyConsumption" aria-selected="fase">YEARLY</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content clearfix">
+                        <div class="tab-pane active" id="currentConsumption" role="tabpanel" aria-labelledby="currentConsumption">
+                            <h:form id="hConsumption">
+                            <div  >
+
+                                <p:chart type="line" model="#{cumulDsoHController.dateModelCurrentTotal}" style="height:400px;" 
+                                         rendered="#{!cumulDsoHController.noDataCurrentTotal}"
+                                         styleClass="ets-chart" responsive="true"/>
+                            </div>
+                            
+                             <p:dataTable id="datalistCumulDsoH" 
+                                          value="#{cumulDsoHController.items}" 
+                                          var="item"
+                                         selectionMode="single" selection="#{cumulDsoHController.selected}"
+                                         paginator="true"
+                                         rowKey="#{item.id}"
+                                         rows="10"
+                                         rowsPerPageTemplate="10,20,30,40,50"
+                                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} Exporters"
+                                         scrollable="true"
+                                         >
+
+                               <f:facet name="Exporters">
+                                         <h:commandLink>
+                                            <p:graphicImage library="images" name="excel.png"/>
+                                            <p:dataExporter type="xls" target="datalistCumulDsoH" fileName="#{cumulDsoHController.fileNameCumulDSO_H}" />
+                                         </h:commandLink>
+
+                                         <h:commandLink>
+                                             <p:graphicImage library="images" name="pdf.png" width="24"/>
+                                             <p:dataExporter type="pdf" target="datalistCumulDsoH" fileName="#{cumulDsoHController.fileNameCumulDSO_H}"/>
+                                         </h:commandLink>
+
+                                         <h:commandLink>
+                                             <p:graphicImage library="images" name="csv.png" width="24"/>
+                                             <p:dataExporter type="csv" target="datalistCumulDsoH" fileName="#{cumulDsoHController.fileNameCumulDSO_H}" />
+                                         </h:commandLink>
+
+                                         <h:commandLink>
+                                             <p:graphicImage library="images" name="xml.png" width="24"/>
+                                             <p:dataExporter type="xml" target="datalistCumulDsoH" fileName="#{cumulDsoHController.fileNameCumulDSO_H}" />
+                                         </h:commandLink>
+                                 </f:facet>
+                               <f:facet name="header">
+                                    Data registered each hour for the DSO
+
+                                    <p:commandButton id="toggler" type="button" value="Columns" style="float:right" icon="ui-icon-calculator" />
+                                    <p:columnToggler datasource="datalistCumulDsoH" trigger="toggler" />
+                                </f:facet>
+                                 <p:column headerText="#{bundle.ListCumulDsoWTitle_createdTime}">
+                                    
+                                    <h:outputText value="#{item.createdTime}" style="float:right">
+                                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                                    </h:outputText>
+                                </p:column>
+                                 
+                                 <p:column headerText="#{bundle.ListCumulDsoWTitle_activePow}">
+                                   
+                                    <h:outputText value="#{item.activePow}" style="float:right">
+                                        <f:convertNumber maxFractionDigits="2"/>
+                                    </h:outputText>
+                                </p:column>
+                                 
+                                 <p:column headerText="#{bundle.ListCumulDsoWTitle_consumedActivePow}">
+                                    
+                                    <h:outputText value="#{item.consumedActivePow}" style="float:right">
+                                        <f:convertNumber maxFractionDigits="2"/>
+                                    </h:outputText>
+                                </p:column>
+                                 
+                                 <p:column headerText="#{bundle.ListCumulDsoWTitle_dayCost}">
+                                    
+                                    <h:outputText value="#{item.dayCost}" style="float:right">
+                                        <f:convertNumber maxFractionDigits="2"/>
+                                    </h:outputText>
+                                </p:column>
+                                 
+                                 <p:column headerText="#{bundle.ListCumulDsoWTitle_upTime}">
+                                   
+                                    <h:outputText value="#{item.upTime}" style="float:right"/>
+                                </p:column>
+                                 
+                                 <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_downTime}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.downTime}" style="float:right"/>
+                                </p:column>
+                                 
+                                 <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_reactivePow}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.reactivePow}" style="float:right">
+                                        <f:convertNumber maxFractionDigits="2"/>
+                                    </h:outputText>
+                                </p:column>                                
+                                 
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_consumedReactivePow}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.consumedReactivePow}" style="float:right">
+                                        <f:convertNumber maxFractionDigits="2"/>
+                                    </h:outputText>
+                                </p:column>
+                                 
+                                 <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_phaseVoltage}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.phaseVoltage}" style="float:right">
+                                        <f:convertNumber maxFractionDigits="2"/>
+                                    </h:outputText>
+                                </p:column>
+                                 
+                                 <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_saidi}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.saidi}" style="float:right">
+                                        <f:convertNumber maxFractionDigits="2"/>
+                                    </h:outputText>
+                                </p:column>
+                                 
+                                 <!-- END ORDERED COLUMNS -->                                                         
+                                
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_co2}"/>                                           
+                                    </f:facet>
+                                    <h:outputText value="#{item.co2}" style="float:right">
+                                        <f:convertNumber maxFractionDigits="2"/>
+                                    </h:outputText>
+                                </p:column>                          
+
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_deviceNumber}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.deviceNumber}" style="float:right"/>
+                                </p:column>
+
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_energyMismatch}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.energyMismatch}" style="float:right"> 
+                                        <f:convertNumber maxFractionDigits="2"/>
+                                    </h:outputText>
+                                </p:column >
+                                
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_energyMismatchRatio}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.energyMismatchRatio}" style="float:right">
+                                        <f:convertNumber maxFractionDigits="2"/>
+                                    </h:outputText>
+                                </p:column>
+                                
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_nightCost}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.nightCost}" style="float:right">
+                                        <f:convertNumber maxFractionDigits="2"/>
+                                    </h:outputText>                                    
+                                </p:column>                               
+
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_sendInterval}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.sendInterval}" style="float:right"/>
+                                </p:column>
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_thdd}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.thdd}" style="float:right">
+                                        <f:convertNumber maxFractionDigits="2"/>
+                                    </h:outputText>
+                                </p:column>
+                                
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_voltageDeviation}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.voltageDeviation}" style="float:right">
+                                        <f:convertNumber maxFractionDigits="2"/>
+                                    </h:outputText>
+                                </p:column>
+                                
+                                <p:column visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_id}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.id}" style="float:right"/>
+                                </p:column>
+                                
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_idx12hours}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idx12hours}" style="float:right"/>
+                                </p:column>
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_idx15minutes}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idx15minutes}" style="float:right"/>
+                                </p:column>
+                                
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_idx1day}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idx1day}" style="float:right"/>
+                                </p:column>
+                                
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_idx1hour}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idx1hour}" style="float:right"/>
+                                </p:column>
+                                
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_idx1month}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idx1month}" style="float:right"/>
+                                </p:column>
+                                
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_idx1week}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idx1week}" style="float:right"/>
+                                </p:column>
+                                
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_idx1year}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idx1year}" style="float:right"/>
+                                </p:column>
+                                
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_idx3month}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idx3month}" style="float:right"/>
+                                </p:column>
+                                
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_idx6hours}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idx6hours}" style="float:right"/>
+                                </p:column>
+                                
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_idx6month}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idx6month}" style="float:right"/>
+                                </p:column>
+
+                            </p:dataTable>
+                            </h:form>
+                        </div>
+                        <div class="tab-pane" id="dailyConsumption" role="tabpanel" aria-labelledby="dailyConsumption">
+                            <h:form id="dailyConsumption">
+
+                            <div  >
+                                <p:chart type="line" model="#{cumulDsoDController.dateModelCurrentTotal}" style="height:400px;" 
+                                         rendered="#{!cumulDsoDController.noDataCurrentTotal}"
+                                         styleClass="ets-chart" responsive="true"/>
+                            </div>
+                           <p:dataTable id="datalistD" value="#{cumulDsoDController.items}" var="item"
+                                         selectionMode="single" selection="#{cumulDsoDController.selected}"
+                                         paginator="true"
+                                         rowKey="#{item.id}"
+                                         rows="10"
+                                         rowsPerPageTemplate="10,20,30,40,50"
+                                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} Exporters"
+                                         scrollable="true"
+                                         >
+                                <f:facet name="Exporters">
+                                  
+                                         <h:commandLink>
+                                            <p:graphicImage library="images" name="excel.png"/>
+                                            <p:dataExporter type="xls" target="datalistD" fileName="#{cumulDsoDController.fileNameCumulDSO_D}" />
+                                         </h:commandLink>
+
+                                         <h:commandLink>
+                                             <p:graphicImage library="images" name="pdf.png" width="24"/>
+                                             <p:dataExporter type="pdf" target="datalistD" fileName="#{cumulDsoDController.fileNameCumulDSO_D}"/>
+                                         </h:commandLink>
+
+                                         <h:commandLink>
+                                             <p:graphicImage library="images" name="csv.png" width="24"/>
+                                             <p:dataExporter type="csv" target="datalistD" fileName="#{cumulDsoDController.fileNameCumulDSO_D}" />
+                                         </h:commandLink>
+
+                                         <h:commandLink>
+                                             <p:graphicImage library="images" name="xml.png" width="24"/>
+                                             <p:dataExporter type="xml" target="datalistD" fileName="#{cumulDsoDController.fileNameCumulDSO_D}" />
+                                         </h:commandLink>
+                                    
+                                 </f:facet>
+                                <f:facet name="header">
+                                    Data registered each day for the DSO
+
+                                    <p:commandButton id="toggler" type="button" value="Columns" style="float:right" icon="ui-icon-calculator" />
+                                    <p:columnToggler datasource="datalistD" trigger="toggler" />
+                                </f:facet>
+
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_createdTime}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.createdTime}" style="float:right">
+                                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                                    </h:outputText>
+                                </p:column>
+                                 
+                                 <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_activePow}"/>                                            
+                                    </f:facet>
+                                    <h:outputText value="#{item.activePow}" style="float:right">
+                                        <f:convertNumber maxFractionDigits="2"/>
+                                    </h:outputText>
+                                </p:column>
+                                 
+                                 <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_consumedActivePow}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.consumedActivePow}" style="float:right">
+                                        <f:convertNumber maxFractionDigits="2"/>
+                                    </h:outputText>
+                                </p:column>
+                                 
+                                 <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_dayCost}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.dayCost}" style="float:right">
+                                        <f:convertNumber maxFractionDigits="2"/>
+                                    </h:outputText>
+                                </p:column>
+                                 
+                                 <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_upTime}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.upTime}" style="float:right"/>
+                                </p:column>
+                                 
+                                 <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_downTime}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.downTime}" style="float:right"/>
+                                </p:column>
+                                 
+                                 <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_reactivePow}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.reactivePow}" style="float:right">
+                                        <f:convertNumber maxFractionDigits="2"/>
+                                    </h:outputText>
+                                </p:column>
+
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_consumedReactivePow}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.consumedReactivePow}" style="float:right">
+                                        <f:convertNumber maxFractionDigits="2"/>
+                                    </h:outputText>
+                                </p:column>
+                                 
+                                 <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_phaseVoltage}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.phaseVoltage}" style="float:right">
+                                        <f:convertNumber maxFractionDigits="2"/>
+                                    </h:outputText>
+                                </p:column>
+                                 
+                                 <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_saidi}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.saidi}" style="float:right">
+                                        <f:convertNumber maxFractionDigits="2"/>
+                                    </h:outputText>
+                                </p:column>
+                                 
+                                 <!-- END ORDERED COLUMNS -->                                                             
+
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_co2}"/>                                           
+                                    </f:facet>
+                                    <h:outputText value="#{item.co2}" style="float:right">
+                                        <f:convertNumber maxFractionDigits="2"/>
+                                    </h:outputText>
+                                </p:column>                            
+
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_deviceNumber}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.deviceNumber}" style="float:right"/>
+                                </p:column>
+
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_energyMismatch}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.energyMismatch}" style="float:right"> 
+                                        <f:convertNumber maxFractionDigits="2"/>
+                                    </h:outputText>
+                                </p:column >
+                                
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_energyMismatchRatio}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.energyMismatchRatio}" style="float:right">
+                                        <f:convertNumber maxFractionDigits="2"/>
+                                    </h:outputText>
+                                </p:column>
+                                
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_nightCost}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.nightCost}" style="float:right">
+                                        <f:convertNumber maxFractionDigits="2"/>
+                                    </h:outputText>                                    
+                                </p:column>                               
+
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_sendInterval}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.sendInterval}" style="float:right"/>
+                                </p:column>
+                                
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_thdd}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.thdd}" style="float:right">
+                                        <f:convertNumber maxFractionDigits="2"/>
+                                    </h:outputText>
+                                </p:column>
+                                
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_voltageDeviation}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.voltageDeviation}" style="float:right">
+                                        <f:convertNumber maxFractionDigits="2"/>
+                                    </h:outputText>
+                                </p:column>
+                                
+                                <p:column visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_id}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.id}" style="float:right"/>
+                                </p:column>
+                                
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_idx12hours}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idx12hours}" style="float:right"/>
+                                </p:column>
+                                
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_idx15minutes}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idx15minutes}" style="float:right"/>
+                                </p:column>
+                                
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_idx1day}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idx1day}" style="float:right"/>
+                                </p:column>
+                                
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_idx1hour}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idx1hour}" style="float:right"/>
+                                </p:column>
+                                
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_idx1month}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idx1month}" style="float:right"/>
+                                </p:column>
+                                
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_idx1week}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idx1week}" style="float:right"/>
+                                </p:column>
+                                
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_idx1year}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idx1year}" style="float:right"/>
+                                </p:column>
+                                
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_idx3month}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idx3month}" style="float:right"/>
+                                </p:column>
+                                
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_idx6hours}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idx6hours}" style="float:right"/>
+                                </p:column>
+                                
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_idx6month}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idx6month}" style="float:right"/>
+                                </p:column>
+                                
+                            </p:dataTable>
+                            </h:form>
+                        </div>
+                        <div class="tab-pane" id="weeklyConsumption" role="tabpanel" aria-labelledby="weeklyConsumption">
+                          
+                            <h:form id="wForm">     
+                            <div  >
+                                <p:chart type="line" model="#{cumulDsoWController.dateModelCurrentTotal}" style="height:400px;" 
+                                         rendered="#{!cumulDsoWController.noDataCurrentTotal}"
+                                         styleClass="ets-chart" responsive="true"/>
+                            </div>
+
+                            <p:dataTable id="datalistDsoW" value="#{cumulDsoWController.items}" var="item"
+                                         selectionMode="single" selection="#{cumulDsoWController.selected}"
+                                         paginator="true"
+                                         rowKey="#{item.id}"
+                                         rows="10"
+                                         rowsPerPageTemplate="10,20,30,40,50"
+                                         scrollable="true"
+                                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} Exporters"
+                                         >
+                                
+                                <f:facet name="header">
+                                    Data registered each week for the DSO
+
+                                    <p:commandButton id="toggler" type="button" value="Columns" style="float:right" icon="ui-icon-calculator" />
+                                    <p:columnToggler datasource="datalistDsoW" trigger="toggler" />
+                                </f:facet>
+                                <f:facet name="Exporters">
+                                  
+                                         <h:commandLink>
+                                            <p:graphicImage library="images" name="excel.png"/>
+                                            <p:dataExporter type="xls" target="datalistDsoW" fileName="#{cumulDsoWController.fileNameCumulDSO_W}" />
+                                         </h:commandLink>
+
+                                         <h:commandLink>
+                                             <p:graphicImage library="images" name="pdf.png" width="24"/>
+                                             <p:dataExporter type="pdf" target="datalistDsoW" fileName="#{cumulDsoWController.fileNameCumulDSO_W}"/>
+                                         </h:commandLink>
+
+                                         <h:commandLink>
+                                             <p:graphicImage library="images" name="csv.png" width="24"/>
+                                             <p:dataExporter type="csv" target="datalistDsoW" fileName="#{cumulDsoWController.fileNameCumulDSO_W}" />
+                                         </h:commandLink>
+
+                                         <h:commandLink>
+                                             <p:graphicImage library="images" name="xml.png" width="24"/>
+                                             <p:dataExporter type="xml" target="datalistDsoW" fileName="#{cumulDsoWController.fileNameCumulDSO_W}" />
+                                         </h:commandLink>
+                                    
+                                 </f:facet>    
+                               <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_createdTime}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.createdTime}" style="float:right">
+                                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                                    </h:outputText>
+                                </p:column>
+                                 
+                                 <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_activePow}"/>                                            
+                                    </f:facet>
+                                    <h:outputText value="#{item.activePow}" style="float:right">
+                                        <f:convertNumber maxFractionDigits="2"/>
+                                    </h:outputText>
+                                </p:column>
+                                 
+                                 <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_consumedActivePow}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.consumedActivePow}" style="float:right">
+                                        <f:convertNumber maxFractionDigits="2"/>
+                                    </h:outputText>
+                                </p:column>
+                                 
+                                 <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_dayCost}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.dayCost}" style="float:right">
+                                        <f:convertNumber maxFractionDigits="2"/>
+                                    </h:outputText>
+                                </p:column>
+                                 
+                                 <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_upTime}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.upTime}" style="float:right"/>
+                                </p:column>
+                                 
+                                 <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_downTime}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.downTime}" style="float:right"/>
+                                </p:column>
+                                 
+                                 <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_reactivePow}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.reactivePow}" style="float:right">
+                                        <f:convertNumber maxFractionDigits="2"/>
+                                    </h:outputText>
+                                </p:column>
+
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_consumedReactivePow}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.consumedReactivePow}" style="float:right">
+                                        <f:convertNumber maxFractionDigits="2"/>
+                                    </h:outputText>
+                                </p:column>
+                                 
+                                 <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_phaseVoltage}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.phaseVoltage}" style="float:right">
+                                        <f:convertNumber maxFractionDigits="2"/>
+                                    </h:outputText>
+                                </p:column>
+                                 
+                                 <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_saidi}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.saidi}" style="float:right">
+                                        <f:convertNumber maxFractionDigits="2"/>
+                                    </h:outputText>
+                                </p:column>
+                                 
+                                 <!-- END ORDERED COLUMNS -->                                                             
+
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_co2}"/>                                           
+                                    </f:facet>
+                                    <h:outputText value="#{item.co2}" style="float:right">
+                                        <f:convertNumber maxFractionDigits="2"/>
+                                    </h:outputText>
+                                </p:column>                            
+
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_deviceNumber}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.deviceNumber}" style="float:right"/>
+                                </p:column>
+
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_energyMismatch}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.energyMismatch}" style="float:right"> 
+                                        <f:convertNumber maxFractionDigits="2"/>
+                                    </h:outputText>
+                                </p:column >
+                                
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_energyMismatchRatio}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.energyMismatchRatio}" style="float:right">
+                                        <f:convertNumber maxFractionDigits="2"/>
+                                    </h:outputText>
+                                </p:column>
+                                
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_nightCost}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.nightCost}" style="float:right">
+                                        <f:convertNumber maxFractionDigits="2"/>
+                                    </h:outputText>                                    
+                                </p:column>                               
+
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_sendInterval}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.sendInterval}" style="float:right"/>
+                                </p:column>
+                                
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_thdd}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.thdd}" style="float:right">
+                                        <f:convertNumber maxFractionDigits="2"/>
+                                    </h:outputText>
+                                </p:column>
+                                
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_voltageDeviation}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.voltageDeviation}" style="float:right">
+                                        <f:convertNumber maxFractionDigits="2"/>
+                                    </h:outputText>
+                                </p:column>
+                                
+                                <p:column visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_id}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.id}" style="float:right"/>
+                                </p:column>
+                                
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_idx12hours}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idx12hours}" style="float:right"/>
+                                </p:column>
+                                
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_idx15minutes}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idx15minutes}" style="float:right"/>
+                                </p:column>
+                                
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_idx1day}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idx1day}" style="float:right"/>
+                                </p:column>
+                                
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_idx1hour}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idx1hour}" style="float:right"/>
+                                </p:column>
+                                
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_idx1month}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idx1month}" style="float:right"/>
+                                </p:column>
+                                
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_idx1week}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idx1week}" style="float:right"/>
+                                </p:column>
+                                
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_idx1year}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idx1year}" style="float:right"/>
+                                </p:column>
+                                
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_idx3month}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idx3month}" style="float:right"/>
+                                </p:column>
+                                
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_idx6hours}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idx6hours}" style="float:right"/>
+                                </p:column>
+                                
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoWTitle_idx6month}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idx6month}" style="float:right"/>
+                                </p:column>
+                                
+                            </p:dataTable>
+                                </h:form>  
+                        </div>
+                        <div class="tab-pane" id="monthlyConsumption" role="tabpanel" aria-labelledby="monthlyConsumption">
+                            <h:form id="mForm">
+                            <div>
+                                <p:chart type="line" model="#{cumulDsoMController.dateModelCurrentTotal}" style="height:400px;" 
+                                         rendered="#{!cumulDsoMController.noDataCurrentTotal}"
+                                         styleClass="ets-chart" responsive="true"/>
+                            </div>
+        
+                            <p:dataTable id="datalistDSOM" value="#{cumulDsoMController.items}" var="item"
+                                         selectionMode="single" selection="#{cumulDsoMController.selected}"
+                                         paginator="true"
+                                         rowKey="#{item.id}"
+                                         rows="10"
+                                         rowsPerPageTemplate="10,20,30,40,50"
+                                         scrollable="true"
+                                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} Exporters"
+                                         >
+
+                                <f:facet name="header">
+                                    Data registered each month for the DSO
+
+                                    <p:commandButton id="toggler" type="button" value="Columns" style="float:right" icon="ui-icon-calculator" />
+                                    <p:columnToggler datasource="datalistDSOM" trigger="toggler" />
+                                </f:facet>
+                                <f:facet name="Exporters">
+                                  
+                                         <h:commandLink>
+                                            <p:graphicImage library="images" name="excel.png"/>
+                                            <p:dataExporter type="xls" target="datalistDSOM" fileName="#{cumulDsoMController.fileNameCumulDSO_M}" />
+                                         </h:commandLink>
+
+                                         <h:commandLink>
+                                             <p:graphicImage library="images" name="pdf.png" width="24"/>
+                                             <p:dataExporter type="pdf" target="datalistDSOM" fileName="#{cumulDsoMController.fileNameCumulDSO_M}"/>
+                                         </h:commandLink>
+
+                                         <h:commandLink>
+                                             <p:graphicImage library="images" name="csv.png" width="24"/>
+                                             <p:dataExporter type="csv" target="datalistDSOM" fileName="#{cumulDsoMController.fileNameCumulDSO_M}" />
+                                         </h:commandLink>
+
+                                         <h:commandLink>
+                                             <p:graphicImage library="images" name="xml.png" width="24"/>
+                                             <p:dataExporter type="xml" target="datalistDSOM" fileName="#{cumulDsoMController.fileNameCumulDSO_M}" />
+                                         </h:commandLink>
+                                    
+                                 </f:facet>
+                               <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoMTitle_createdTime}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.createdTime}" style="float:right">
+                                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                                    </h:outputText>
+                                </p:column>
+                                 
+                                 <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoMTitle_activePow}"/>                                            
+                                    </f:facet>
+                                    <h:outputText value="#{item.activePow}" style="float:right">
+                                        <f:convertNumber maxFractionDigits="2"/>
+                                    </h:outputText>
+                                </p:column>
+                                 
+                                 <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoMTitle_consumedActivePow}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.consumedActivePow}" style="float:right">
+                                        <f:convertNumber maxFractionDigits="2"/>
+                                    </h:outputText>
+                                </p:column>
+                                 
+                                 <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoMTitle_dayCost}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.dayCost}" style="float:right">
+                                        <f:convertNumber maxFractionDigits="2"/>
+                                    </h:outputText>
+                                </p:column>
+                                 
+                                 <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoMTitle_upTime}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.upTime}" style="float:right"/>
+                                </p:column>
+                                 
+                                 <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoMTitle_downTime}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.downTime}" style="float:right"/>
+                                </p:column>
+                                 
+                                 <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoMTitle_reactivePow}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.reactivePow}" style="float:right">
+                                        <f:convertNumber maxFractionDigits="2"/>
+                                    </h:outputText>
+                                </p:column>
+
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoMTitle_consumedReactivePow}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.consumedReactivePow}" style="float:right">
+                                        <f:convertNumber maxFractionDigits="2"/>
+                                    </h:outputText>
+                                </p:column>
+                                 
+                                 <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoMTitle_phaseVoltage}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.phaseVoltage}" style="float:right">
+                                        <f:convertNumber maxFractionDigits="2"/>
+                                    </h:outputText>
+                                </p:column>
+                                 
+                                 <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoMTitle_saidi}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.saidi}" style="float:right">
+                                        <f:convertNumber maxFractionDigits="2"/>
+                                    </h:outputText>
+                                </p:column>
+                                 
+                                 <!-- END ORDERED COLUMNS -->                                                             
+
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoMTitle_co2}"/>                                           
+                                    </f:facet>
+                                    <h:outputText value="#{item.co2}" style="float:right">
+                                        <f:convertNumber maxFractionDigits="2"/>
+                                    </h:outputText>
+                                </p:column>                            
+
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoMTitle_deviceNumber}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.deviceNumber}" style="float:right"/>
+                                </p:column>
+
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoMTitle_energyMismatch}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.energyMismatch}" style="float:right"> 
+                                        <f:convertNumber maxFractionDigits="2"/>
+                                    </h:outputText>
+                                </p:column >
+                                
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoMTitle_energyMismatchRatio}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.energyMismatchRatio}" style="float:right">
+                                        <f:convertNumber maxFractionDigits="2"/>
+                                    </h:outputText>
+                                </p:column>
+                                
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoMTitle_nightCost}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.nightCost}" style="float:right">
+                                        <f:convertNumber maxFractionDigits="2"/>
+                                    </h:outputText>                                    
+                                </p:column>                               
+
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoMTitle_sendInterval}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.sendInterval}" style="float:right"/>
+                                </p:column>
+                                
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoMTitle_thdd}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.thdd}" style="float:right">
+                                        <f:convertNumber maxFractionDigits="2"/>
+                                    </h:outputText>
+                                </p:column>
+                                
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoMTitle_voltageDeviation}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.voltageDeviation}" style="float:right">
+                                        <f:convertNumber maxFractionDigits="2"/>
+                                    </h:outputText>
+                                </p:column>
+                                
+                                <p:column visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoMTitle_id}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.id}" style="float:right"/>
+                                </p:column>
+                                
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoMTitle_idx12hours}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idx12hours}" style="float:right"/>
+                                </p:column>
+                                
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoMTitle_idx15minutes}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idx15minutes}" style="float:right"/>
+                                </p:column>
+                                
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoMTitle_idx1day}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idx1day}" style="float:right"/>
+                                </p:column>
+                                
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoMTitle_idx1hour}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idx1hour}" style="float:right"/>
+                                </p:column>
+                                
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoMTitle_idx1month}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idx1month}" style="float:right"/>
+                                </p:column>
+                                
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoMTitle_idx1week}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idx1week}" style="float:right"/>
+                                </p:column>
+                                
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoMTitle_idx1year}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idx1year}" style="float:right"/>
+                                </p:column>
+                                
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoMTitle_idx3month}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idx3month}" style="float:right"/>
+                                </p:column>
+                                
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoMTitle_idx6hours}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idx6hours}" style="float:right"/>
+                                </p:column>
+                                
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoMTitle_idx6month}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idx6month}" style="float:right"/>
+                                </p:column>
+
+                            </p:dataTable>     
+                                </h:form>
+                        </div>
+                        <div class="tab-pane" id="yearlyConsumption" role="tabpanel" aria-labelledby="yearlyConsumption">
+                           
+                            <h:form id="yForm">
+                            <div  >
+                                <p:chart type="line" model="#{cumulDsoYController.dateModelDSOY}" style="height:400px;" rendered="#{!cumulDsoYController.noDSOYData}"
+                                         styleClass="ets-chart" responsive="true"/>
+                            </div>
+
+                            <p:dataTable id="datalistDSOY" value="#{cumulDsoYController.items}" var="item"
+                                         selectionMode="single" selection="#{cumulDsoYController.selected}"
+                                         paginator="true"
+                                         rowKey="#{item.id}"
+                                         rows="10"
+                                         rowsPerPageTemplate="10,20,30,40,50"
+                                         scrollable="true"
+                                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} Exporters"
+                                         >
+                                <f:facet name="Exporters">
+                                  
+                                         <h:commandLink>
+                                            <p:graphicImage library="images" name="excel.png"/>
+                                            <p:dataExporter type="xls" target="datalistDSOY" fileName="#{cumulDsoYController.fileNameCumulDSO_Y}" />
+                                         </h:commandLink>
+
+                                         <h:commandLink>
+                                             <p:graphicImage library="images" name="pdf.png" width="24"/>
+                                             <p:dataExporter type="pdf" target="datalistDSOY" fileName="#{cumulDsoYController.fileNameCumulDSO_Y}"/>
+                                         </h:commandLink>
+
+                                         <h:commandLink>
+                                             <p:graphicImage library="images" name="csv.png" width="24"/>
+                                             <p:dataExporter type="csv" target="datalistDSOY" fileName="#{cumulDsoYController.fileNameCumulDSO_Y}" />
+                                         </h:commandLink>
+
+                                         <h:commandLink>
+                                             <p:graphicImage library="images" name="xml.png" width="24"/>
+                                             <p:dataExporter type="xml" target="datalistDSOY" fileName="#{cumulDsoYController.fileNameCumulDSO_Y}" />
+                                         </h:commandLink>
+                                    
+                                 </f:facet>
+                                <f:facet name="header">
+                                    Data registered each year for the DSO
+
+                                    <p:commandButton id="toggler" type="button" value="Columns" style="float:right" icon="ui-icon-calculator" />
+                                    <p:columnToggler datasource="datalistDSOY" trigger="toggler" />
+                                </f:facet>
+                                
+                              <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoYTitle_createdTime}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.createdTime}" style="float:right">
+                                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                                    </h:outputText>
+                                </p:column>
+                                 
+                                 <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoYTitle_activePow}"/>                                            
+                                    </f:facet>
+                                    <h:outputText value="#{item.activePow}" style="float:right">
+                                        <f:convertNumber maxFractionDigits="2"/>
+                                    </h:outputText>
+                                </p:column>
+                                 
+                                 <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoYTitle_consumedActivePow}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.consumedActivePow}" style="float:right">
+                                        <f:convertNumber maxFractionDigits="2"/>
+                                    </h:outputText>
+                                </p:column>
+                                 
+                                 <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoYTitle_dayCost}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.dayCost}" style="float:right">
+                                        <f:convertNumber maxFractionDigits="2"/>
+                                    </h:outputText>
+                                </p:column>
+                                 
+                                 <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoYTitle_upTime}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.upTime}" style="float:right"/>
+                                </p:column>
+                                 
+                                 <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoYTitle_downTime}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.downTime}" style="float:right"/>
+                                </p:column>
+                                 
+                                 <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoYTitle_reactivePow}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.reactivePow}" style="float:right">
+                                        <f:convertNumber maxFractionDigits="2"/>
+                                    </h:outputText>
+                                </p:column>
+
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoYTitle_consumedReactivePow}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.consumedReactivePow}" style="float:right">
+                                        <f:convertNumber maxFractionDigits="2"/>
+                                    </h:outputText>
+                                </p:column>
+                                 
+                                 <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoYTitle_phaseVoltage}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.phaseVoltage}" style="float:right">
+                                        <f:convertNumber maxFractionDigits="2"/>
+                                    </h:outputText>
+                                </p:column>
+                                 
+                                 <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoYTitle_saidi}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.saidi}" style="float:right">
+                                        <f:convertNumber maxFractionDigits="2"/>
+                                    </h:outputText>
+                                </p:column>
+                                 
+                                 <!-- END ORDERED COLUMNS -->                                                             
+
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoYTitle_co2}"/>                                           
+                                    </f:facet>
+                                    <h:outputText value="#{item.co2}" style="float:right">
+                                        <f:convertNumber maxFractionDigits="2"/>
+                                    </h:outputText>
+                                </p:column>                            
+
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoYTitle_deviceNumber}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.deviceNumber}" style="float:right"/>
+                                </p:column>
+
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoYTitle_energyMismatch}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.energyMismatch}" style="float:right"> 
+                                        <f:convertNumber maxFractionDigits="2"/>
+                                    </h:outputText>
+                                </p:column >
+                                
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoYTitle_energyMismatchRatio}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.energyMismatchRatio}" style="float:right">
+                                        <f:convertNumber maxFractionDigits="2"/>
+                                    </h:outputText>
+                                </p:column>
+                                
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoYTitle_nightCost}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.nightCost}" style="float:right">
+                                        <f:convertNumber maxFractionDigits="2"/>
+                                    </h:outputText>                                    
+                                </p:column>                               
+
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoYTitle_sendInterval}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.sendInterval}" style="float:right"/>
+                                </p:column>
+                                
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoYTitle_thdd}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.thdd}" style="float:right">
+                                        <f:convertNumber maxFractionDigits="2"/>
+                                    </h:outputText>
+                                </p:column>
+                                
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoYTitle_voltageDeviation}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.voltageDeviation}" style="float:right">
+                                        <f:convertNumber maxFractionDigits="2"/>
+                                    </h:outputText>
+                                </p:column>
+                                
+                                <p:column visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoYTitle_id}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.id}" style="float:right"/>
+                                </p:column>
+                                
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoYTitle_idx12hours}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idx12hours}" style="float:right"/>
+                                </p:column>
+                                
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoYTitle_idx15minutes}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idx15minutes}" style="float:right"/>
+                                </p:column>
+                                
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoYTitle_idx1day}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idx1day}" style="float:right"/>
+                                </p:column>
+                                
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoYTitle_idx1hour}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idx1hour}" style="float:right"/>
+                                </p:column>
+                                
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoYTitle_idx1month}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idx1month}" style="float:right"/>
+                                </p:column>
+                                
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoYTitle_idx1week}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idx1week}" style="float:right"/>
+                                </p:column>
+                                
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoYTitle_idx1year}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idx1year}" style="float:right"/>
+                                </p:column>
+                                
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoYTitle_idx3month}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idx3month}" style="float:right"/>
+                                </p:column>
+                                
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoYTitle_idx6hours}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idx6hours}" style="float:right"/>
+                                </p:column>
+                                
+                                <p:column  visible="false">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCumulDsoYTitle_idx6month}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idx6month}" style="float:right"/>
+                                </p:column>
+
+                            </p:dataTable>
+                                </h:form>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <h:outputScript library="js" name="bootstrap.js" />
+        </ui:define>
+
+    </ui:composition>
+
+
+</html>

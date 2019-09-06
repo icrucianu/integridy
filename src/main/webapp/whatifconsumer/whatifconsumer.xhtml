@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/mainframe.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.WhatIfPageTitle}"></h:outputText>
+            <h:outputStylesheet library="css" name="bootstrap.css"/>
+            <h:outputStylesheet library="css" name="tabstyle.css"/>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="WhatIfConsumerForm">
+                <p:panelGrid columns="2">
+                    <p:outputLabel for="consumersList" value="#{bundle.ListConsumerslabel}"/>
+                    <p:selectOneMenu id="consumersList" value="#{whatIfConsumerController.selectedConsumer}"  style="width:125px" filter="true" filterMatchMode="contains">
+                        <f:selectItem itemLabel="Select One" itemValue="" />
+                        <f:selectItems value="#{consumerDataController.consumers}" var="consumer" itemLabel="#{consumer.fullName}" itemValue="#{consumer}" />
+                        <p:ajax event="change" update="cpTreePanel panelListScenario scenarioSelectedPane"   listener="#{whatIfConsumerController.onSelectConsumer}" />
+                    </p:selectOneMenu>
+                </p:panelGrid>
+                <p:panel id="cpTreePanel">
+                    <p:outputLabel rendered="#{whatIfConsumerController.selectedConsumer!=null }" for="devicesList" value="List of Devices:"/>
+                    <p:tree  id="devicesList" rendered="#{whatIfConsumerController.selectedConsumer!=null }" value="#{whatIfConsumerController.root}" selectionMode="single" selection="#{forecastConsumerController.selectedNode}"   var="node" animate="true">
+
+                        <p:treeNode type="CP" icon="fa fa-home" styleClass="h2-subtitle" >
+                            <h:outputText styleClass="h2-subtitle" value="#{node.name}(#{node.nodeType})" />
+                        </p:treeNode>
+                        <p:treeNode type="SM" icon="fa fa-tablet" styleClass="h3-subtitle">
+                            <h:outputText value="#{node.name}(#{node.nodeType})" />
+                        </p:treeNode>
+                    </p:tree> 
+                </p:panel>
+
+                <p:panelGrid id="scenarioPanel">
+
+
+                    <p:panelGrid id="panelListScenario" columns="3">
+                        <p:outputLabel   value="Scenarios"/>
+                        <p:selectOneMenu id="selectListScenario" value="#{whatIfConsumerController.selectedScenarioId}"  style="width:250px" filter="true" filterMatchMode="contains">
+                            <f:selectItem itemLabel="Select One" itemValue="" />
+                            <f:selectItems value="#{whatIfConsumerController.whatIfScenarioList}" var="scenario" itemLabel="#{scenario.scenarioName}" itemValue="#{scenario.id}" />
+                            <p:ajax event="change" update="panelListScenario scenarioSelectedPane"  listener="#{whatIfConsumerController.onSelectScenario}" />
+                        </p:selectOneMenu>
+                        <p:panel rendered="#{whatIfConsumerController.selectedScenario!=null}">
+                            <p:panelGrid columns="6" >
+                                <p:outputLabel value="Start date:" />
+                                <p:calendar  value="#{whatIfConsumerController.selectedScenario.referenceStartPeriod}" pattern="dd/MM/yyyy"/>
+                                <p:outputLabel value="End date:" />
+                                <p:calendar  value="#{whatIfConsumerController.selectedScenario.referenceEndPeriod}" pattern="dd/MM/yyyy"/>
+                            </p:panelGrid>
+
+                        </p:panel>
+                    </p:panelGrid>
+                </p:panelGrid>
+
+                <p:panel id="scenarioSelectedPane">
+
+                    <p:panel rendered="#{whatIfConsumerController.selectedScenario!=null}">
+
+                        <p:dataTable id="parametersList" 
+                                     widgetVar="parametersList" 
+                                     var="parameter" 
+                                     rowKey="#{parameter.id}"
+                                     value="#{whatIfConsumerController.whatIfParametersList}" 
+                                     editable="true" 
+                                     style="margin-bottom:20px">
+                            <f:facet name="header">
+                                What-If Parameters List
+                            </f:facet>
+                            <p:column headerText="Parameter Name">
+                                <p:cellEditor>
+                                    <f:facet name="output"><h:outputText value="#{parameter.paramName}" /></f:facet>
+                                    <f:facet name="input"><p:inputText id="modelInput" value="#{parameter.paramName}" style="width:100%"/></f:facet>
+                                </p:cellEditor>
+                            </p:column>
+
+                            <p:column headerText="Parameter value">
+                                <p:cellEditor>
+                                    <f:facet name="output"><h:outputText value="#{parameter.paramDval}" /></f:facet>
+                                    <f:facet name="input"><p:inputText value="#{parameter.paramDval}" style="width:100%" label="Value"/></f:facet>
+                                </p:cellEditor>
+                            </p:column>
+                            <p:column headerText="Start time">
+                                <p:cellEditor>
+                                    <f:facet name="output">
+                                        <h:outputText value="#{parameter.startTime}" >
+                                            <f:convertDateTime pattern="HH:mm" timeZone="GMT+2"/>
+                                        </h:outputText>
+                                    </f:facet>
+                                    <f:facet name="input"><p:calendar value="#{parameter.startTime}" 
+                                                                      pattern="HH:mm" 
+                                                                      timeOnly="true" 
+                                                                      style="width:100%" 
+                                                                      label="Start Time"/>
+                                    </f:facet>
+                                </p:cellEditor>
+                            </p:column>
+                            <p:column headerText="End time">
+                                <p:cellEditor>
+                                    <f:facet name="output">
+                                        <h:outputText value="#{parameter.endTime}" >
+                                            <f:convertDateTime pattern="HH:mm" timeZone="GMT+2"/>
+                                        </h:outputText>
+                                    </f:facet>
+                                    <f:facet name="input"><p:calendar value="#{parameter.endTime}" 
+                                                                      pattern="HH:mm" 
+                                                                      timeOnly="true" 
+                                                                      style="width:100%" 
+                                                                      label="End Time"/>
+                                    </f:facet>
+                                </p:cellEditor>
+                            </p:column>
+                        </p:dataTable>
+                    </p:panel>
+                    <h:panelGroup style="display:block; text-align:center">
+                        <p:commandButton id="playbtn" value="Play scenario"  
+                                         icon="fa fa-play" 
+                                         styleClass="ui-priority-primary" process="@this"
+                                         rendered="#{whatIfConsumerController.selectedScenarioId != null}"
+                                         actionListener ="#{whatIfConsumerController.playScenario}"  update="chartPanel"
+                                         />
+                    </h:panelGroup>
+                    <p:panel id="chartPanel">
+                        <div  >
+                            <p:chart type="line" model="#{whatIfConsumerController.chartDataModel}" style="height:400px;" 
+                                     rendered="#{!whatIfConsumerController.noDataModel}"
+                                     styleClass="ets-chart" responsive="true"/>
+                        </div>
+                    </p:panel>
+                </p:panel>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

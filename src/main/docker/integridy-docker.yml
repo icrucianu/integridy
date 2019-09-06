@@ -1,0 +1,28 @@
+version: '3.3'
+
+services:
+  integridy-ploiesti-pilot-database:
+    image:  nicujalba/integridy-ploiesti-pilot-database
+    restart: always
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_PASSWORD: postgres
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 1m30s
+      timeout: 5s
+      retries: 3
+
+  integridy-ploiesti-pilot-application:
+    image:  nicujalba/integridy-ploiesti-pilot-application
+    restart: always
+    ports:
+      - '8080:8080'
+    depends_on:
+      - integridy-ploiesti-pilot-database
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/integridy-1.0.0"]
+      interval: 1m30s
+      timeout: 10s
+      retries: 3

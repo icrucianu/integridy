@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ForecastClientViewDlg" widgetVar="ForecastClientViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewForecastClientTitle}">
+            <h:form id="ForecastClientViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{forecastClientController.selected != null}">
+                        <h:outputText value="#{bundle.ViewForecastClientLabel_id}"/>
+                        <h:outputText value="#{forecastClientController.selected.id}" title="#{bundle.ViewForecastClientTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewForecastClientLabel_activePow}"/>
+                        <h:outputText value="#{forecastClientController.selected.activePow}" title="#{bundle.ViewForecastClientTitle_activePow}"/>
+                        <h:outputText value="#{bundle.ViewForecastClientLabel_co2}"/>
+                        <h:outputText value="#{forecastClientController.selected.co2}" title="#{bundle.ViewForecastClientTitle_co2}"/>
+                        <h:outputText value="#{bundle.ViewForecastClientLabel_consumedActivePow}"/>
+                        <h:outputText value="#{forecastClientController.selected.consumedActivePow}" title="#{bundle.ViewForecastClientTitle_consumedActivePow}"/>
+                        <h:outputText value="#{bundle.ViewForecastClientLabel_consumedReactivePow}"/>
+                        <h:outputText value="#{forecastClientController.selected.consumedReactivePow}" title="#{bundle.ViewForecastClientTitle_consumedReactivePow}"/>
+                        <h:outputText value="#{bundle.ViewForecastClientLabel_createdTime}"/>
+                        <h:outputText value="#{forecastClientController.selected.createdTime}" title="#{bundle.ViewForecastClientTitle_createdTime}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewForecastClientLabel_dayCost}"/>
+                        <h:outputText value="#{forecastClientController.selected.dayCost}" title="#{bundle.ViewForecastClientTitle_dayCost}"/>
+                        <h:outputText value="#{bundle.ViewForecastClientLabel_deviceNumber}"/>
+                        <h:outputText value="#{forecastClientController.selected.deviceNumber}" title="#{bundle.ViewForecastClientTitle_deviceNumber}"/>
+                        <h:outputText value="#{bundle.ViewForecastClientLabel_downTime}"/>
+                        <h:outputText value="#{forecastClientController.selected.downTime}" title="#{bundle.ViewForecastClientTitle_downTime}"/>
+                        <h:outputText value="#{bundle.ViewForecastClientLabel_energyMismatch}"/>
+                        <h:outputText value="#{forecastClientController.selected.energyMismatch}" title="#{bundle.ViewForecastClientTitle_energyMismatch}"/>
+                        <h:outputText value="#{bundle.ViewForecastClientLabel_energyMismatchRatio}"/>
+                        <h:outputText value="#{forecastClientController.selected.energyMismatchRatio}" title="#{bundle.ViewForecastClientTitle_energyMismatchRatio}"/>
+                        <h:outputText value="#{bundle.ViewForecastClientLabel_nightCost}"/>
+                        <h:outputText value="#{forecastClientController.selected.nightCost}" title="#{bundle.ViewForecastClientTitle_nightCost}"/>
+                        <h:outputText value="#{bundle.ViewForecastClientLabel_saidi}"/>
+                        <h:outputText value="#{forecastClientController.selected.saidi}" title="#{bundle.ViewForecastClientTitle_saidi}"/>
+                        <h:outputText value="#{bundle.ViewForecastClientLabel_phaseVoltage}"/>
+                        <h:outputText value="#{forecastClientController.selected.phaseVoltage}" title="#{bundle.ViewForecastClientTitle_phaseVoltage}"/>
+                        <h:outputText value="#{bundle.ViewForecastClientLabel_reactivePow}"/>
+                        <h:outputText value="#{forecastClientController.selected.reactivePow}" title="#{bundle.ViewForecastClientTitle_reactivePow}"/>
+                        <h:outputText value="#{bundle.ViewForecastClientLabel_sendInterval}"/>
+                        <h:outputText value="#{forecastClientController.selected.sendInterval}" title="#{bundle.ViewForecastClientTitle_sendInterval}"/>
+                        <h:outputText value="#{bundle.ViewForecastClientLabel_thdd}"/>
+                        <h:outputText value="#{forecastClientController.selected.thdd}" title="#{bundle.ViewForecastClientTitle_thdd}"/>
+                        <h:outputText value="#{bundle.ViewForecastClientLabel_upTime}"/>
+                        <h:outputText value="#{forecastClientController.selected.upTime}" title="#{bundle.ViewForecastClientTitle_upTime}"/>
+                        <h:outputText value="#{bundle.ViewForecastClientLabel_voltageDeviation}"/>
+                        <h:outputText value="#{forecastClientController.selected.voltageDeviation}" title="#{bundle.ViewForecastClientTitle_voltageDeviation}"/>
+                        <h:outputText value="#{bundle.ViewForecastClientLabel_idx12hours}"/>
+                        <h:outputText value="#{forecastClientController.selected.idx12hours}" title="#{bundle.ViewForecastClientTitle_idx12hours}"/>
+                        <h:outputText value="#{bundle.ViewForecastClientLabel_idx15minutes}"/>
+                        <h:outputText value="#{forecastClientController.selected.idx15minutes}" title="#{bundle.ViewForecastClientTitle_idx15minutes}"/>
+                        <h:outputText value="#{bundle.ViewForecastClientLabel_idx1day}"/>
+                        <h:outputText value="#{forecastClientController.selected.idx1day}" title="#{bundle.ViewForecastClientTitle_idx1day}"/>
+                        <h:outputText value="#{bundle.ViewForecastClientLabel_idx1hour}"/>
+                        <h:outputText value="#{forecastClientController.selected.idx1hour}" title="#{bundle.ViewForecastClientTitle_idx1hour}"/>
+                        <h:outputText value="#{bundle.ViewForecastClientLabel_idx1month}"/>
+                        <h:outputText value="#{forecastClientController.selected.idx1month}" title="#{bundle.ViewForecastClientTitle_idx1month}"/>
+                        <h:outputText value="#{bundle.ViewForecastClientLabel_idx1week}"/>
+                        <h:outputText value="#{forecastClientController.selected.idx1week}" title="#{bundle.ViewForecastClientTitle_idx1week}"/>
+                        <h:outputText value="#{bundle.ViewForecastClientLabel_idx1year}"/>
+                        <h:outputText value="#{forecastClientController.selected.idx1year}" title="#{bundle.ViewForecastClientTitle_idx1year}"/>
+                        <h:outputText value="#{bundle.ViewForecastClientLabel_idx3month}"/>
+                        <h:outputText value="#{forecastClientController.selected.idx3month}" title="#{bundle.ViewForecastClientTitle_idx3month}"/>
+                        <h:outputText value="#{bundle.ViewForecastClientLabel_idx6hours}"/>
+                        <h:outputText value="#{forecastClientController.selected.idx6hours}" title="#{bundle.ViewForecastClientTitle_idx6hours}"/>
+                        <h:outputText value="#{bundle.ViewForecastClientLabel_idx6month}"/>
+                        <h:outputText value="#{forecastClientController.selected.idx6month}" title="#{bundle.ViewForecastClientTitle_idx6month}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="ForecastClientViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

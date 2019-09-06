@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AuditLogCreateDlg" widgetVar="AuditLogCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateAuditLogTitle}">
+            <h:form id="AuditLogCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{auditLogController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateAuditLogLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{auditLogController.selected.id}" title="#{bundle.CreateAuditLogTitle_id}" required="true" requiredMessage="#{bundle.CreateAuditLogRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.CreateAuditLogLabel_activityName}" for="activityName" />
+                        <p:inputText id="activityName" value="#{auditLogController.selected.activityName}" title="#{bundle.CreateAuditLogTitle_activityName}" required="true" requiredMessage="#{bundle.CreateAuditLogRequiredMessage_activityName}"/>
+                        <p:outputLabel value="#{bundle.CreateAuditLogLabel_userId}" for="userId" />
+                        <p:inputText id="userId" value="#{auditLogController.selected.userId}" title="#{bundle.CreateAuditLogTitle_userId}" required="true" requiredMessage="#{bundle.CreateAuditLogRequiredMessage_userId}"/>
+                        <p:outputLabel value="#{bundle.CreateAuditLogLabel_registrationType}" for="registrationType" />
+                        <p:inputText id="registrationType" value="#{auditLogController.selected.registrationType}" title="#{bundle.CreateAuditLogTitle_registrationType}" required="true" requiredMessage="#{bundle.CreateAuditLogRequiredMessage_registrationType}"/>
+                        <p:outputLabel value="#{bundle.CreateAuditLogLabel_activityResult}" for="activityResult" />
+                        <p:inputText id="activityResult" value="#{auditLogController.selected.activityResult}" title="#{bundle.CreateAuditLogTitle_activityResult}" />
+                        <p:outputLabel value="#{bundle.CreateAuditLogLabel_lastUpdatedOn}" for="lastUpdatedOn" />
+                        <p:calendar id="lastUpdatedOn" pattern="MM/dd/yyyy HH:mm:ss" value="#{auditLogController.selected.lastUpdatedOn}" title="#{bundle.EditAuditLogTitle_lastUpdatedOn}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateAuditLogLabel_activityCategory}" for="activityCategory" />
+                        <p:inputText id="activityCategory" value="#{auditLogController.selected.activityCategory}" title="#{bundle.CreateAuditLogTitle_activityCategory}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{auditLogController.create}" value="#{bundle.Save}" update="display,:AuditLogListForm:datalist,:growl" oncomplete="handleSubmit(args,'AuditLogCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="AuditLogCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

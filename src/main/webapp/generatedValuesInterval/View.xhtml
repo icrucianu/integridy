@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="GeneratedValuesIntervalViewDlg" widgetVar="GeneratedValuesIntervalViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewGeneratedValuesIntervalTitle}">
+            <h:form id="GeneratedValuesIntervalViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{generatedValuesIntervalController.selected != null}">
+                        <h:outputText value="#{bundle.ViewGeneratedValuesIntervalLabel_hourOfDay}"/>
+                        <h:outputText value="#{generatedValuesIntervalController.selected.hourOfDay}" title="#{bundle.ViewGeneratedValuesIntervalTitle_hourOfDay}"/>
+                        <h:outputText value="#{bundle.ViewGeneratedValuesIntervalLabel_activePowI}"/>
+                        <h:outputText value="#{generatedValuesIntervalController.selected.activePowI}" title="#{bundle.ViewGeneratedValuesIntervalTitle_activePowI}"/>
+                        <h:outputText value="#{bundle.ViewGeneratedValuesIntervalLabel_co2I}"/>
+                        <h:outputText value="#{generatedValuesIntervalController.selected.co2I}" title="#{bundle.ViewGeneratedValuesIntervalTitle_co2I}"/>
+                        <h:outputText value="#{bundle.ViewGeneratedValuesIntervalLabel_consumedActivePowI}"/>
+                        <h:outputText value="#{generatedValuesIntervalController.selected.consumedActivePowI}" title="#{bundle.ViewGeneratedValuesIntervalTitle_consumedActivePowI}"/>
+                        <h:outputText value="#{bundle.ViewGeneratedValuesIntervalLabel_consumedReactivePowI}"/>
+                        <h:outputText value="#{generatedValuesIntervalController.selected.consumedReactivePowI}" title="#{bundle.ViewGeneratedValuesIntervalTitle_consumedReactivePowI}"/>
+                        <h:outputText value="#{bundle.ViewGeneratedValuesIntervalLabel_dayCostI}"/>
+                        <h:outputText value="#{generatedValuesIntervalController.selected.dayCostI}" title="#{bundle.ViewGeneratedValuesIntervalTitle_dayCostI}"/>
+                        <h:outputText value="#{bundle.ViewGeneratedValuesIntervalLabel_downTimeI}"/>
+                        <h:outputText value="#{generatedValuesIntervalController.selected.downTimeI}" title="#{bundle.ViewGeneratedValuesIntervalTitle_downTimeI}"/>
+                        <h:outputText value="#{bundle.ViewGeneratedValuesIntervalLabel_energyMismatchI}"/>
+                        <h:outputText value="#{generatedValuesIntervalController.selected.energyMismatchI}" title="#{bundle.ViewGeneratedValuesIntervalTitle_energyMismatchI}"/>
+                        <h:outputText value="#{bundle.ViewGeneratedValuesIntervalLabel_energyMismatchRatioI}"/>
+                        <h:outputText value="#{generatedValuesIntervalController.selected.energyMismatchRatioI}" title="#{bundle.ViewGeneratedValuesIntervalTitle_energyMismatchRatioI}"/>
+                        <h:outputText value="#{bundle.ViewGeneratedValuesIntervalLabel_nightCostI}"/>
+                        <h:outputText value="#{generatedValuesIntervalController.selected.nightCostI}" title="#{bundle.ViewGeneratedValuesIntervalTitle_nightCostI}"/>
+                        <h:outputText value="#{bundle.ViewGeneratedValuesIntervalLabel_saidiI}"/>
+                        <h:outputText value="#{generatedValuesIntervalController.selected.saidiI}" title="#{bundle.ViewGeneratedValuesIntervalTitle_saidiI}"/>
+                        <h:outputText value="#{bundle.ViewGeneratedValuesIntervalLabel_phaseVoltageI}"/>
+                        <h:outputText value="#{generatedValuesIntervalController.selected.phaseVoltageI}" title="#{bundle.ViewGeneratedValuesIntervalTitle_phaseVoltageI}"/>
+                        <h:outputText value="#{bundle.ViewGeneratedValuesIntervalLabel_reactivePowI}"/>
+                        <h:outputText value="#{generatedValuesIntervalController.selected.reactivePowI}" title="#{bundle.ViewGeneratedValuesIntervalTitle_reactivePowI}"/>
+                        <h:outputText value="#{bundle.ViewGeneratedValuesIntervalLabel_sendIntervalI}"/>
+                        <h:outputText value="#{generatedValuesIntervalController.selected.sendIntervalI}" title="#{bundle.ViewGeneratedValuesIntervalTitle_sendIntervalI}"/>
+                        <h:outputText value="#{bundle.ViewGeneratedValuesIntervalLabel_thddI}"/>
+                        <h:outputText value="#{generatedValuesIntervalController.selected.thddI}" title="#{bundle.ViewGeneratedValuesIntervalTitle_thddI}"/>
+                        <h:outputText value="#{bundle.ViewGeneratedValuesIntervalLabel_upTimeI}"/>
+                        <h:outputText value="#{generatedValuesIntervalController.selected.upTimeI}" title="#{bundle.ViewGeneratedValuesIntervalTitle_upTimeI}"/>
+                        <h:outputText value="#{bundle.ViewGeneratedValuesIntervalLabel_voltageDeviationI}"/>
+                        <h:outputText value="#{generatedValuesIntervalController.selected.voltageDeviationI}" title="#{bundle.ViewGeneratedValuesIntervalTitle_voltageDeviationI}"/>
+                        <h:outputText value="#{bundle.ViewGeneratedValuesIntervalLabel_idx12hoursI}"/>
+                        <h:outputText value="#{generatedValuesIntervalController.selected.idx12hoursI}" title="#{bundle.ViewGeneratedValuesIntervalTitle_idx12hoursI}"/>
+                        <h:outputText value="#{bundle.ViewGeneratedValuesIntervalLabel_idx15minutesI}"/>
+                        <h:outputText value="#{generatedValuesIntervalController.selected.idx15minutesI}" title="#{bundle.ViewGeneratedValuesIntervalTitle_idx15minutesI}"/>
+                        <h:outputText value="#{bundle.ViewGeneratedValuesIntervalLabel_idx1dayI}"/>
+                        <h:outputText value="#{generatedValuesIntervalController.selected.idx1dayI}" title="#{bundle.ViewGeneratedValuesIntervalTitle_idx1dayI}"/>
+                        <h:outputText value="#{bundle.ViewGeneratedValuesIntervalLabel_idx1hourI}"/>
+                        <h:outputText value="#{generatedValuesIntervalController.selected.idx1hourI}" title="#{bundle.ViewGeneratedValuesIntervalTitle_idx1hourI}"/>
+                        <h:outputText value="#{bundle.ViewGeneratedValuesIntervalLabel_idx1monthI}"/>
+                        <h:outputText value="#{generatedValuesIntervalController.selected.idx1monthI}" title="#{bundle.ViewGeneratedValuesIntervalTitle_idx1monthI}"/>
+                        <h:outputText value="#{bundle.ViewGeneratedValuesIntervalLabel_idx1weekI}"/>
+                        <h:outputText value="#{generatedValuesIntervalController.selected.idx1weekI}" title="#{bundle.ViewGeneratedValuesIntervalTitle_idx1weekI}"/>
+                        <h:outputText value="#{bundle.ViewGeneratedValuesIntervalLabel_idx1yearI}"/>
+                        <h:outputText value="#{generatedValuesIntervalController.selected.idx1yearI}" title="#{bundle.ViewGeneratedValuesIntervalTitle_idx1yearI}"/>
+                        <h:outputText value="#{bundle.ViewGeneratedValuesIntervalLabel_idx3monthI}"/>
+                        <h:outputText value="#{generatedValuesIntervalController.selected.idx3monthI}" title="#{bundle.ViewGeneratedValuesIntervalTitle_idx3monthI}"/>
+                        <h:outputText value="#{bundle.ViewGeneratedValuesIntervalLabel_idx6hoursI}"/>
+                        <h:outputText value="#{generatedValuesIntervalController.selected.idx6hoursI}" title="#{bundle.ViewGeneratedValuesIntervalTitle_idx6hoursI}"/>
+                        <h:outputText value="#{bundle.ViewGeneratedValuesIntervalLabel_idx6monthI}"/>
+                        <h:outputText value="#{generatedValuesIntervalController.selected.idx6monthI}" title="#{bundle.ViewGeneratedValuesIntervalTitle_idx6monthI}"/>
+                        <h:outputText value="#{bundle.ViewGeneratedValuesIntervalLabel_activePowX}"/>
+                        <h:outputText value="#{generatedValuesIntervalController.selected.activePowX}" title="#{bundle.ViewGeneratedValuesIntervalTitle_activePowX}"/>
+                        <h:outputText value="#{bundle.ViewGeneratedValuesIntervalLabel_co2X}"/>
+                        <h:outputText value="#{generatedValuesIntervalController.selected.co2X}" title="#{bundle.ViewGeneratedValuesIntervalTitle_co2X}"/>
+                        <h:outputText value="#{bundle.ViewGeneratedValuesIntervalLabel_consumedActivePowX}"/>
+                        <h:outputText value="#{generatedValuesIntervalController.selected.consumedActivePowX}" title="#{bundle.ViewGeneratedValuesIntervalTitle_consumedActivePowX}"/>
+                        <h:outputText value="#{bundle.ViewGeneratedValuesIntervalLabel_consumedReactivePowX}"/>
+                        <h:outputText value="#{generatedValuesIntervalController.selected.consumedReactivePowX}" title="#{bundle.ViewGeneratedValuesIntervalTitle_consumedReactivePowX}"/>
+                        <h:outputText value="#{bundle.ViewGeneratedValuesIntervalLabel_dayCostX}"/>
+                        <h:outputText value="#{generatedValuesIntervalController.selected.dayCostX}" title="#{bundle.ViewGeneratedValuesIntervalTitle_dayCostX}"/>
+                        <h:outputText value="#{bundle.ViewGeneratedValuesIntervalLabel_downTimeX}"/>
+                        <h:outputText value="#{generatedValuesIntervalController.selected.downTimeX}" title="#{bundle.ViewGeneratedValuesIntervalTitle_downTimeX}"/>
+                        <h:outputText value="#{bundle.ViewGeneratedValuesIntervalLabel_energyMismatchX}"/>
+                        <h:outputText value="#{generatedValuesIntervalController.selected.energyMismatchX}" title="#{bundle.ViewGeneratedValuesIntervalTitle_energyMismatchX}"/>
+                        <h:outputText value="#{bundle.ViewGeneratedValuesIntervalLabel_energyMismatchRatioX}"/>
+                        <h:outputText value="#{generatedValuesIntervalController.selected.energyMismatchRatioX}" title="#{bundle.ViewGeneratedValuesIntervalTitle_energyMismatchRatioX}"/>
+                        <h:outputText value="#{bundle.ViewGeneratedValuesIntervalLabel_nightCostX}"/>
+                        <h:outputText value="#{generatedValuesIntervalController.selected.nightCostX}" title="#{bundle.ViewGeneratedValuesIntervalTitle_nightCostX}"/>
+                        <h:outputText value="#{bundle.ViewGeneratedValuesIntervalLabel_saidiX}"/>
+                        <h:outputText value="#{generatedValuesIntervalController.selected.saidiX}" title="#{bundle.ViewGeneratedValuesIntervalTitle_saidiX}"/>
+                        <h:outputText value="#{bundle.ViewGeneratedValuesIntervalLabel_phaseVoltageX}"/>
+                        <h:outputText value="#{generatedValuesIntervalController.selected.phaseVoltageX}" title="#{bundle.ViewGeneratedValuesIntervalTitle_phaseVoltageX}"/>
+                        <h:outputText value="#{bundle.ViewGeneratedValuesIntervalLabel_reactivePowX}"/>
+                        <h:outputText value="#{generatedValuesIntervalController.selected.reactivePowX}" title="#{bundle.ViewGeneratedValuesIntervalTitle_reactivePowX}"/>
+                        <h:outputText value="#{bundle.ViewGeneratedValuesIntervalLabel_sendIntervalX}"/>
+                        <h:outputText value="#{generatedValuesIntervalController.selected.sendIntervalX}" title="#{bundle.ViewGeneratedValuesIntervalTitle_sendIntervalX}"/>
+                        <h:outputText value="#{bundle.ViewGeneratedValuesIntervalLabel_thddX}"/>
+                        <h:outputText value="#{generatedValuesIntervalController.selected.thddX}" title="#{bundle.ViewGeneratedValuesIntervalTitle_thddX}"/>
+                        <h:outputText value="#{bundle.ViewGeneratedValuesIntervalLabel_upTimeX}"/>
+                        <h:outputText value="#{generatedValuesIntervalController.selected.upTimeX}" title="#{bundle.ViewGeneratedValuesIntervalTitle_upTimeX}"/>
+                        <h:outputText value="#{bundle.ViewGeneratedValuesIntervalLabel_voltageDeviationX}"/>
+                        <h:outputText value="#{generatedValuesIntervalController.selected.voltageDeviationX}" title="#{bundle.ViewGeneratedValuesIntervalTitle_voltageDeviationX}"/>
+                        <h:outputText value="#{bundle.ViewGeneratedValuesIntervalLabel_idx12hoursX}"/>
+                        <h:outputText value="#{generatedValuesIntervalController.selected.idx12hoursX}" title="#{bundle.ViewGeneratedValuesIntervalTitle_idx12hoursX}"/>
+                        <h:outputText value="#{bundle.ViewGeneratedValuesIntervalLabel_idx15minutesX}"/>
+                        <h:outputText value="#{generatedValuesIntervalController.selected.idx15minutesX}" title="#{bundle.ViewGeneratedValuesIntervalTitle_idx15minutesX}"/>
+                        <h:outputText value="#{bundle.ViewGeneratedValuesIntervalLabel_idx1dayX}"/>
+                        <h:outputText value="#{generatedValuesIntervalController.selected.idx1dayX}" title="#{bundle.ViewGeneratedValuesIntervalTitle_idx1dayX}"/>
+                        <h:outputText value="#{bundle.ViewGeneratedValuesIntervalLabel_idx1hourX}"/>
+                        <h:outputText value="#{generatedValuesIntervalController.selected.idx1hourX}" title="#{bundle.ViewGeneratedValuesIntervalTitle_idx1hourX}"/>
+                        <h:outputText value="#{bundle.ViewGeneratedValuesIntervalLabel_idx1monthX}"/>
+                        <h:outputText value="#{generatedValuesIntervalController.selected.idx1monthX}" title="#{bundle.ViewGeneratedValuesIntervalTitle_idx1monthX}"/>
+                        <h:outputText value="#{bundle.ViewGeneratedValuesIntervalLabel_idx1weekX}"/>
+                        <h:outputText value="#{generatedValuesIntervalController.selected.idx1weekX}" title="#{bundle.ViewGeneratedValuesIntervalTitle_idx1weekX}"/>
+                        <h:outputText value="#{bundle.ViewGeneratedValuesIntervalLabel_idx1yearX}"/>
+                        <h:outputText value="#{generatedValuesIntervalController.selected.idx1yearX}" title="#{bundle.ViewGeneratedValuesIntervalTitle_idx1yearX}"/>
+                        <h:outputText value="#{bundle.ViewGeneratedValuesIntervalLabel_idx3monthX}"/>
+                        <h:outputText value="#{generatedValuesIntervalController.selected.idx3monthX}" title="#{bundle.ViewGeneratedValuesIntervalTitle_idx3monthX}"/>
+                        <h:outputText value="#{bundle.ViewGeneratedValuesIntervalLabel_idx6hoursX}"/>
+                        <h:outputText value="#{generatedValuesIntervalController.selected.idx6hoursX}" title="#{bundle.ViewGeneratedValuesIntervalTitle_idx6hoursX}"/>
+                        <h:outputText value="#{bundle.ViewGeneratedValuesIntervalLabel_idx6monthX}"/>
+                        <h:outputText value="#{generatedValuesIntervalController.selected.idx6monthX}" title="#{bundle.ViewGeneratedValuesIntervalTitle_idx6monthX}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="GeneratedValuesIntervalViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

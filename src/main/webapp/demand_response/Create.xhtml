@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ConsumerRecommendationCreateDlg" widgetVar="ConsumerRecommendationCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateConsumerRecommendationTitle}">
+            <h:form id="ConsumerRecommendationCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{consumerRecommendationController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateConsumerRecommendationLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{consumerRecommendationController.selected.id}" title="#{bundle.CreateConsumerRecommendationTitle_id}" required="true" requiredMessage="#{bundle.CreateConsumerRecommendationRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.CreateConsumerRecommendationLabel_notifCode}" for="notifCode" />
+                        <p:inputText id="notifCode" value="#{consumerRecommendationController.selected.notifCode}" title="#{bundle.CreateConsumerRecommendationTitle_notifCode}" required="true" requiredMessage="#{bundle.CreateConsumerRecommendationRequiredMessage_notifCode}"/>
+                        <p:outputLabel value="#{bundle.CreateConsumerRecommendationLabel_severity}" for="severity" />
+                        <p:inputText id="severity" value="#{consumerRecommendationController.selected.severity}" title="#{bundle.CreateConsumerRecommendationTitle_severity}" />
+                        <p:outputLabel value="#{bundle.CreateConsumerRecommendationLabel_shortDescription}" for="shortDescription" />
+                        <p:inputText id="shortDescription" value="#{consumerRecommendationController.selected.shortDescription}" title="#{bundle.CreateConsumerRecommendationTitle_shortDescription}" />
+                        <p:outputLabel value="#{bundle.CreateConsumerRecommendationLabel_longDescription}" for="longDescription" />
+                        <p:inputText id="longDescription" value="#{consumerRecommendationController.selected.longDescription}" title="#{bundle.CreateConsumerRecommendationTitle_longDescription}" />
+                        <p:outputLabel value="#{bundle.CreateConsumerRecommendationLabel_emitter}" for="emitter" />
+                        <p:inputText id="emitter" value="#{consumerRecommendationController.selected.emitter}" title="#{bundle.CreateConsumerRecommendationTitle_emitter}" />
+                        <p:outputLabel value="#{bundle.CreateConsumerRecommendationLabel_createdOn}" for="createdOn" />
+                        <p:calendar id="createdOn" pattern="MM/dd/yyyy HH:mm:ss" value="#{consumerRecommendationController.selected.createdOn}" title="#{bundle.EditConsumerRecommendationTitle_createdOn}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateConsumerRecommendationLabel_status}" for="status" />
+                        <p:inputText id="status" value="#{consumerRecommendationController.selected.status}" title="#{bundle.CreateConsumerRecommendationTitle_status}" />
+                        <p:outputLabel value="#{bundle.CreateConsumerRecommendationLabel_reduceIntervalStart}" for="reduceIntervalStart" />
+                        <p:inputText id="reduceIntervalStart" value="#{consumerRecommendationController.selected.reduceIntervalStart}" title="#{bundle.CreateConsumerRecommendationTitle_reduceIntervalStart}" />
+                        <p:outputLabel value="#{bundle.CreateConsumerRecommendationLabel_reduceIntervalStop}" for="reduceIntervalStop" />
+                        <p:inputText id="reduceIntervalStop" value="#{consumerRecommendationController.selected.reduceIntervalStop}" title="#{bundle.CreateConsumerRecommendationTitle_reduceIntervalStop}" />
+                        <p:outputLabel value="#{bundle.CreateConsumerRecommendationLabel_quantity}" for="quantity" />
+                        <p:inputText id="quantity" value="#{consumerRecommendationController.selected.quantity}" title="#{bundle.CreateConsumerRecommendationTitle_quantity}" />
+                        <p:outputLabel value="#{bundle.CreateConsumerRecommendationLabel_confirmedDate}" for="confirmedDate" />
+                        <p:calendar id="confirmedDate" pattern="MM/dd/yyyy HH:mm:ss" value="#{consumerRecommendationController.selected.confirmedDate}" title="#{bundle.EditConsumerRecommendationTitle_confirmedDate}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateConsumerRecommendationLabel_confirmationStatus}" for="confirmationStatus" />
+                        <p:inputText id="confirmationStatus" value="#{consumerRecommendationController.selected.confirmationStatus}" title="#{bundle.CreateConsumerRecommendationTitle_confirmationStatus}" />
+                        <p:outputLabel value="#{bundle.CreateConsumerRecommendationLabel_reduceDayOfWeek}" for="reduceDayOfWeek" />
+                        <p:inputText id="reduceDayOfWeek" value="#{consumerRecommendationController.selected.reduceDayOfWeek}" title="#{bundle.CreateConsumerRecommendationTitle_reduceDayOfWeek}" />
+                        <p:outputLabel value="#{bundle.CreateConsumerRecommendationLabel_clientId}" for="clientId" />
+                        <p:selectOneMenu id="clientId" value="#{consumerRecommendationController.selected.clientId}" >
+                            <f:selectItems value="#{consumerClientController.itemsAvailableSelectOne}"
+                                           var="clientIdItem"
+                                           itemValue="#{clientIdItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{consumerRecommendationController.create}" value="#{bundle.Save}" update="display,:ConsumerRecommendationListForm:datalist,:growl" oncomplete="handleSubmit(args,'ConsumerRecommendationCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ConsumerRecommendationCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

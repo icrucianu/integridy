@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+
+
+    <ui:composition template="/mainframe.xhtml">
+        <ui:define name="title">
+            <h:outputText value="Consumption client"></h:outputText>
+            <h:outputStylesheet library="css" name="bootstrap.css"/>
+            <h:outputStylesheet library="css" name="tabstyle.css"/>
+
+        </ui:define>
+
+        <ui:define name="body">
+            <style>
+                .tab-content > .tab-pane:not(.active),
+                .pill-content > .pill-pane:not(.active) {
+                    display: block !important;
+                    height: 0 !important;
+                    overflow-y: hidden !important;
+                } 
+            </style>
+            <script>
+                function myLineChartExtender() {
+
+                    this.cfg.seriesDefaults = {
+                        linePattern: 'dotted'
+                    }
+                }
+            </script>
+
+            <h:form id="userData">
+                <p:panelGrid columns="2">
+                    <p:outputLabel rendered="#{!consumerInvoiceController.isConsumer}" for="consumersList" value="#{bundle.ListConsumerslabel}" />
+                    <p:selectOneMenu id="consumersList" rendered="#{!consumerInvoiceController.isConsumer}" value="#{consumerInvoiceController.selectedConsumer}"  style="width:125px" filter="true" filterMatchMode="contains">
+                        <f:selectItem itemLabel="Select One" itemValue="" />
+                        <f:selectItems value="#{consumerInvoiceController.consumers}" var="consumer" itemLabel="#{consumer.fullName}" itemValue="#{consumer}" />
+                        <p:ajax event="change" update="devicesList"   listener="#{consumerInvoiceController.onSelectConsumer}" />
+                    </p:selectOneMenu>
+
+                    <p:outputLabel for="devicesList" value="List of Devices:"/>
+                    <p:tree  id="devicesList" value="#{consumerInvoiceController.root}" selectionMode="single" selection="#{consumerInvoiceController.selectedNode}"   var="node" animate="true">
+
+                        <p:treeNode type="CP" icon="fa fa-home" styleClass="h2-subtitle" >
+                            <h:outputText styleClass="h2-subtitle" value="#{node.name}(#{node.nodeType})" />
+                        </p:treeNode>
+                        <p:treeNode type="SM" icon="fa fa-tablet" styleClass="h3-subtitle">
+                            <h:outputText value="#{node.name}(#{node.nodeType})" />
+                        </p:treeNode>
+                    </p:tree> 
+
+                    <p:outputLabel value="Reference Date: "/>
+                    <p:outputLabel value="#{consumerInvoiceController.referenceDate}">
+                        <f:convertDateTime pattern="dd/MM/yyyy " timeZone="GMT+2" />
+                    </p:outputLabel>
+                    <p:outputLabel value="Detailed view: "/>
+                    <p:selectBooleanCheckbox value="#{consumerInvoiceController.viewDetailedChart}" />
+                </p:panelGrid>
+
+
+                <p:dataTable id="datalistPrices" value="#{consumerInvoiceController.validPricesList}" var="item"
+                             rowKey="#{item.id}"
+                             selection="#{consumerInvoiceController.selectedPrice}"
+                             >
+                    <f:facet name="header">
+                        Select Price
+                    </f:facet>
+                    <p:column selectionMode="single" style="width:16px;text-align:center"/>
+                    <p:column  headerText="Price Name">
+                        <h:outputText value="#{item.priceDef}"/>
+                    </p:column>
+                    <p:column  headerText="Price Type">
+                        <h:outputText value="#{item.priceType}"/>
+                    </p:column>
+                    <p:column  headerText="Day Time Start">
+                        <h:outputText value="#{item.startTimePeriod}">
+                            <f:convertDateTime pattern="HH:mm" timeZone="GMT+2"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column  headerText="Day Time End">
+                        <h:outputText value="#{item.endTimePeriod}">
+                            <f:convertDateTime pattern="HH:mm" timeZone="GMT+2"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column  headerText="(Day) Price">
+                        <h:outputText value="#{item.priceVal}"/>
+                    </p:column>
+                    <p:column  headerText="Night Price">
+                        <h:outputText value="#{item.nightPriceVal}"/>
+                    </p:column>
+                    <p:column  headerText="Start valability">
+                        <h:outputText value="#{item.validityStart}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT+2" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column  headerText="End valability">
+                        <h:outputText value="#{item.validityEnd}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT+2" />
+                        </h:outputText>
+                    </p:column>
+
+
+
+                </p:dataTable>
+                <p:panel>
+                    <p:commandButton id="computeCosts" value="Compute Costs" update=":costPanel" actionListener="#{consumerInvoiceController.computeCosts}"/>
+                    <p:commandButton id="clearChart" value="Clear chart" update=":costPanel" actionListener="#{consumerInvoiceController.clearChart}"/>
+                </p:panel>
+
+
+            </h:form> 
+            <p:panel id="costPanel"  >
+                <div class="tableContainer">
+                    <div id="navTab">
+                        <ul class="nav nav-pills">
+                            <li class="active">
+                                <a href="#currentConsumption" class="tabHeader" data-toggle="tab">CURRENT</a>
+                            </li>
+                            <li>
+                                <a href="#dailyConsumption" class="tabHeader" data-toggle="tab">DAILY</a>
+                            </li>
+                            <li>
+                                <a href="#monthlyConsumption" class="tabHeader" data-toggle="tab">MONTHLY</a>
+                            </li>
+
+                        </ul>
+                        <div class="tab-content clearfix">
+                            <div class="tab-pane active" id="currentConsumption">
+                                <h:form id="ConsumptionRecordListForm">
+
+                                    <div  >
+                                        <p:chart id="currentTotalCostDay" type="line" 
+                                                 model="#{consumerInvoiceController.dataModelCostTotalDay}" 
+                                                 style="height:400px;" 
+                                                 rendered="#{!consumerInvoiceController.noChartDataDay}"
+                                                 responsive="true"/>
+                                    </div>
+
+
+                                    <p:dataTable id="dataInvoiceDay" value="#{consumerInvoiceController.invoiceDataDay}"
+                                                 var="invoiceDay"
+                                                 rowKey="invoiceDay.id"
+                                                 paginator="true"
+                                                 rows="10"
+                                                 rowsPerPageTemplate="10,20,30,40,50"
+                                                 scrollable="true"
+                                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} Exporters"
+                                                 >
+
+                                        <f:facet name="Exporters">
+                                            <h:commandLink>
+                                                <p:graphicImage library="images" name="excel.png"/>
+                                                <p:dataExporter type="xls" target="dataInvoiceDay" fileName="Report" />
+                                            </h:commandLink>
+
+                                            <h:commandLink>
+                                                <p:graphicImage library="images" name="pdf.png" width="24"/>
+                                                <p:dataExporter type="pdf" target="dataInvoiceDay" fileName="Report"/>
+                                            </h:commandLink>
+
+                                            <h:commandLink>
+                                                <p:graphicImage library="images" name="csv.png" width="24"/>
+                                                <p:dataExporter type="csv" target="dataInvoiceDay" fileName="Report" />
+                                            </h:commandLink>
+
+                                            <h:commandLink>
+                                                <p:graphicImage library="images" name="xml.png" width="24"/>
+                                                <p:dataExporter type="xml" target="dataInvoiceDay" fileName="Report" />
+                                            </h:commandLink>
+                                        </f:facet>
+                                        <p:column  headerText="Consumer Name ">
+                                            <h:outputText value="#{invoiceDay.consumerClient.fullName}">
+
+                                            </h:outputText>
+                                        </p:column>
+                                        <p:column  headerText="Price Name">
+                                            <h:outputText value="#{invoiceDay.price.priceDef}">
+
+                                            </h:outputText>
+                                        </p:column>
+                                        <p:column  headerText="Date Start">
+                                            <h:outputText value="#{invoiceDay.dateStart}">
+                                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="GMT+3" />
+                                            </h:outputText>
+                                        </p:column>
+                                        <p:column  headerText="Date Stop">
+                                            <h:outputText value="#{invoiceDay.dateStop}">
+                                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="GMT+3" />
+                                            </h:outputText>
+                                        </p:column>
+                                        <p:column  headerText="Total Consumed Active Power">
+                                            <h:outputText value="#{invoiceDay.totalConsumedActivePower}">
+                                                <f:convertNumber pattern="#0.00" locale="ro_RO"/>
+                                            </h:outputText>
+                                        </p:column>
+                                        <p:column  headerText="Total Cost">
+                                            <h:outputText value="#{invoiceDay.totalCost}">
+                                                <f:convertNumber pattern="#0.00" locale="ro_RO"/>
+                                            </h:outputText>
+                                        </p:column>
+                                    </p:dataTable>
+
+
+
+
+
+
+                                </h:form>
+                            </div>
+                            <div class="tab-pane" id="dailyConsumption">
+                                <h:form id="costDaily">
+
+                                    <div  >
+                                        <p:chart id="currentTotalCostMonth" type="line" 
+                                                 model="#{consumerInvoiceController.dataModelCostTotalMonth}" 
+                                                 style="height:400px;" 
+                                                 rendered="#{!consumerInvoiceController.noChartDataMonth}"
+                                                 responsive="true"/>
+                                    </div>
+
+
+                                    <p:dataTable id="dataInvoiceMonth" value="#{consumerInvoiceController.invoiceDataMonth}"
+                                                 var="invoiceMonth"
+                                                 rowKey="invoiceMonth.id"
+                                                 paginator="true"
+                                                 rows="10"
+                                                 rowsPerPageTemplate="10,20,30,40,50"
+                                                 scrollable="true"
+                                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} Exporters"
+                                                 >
+
+                                        <f:facet name="Exporters">
+                                            <h:commandLink>
+                                                <p:graphicImage library="images" name="excel.png"/>
+                                                <p:dataExporter type="xls" target="invoiceMonth" fileName="Report" />
+                                            </h:commandLink>
+
+                                            <h:commandLink>
+                                                <p:graphicImage library="images" name="pdf.png" width="24"/>
+                                                <p:dataExporter type="pdf" target="invoiceMonth" fileName="Report"/>
+                                            </h:commandLink>
+
+                                            <h:commandLink>
+                                                <p:graphicImage library="images" name="csv.png" width="24"/>
+                                                <p:dataExporter type="csv" target="invoiceMonth" fileName="Report" />
+                                            </h:commandLink>
+
+                                            <h:commandLink>
+                                                <p:graphicImage library="images" name="xml.png" width="24"/>
+                                                <p:dataExporter type="xml" target="invoiceMonth" fileName="Report" />
+                                            </h:commandLink>
+                                        </f:facet>
+                                        <p:column  headerText="Consumer Name ">
+                                            <h:outputText value="#{invoiceMonth.consumerClient.fullName}">
+
+                                            </h:outputText>
+                                        </p:column>
+                                        <p:column  headerText="Price Name">
+                                            <h:outputText value="#{invoiceMonth.price.priceDef}">
+
+                                            </h:outputText>
+                                        </p:column>
+                                        <p:column  headerText="Date Start">
+                                            <h:outputText value="#{invoiceMonth.dateStart}">
+                                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="GMT+3" />
+                                            </h:outputText>
+                                        </p:column>
+                                        <p:column  headerText="Date Stop">
+                                            <h:outputText value="#{invoiceMonth.dateStop}">
+                                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="GMT+3" />
+                                            </h:outputText>
+                                        </p:column>
+                                        <p:column  headerText="Total Consumed Active Power">
+                                            <h:outputText value="#{invoiceMonth.totalConsumedActivePower}">
+                                                <f:convertNumber pattern="#0.00" locale="ro_RO"/>
+                                            </h:outputText>
+                                        </p:column>
+                                        <p:column  headerText="Total Cost">
+                                            <h:outputText value="#{invoiceMonth.totalCost}">
+                                                <f:convertNumber pattern="#0.00" locale="ro_RO"/>
+                                            </h:outputText>
+                                        </p:column>
+                                    </p:dataTable>
+
+
+
+                                </h:form>
+
+                            </div>
+
+                            <div class="tab-pane" id="monthlyConsumption">
+                                <h:form id="costMonthly">
+                                    <div  >
+                                        <p:chart id="currentTotalCostYear" type="line" 
+                                                 model="#{consumerInvoiceController.dataModelCostTotalYear}" 
+                                                 style="height:400px;" 
+                                                 rendered="#{!consumerInvoiceController.noChartDataYear}"
+                                                 responsive="true"/>
+                                    </div>
+                                    <p:dataTable id="dataInvoiceYear" value="#{consumerInvoiceController.invoiceDataYear}"
+                                                 var="invoiceYear"
+                                                 rowKey="invoiceYear.id"
+                                                 paginator="true"
+                                                 rows="10"
+                                                 rowsPerPageTemplate="10,20,30,40,50"
+                                                 scrollable="true"
+                                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} Exporters"
+                                                 >
+
+                                        <f:facet name="Exporters">
+                                            <h:commandLink>
+                                                <p:graphicImage library="images" name="excel.png"/>
+                                                <p:dataExporter type="xls" target="dataInvoiceYear" fileName="Report" />
+                                            </h:commandLink>
+
+                                            <h:commandLink>
+                                                <p:graphicImage library="images" name="pdf.png" width="24"/>
+                                                <p:dataExporter type="pdf" target="dataInvoiceYear" fileName="Report"/>
+                                            </h:commandLink>
+
+                                            <h:commandLink>
+                                                <p:graphicImage library="images" name="csv.png" width="24"/>
+                                                <p:dataExporter type="csv" target="dataInvoiceYear" fileName="Report" />
+                                            </h:commandLink>
+
+                                            <h:commandLink>
+                                                <p:graphicImage library="images" name="xml.png" width="24"/>
+                                                <p:dataExporter type="xml" target="dataInvoiceYear" fileName="Report" />
+                                            </h:commandLink>
+                                        </f:facet>
+                                        <p:column  headerText="Consumer Name ">
+                                            <h:outputText value="#{invoiceYear.consumerClient.fullName}">
+
+                                            </h:outputText>
+                                        </p:column>
+                                        <p:column  headerText="Price Name">
+                                            <h:outputText value="#{invoiceYear.price.priceDef}">
+
+                                            </h:outputText>
+                                        </p:column>
+                                        <p:column  headerText="Date Start">
+                                            <h:outputText value="#{invoiceYear.dateStart}">
+                                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="GMT+3" />
+                                            </h:outputText>
+                                        </p:column>
+                                        <p:column  headerText="Date Stop">
+                                            <h:outputText value="#{invoiceYear.dateStop}">
+                                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="GMT+3" />
+                                            </h:outputText>
+                                        </p:column>
+                                        <p:column  headerText="Total Consumed Active Power">
+                                            <h:outputText value="#{invoiceYear.totalConsumedActivePower}">
+                                                <f:convertNumber pattern="#0.00" locale="ro_RO"/>
+                                            </h:outputText>
+                                        </p:column>
+                                        <p:column  headerText="Total Cost">
+                                            <h:outputText value="#{invoiceYear.totalCost}">
+                                                <f:convertNumber pattern="#0.00" locale="ro_RO"/>
+                                            </h:outputText>
+                                        </p:column>
+                                    </p:dataTable>
+
+                                </h:form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </p:panel>
+            <p:panel id="clientPanel">
+
+            </p:panel>
+            <h:outputScript library="js" name="bootstrap.js" />
+            <!--chart.js for charts-->
+            <h:outputScript library="js" name="Chart.bundle.js" />
+            <h:outputScript library="js" name="utils.js" />
+            <h:outputScript library="js" name="moment.min.js" />
+            <h:outputScript library="js" name="client_charts.js" />
+
+        </ui:define>
+
+
+    </ui:composition>
+
+</html>
+

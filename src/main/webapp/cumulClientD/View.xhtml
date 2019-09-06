@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CumulClientDViewDlg" widgetVar="CumulClientDViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewCumulClientDTitle}">
+            <h:form id="CumulClientDViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{cumulClientDController.selected != null}">
+                        <h:outputText value="#{bundle.ViewCumulClientDLabel_id}"/>
+                        <h:outputText value="#{cumulClientDController.selected.id}" title="#{bundle.ViewCumulClientDTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewCumulClientDLabel_activePow}"/>
+                        <h:outputText value="#{cumulClientDController.selected.activePow}" title="#{bundle.ViewCumulClientDTitle_activePow}"/>
+                        <h:outputText value="#{bundle.ViewCumulClientDLabel_co2}"/>
+                        <h:outputText value="#{cumulClientDController.selected.co2}" title="#{bundle.ViewCumulClientDTitle_co2}"/>
+                        <h:outputText value="#{bundle.ViewCumulClientDLabel_consumedActivePow}"/>
+                        <h:outputText value="#{cumulClientDController.selected.consumedActivePow}" title="#{bundle.ViewCumulClientDTitle_consumedActivePow}"/>
+                        <h:outputText value="#{bundle.ViewCumulClientDLabel_consumedReactivePow}"/>
+                        <h:outputText value="#{cumulClientDController.selected.consumedReactivePow}" title="#{bundle.ViewCumulClientDTitle_consumedReactivePow}"/>
+                        <h:outputText value="#{bundle.ViewCumulClientDLabel_createdTime}"/>
+                        <h:outputText value="#{cumulClientDController.selected.createdTime}" title="#{bundle.ViewCumulClientDTitle_createdTime}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewCumulClientDLabel_dayCost}"/>
+                        <h:outputText value="#{cumulClientDController.selected.dayCost}" title="#{bundle.ViewCumulClientDTitle_dayCost}"/>
+                        <h:outputText value="#{bundle.ViewCumulClientDLabel_deviceNumber}"/>
+                        <h:outputText value="#{cumulClientDController.selected.deviceNumber}" title="#{bundle.ViewCumulClientDTitle_deviceNumber}"/>
+                        <h:outputText value="#{bundle.ViewCumulClientDLabel_downTime}"/>
+                        <h:outputText value="#{cumulClientDController.selected.downTime}" title="#{bundle.ViewCumulClientDTitle_downTime}"/>
+                        <h:outputText value="#{bundle.ViewCumulClientDLabel_energyMismatch}"/>
+                        <h:outputText value="#{cumulClientDController.selected.energyMismatch}" title="#{bundle.ViewCumulClientDTitle_energyMismatch}"/>
+                        <h:outputText value="#{bundle.ViewCumulClientDLabel_energyMismatchRatio}"/>
+                        <h:outputText value="#{cumulClientDController.selected.energyMismatchRatio}" title="#{bundle.ViewCumulClientDTitle_energyMismatchRatio}"/>
+                        <h:outputText value="#{bundle.ViewCumulClientDLabel_nightCost}"/>
+                        <h:outputText value="#{cumulClientDController.selected.nightCost}" title="#{bundle.ViewCumulClientDTitle_nightCost}"/>
+                        <h:outputText value="#{bundle.ViewCumulClientDLabel_saidi}"/>
+                        <h:outputText value="#{cumulClientDController.selected.saidi}" title="#{bundle.ViewCumulClientDTitle_saidi}"/>
+                        <h:outputText value="#{bundle.ViewCumulClientDLabel_phaseVoltage}"/>
+                        <h:outputText value="#{cumulClientDController.selected.phaseVoltage}" title="#{bundle.ViewCumulClientDTitle_phaseVoltage}"/>
+                        <h:outputText value="#{bundle.ViewCumulClientDLabel_reactivePow}"/>
+                        <h:outputText value="#{cumulClientDController.selected.reactivePow}" title="#{bundle.ViewCumulClientDTitle_reactivePow}"/>
+                        <h:outputText value="#{bundle.ViewCumulClientDLabel_sendInterval}"/>
+                        <h:outputText value="#{cumulClientDController.selected.sendInterval}" title="#{bundle.ViewCumulClientDTitle_sendInterval}"/>
+                        <h:outputText value="#{bundle.ViewCumulClientDLabel_thdd}"/>
+                        <h:outputText value="#{cumulClientDController.selected.thdd}" title="#{bundle.ViewCumulClientDTitle_thdd}"/>
+                        <h:outputText value="#{bundle.ViewCumulClientDLabel_upTime}"/>
+                        <h:outputText value="#{cumulClientDController.selected.upTime}" title="#{bundle.ViewCumulClientDTitle_upTime}"/>
+                        <h:outputText value="#{bundle.ViewCumulClientDLabel_voltageDeviation}"/>
+                        <h:outputText value="#{cumulClientDController.selected.voltageDeviation}" title="#{bundle.ViewCumulClientDTitle_voltageDeviation}"/>
+                        <h:outputText value="#{bundle.ViewCumulClientDLabel_idx12hours}"/>
+                        <h:outputText value="#{cumulClientDController.selected.idx12hours}" title="#{bundle.ViewCumulClientDTitle_idx12hours}"/>
+                        <h:outputText value="#{bundle.ViewCumulClientDLabel_idx15minutes}"/>
+                        <h:outputText value="#{cumulClientDController.selected.idx15minutes}" title="#{bundle.ViewCumulClientDTitle_idx15minutes}"/>
+                        <h:outputText value="#{bundle.ViewCumulClientDLabel_idx1day}"/>
+                        <h:outputText value="#{cumulClientDController.selected.idx1day}" title="#{bundle.ViewCumulClientDTitle_idx1day}"/>
+                        <h:outputText value="#{bundle.ViewCumulClientDLabel_idx1hour}"/>
+                        <h:outputText value="#{cumulClientDController.selected.idx1hour}" title="#{bundle.ViewCumulClientDTitle_idx1hour}"/>
+                        <h:outputText value="#{bundle.ViewCumulClientDLabel_idx1month}"/>
+                        <h:outputText value="#{cumulClientDController.selected.idx1month}" title="#{bundle.ViewCumulClientDTitle_idx1month}"/>
+                        <h:outputText value="#{bundle.ViewCumulClientDLabel_idx1week}"/>
+                        <h:outputText value="#{cumulClientDController.selected.idx1week}" title="#{bundle.ViewCumulClientDTitle_idx1week}"/>
+                        <h:outputText value="#{bundle.ViewCumulClientDLabel_idx1year}"/>
+                        <h:outputText value="#{cumulClientDController.selected.idx1year}" title="#{bundle.ViewCumulClientDTitle_idx1year}"/>
+                        <h:outputText value="#{bundle.ViewCumulClientDLabel_idx3month}"/>
+                        <h:outputText value="#{cumulClientDController.selected.idx3month}" title="#{bundle.ViewCumulClientDTitle_idx3month}"/>
+                        <h:outputText value="#{bundle.ViewCumulClientDLabel_idx6hours}"/>
+                        <h:outputText value="#{cumulClientDController.selected.idx6hours}" title="#{bundle.ViewCumulClientDTitle_idx6hours}"/>
+                        <h:outputText value="#{bundle.ViewCumulClientDLabel_idx6month}"/>
+                        <h:outputText value="#{cumulClientDController.selected.idx6month}" title="#{bundle.ViewCumulClientDTitle_idx6month}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="CumulClientDViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

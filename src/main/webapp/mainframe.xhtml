@@ -1,0 +1,345 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <title><ui:insert name="title">Default Title</ui:insert></title>
+    <h:outputScript library="js" name="jsfcrud.js"/>
+    <h:outputStylesheet library="css" name="integridy-mainframe.css"/>
+    <h:outputStylesheet library="css" name="integridy-nav-menu.css"/>
+    <h:outputStylesheet library="css" name="integridy-main-style.css"/>
+</h:head>
+
+<h:body>
+    <f:view locale="#{localeManager.locale}"/>
+    <p:growl id="growl" life="3000"/>
+
+    <p:layout fullPage="true" widgetVar="layoutVar">
+
+        <p:layoutUnit position="west" collapsible="true" collapseSize="0" styleClass="navigationMenuContainer"
+                      gutter="1">
+            <h:form id="integridy-navForm"
+                    style="width:230px !important;max-width:250px !important;min-width:150px !important;">
+                <p:remoteCommand name="selectPageRc" actionListener="#{dashboardController.navigate()}"/>
+                <h:commandLink actionListener="#{dashboardController.redirectDashboard()}"
+                               onclick="navigate('Dashboard')">
+                    <p:graphicImage library="images" name="integridy-logo.png"
+                                    style="max-width:150px;height:auto;margin:0px auto;"/>
+                </h:commandLink>
+
+                <p:panel styleClass="integridyUserPanel">
+                    <p:graphicImage library="images" name="integridy-user.png"
+                                    style="max-width:80px;height:auto;margin:0px auto"/> <br/>
+                    <span>
+                        
+                            <h:outputText value="#{dashboardController.currentUserUsername}"
+                                          style="margin:0px auto;font-weight: bold;"/>
+                            <p:menuButton icon="fa fa-chevron-down" styleClass="styleButtonTransparent">
+                                <p:menuitem styleClass="styleIntegridyMenuItem" icon="fa fa-user" value="My Account"
+                                            action="/myAccount/myAccount.xhtml" onclick="navigate('My Account')"/>
+                            </p:menuButton>
+                            <br/>
+                            <h:outputText value="#{dashboardController.currentUserRole}"
+                                          style="margin:0px auto;font-weight: bold;"/>
+                    </span>
+                </p:panel>
+
+                <p:panel id="integridyDateSelectionPanel" styleClass="integridyDateSelectionPanel">
+
+                    <p:inputText id="filterStartDate" value="#{dashboardController.startDate}" type="hidden">
+                        <f:convertDateTime locale="ro_RO" pattern="yyyy-MM-dd HH:mm:ss"/>
+                    </p:inputText>
+
+
+                    <p:commandButton id="applyFiltersBtn"
+                                     value="Apply changes"
+                                     styleClass="integridy-apply-filters-btn"
+                                     rendered="true"
+                                     immediate="true"
+                                     actionListener="#{dashboardController.applyIntegridyFilters()}"
+                    />
+
+                    <p:calendar id="calendarStartDate" value="#{dashboardController.startDate}"
+                                pattern="dd-MMM-yyyy HH:mm:ss"
+                                placeholder="Start date"
+                                readonlyInput="true"
+                                styleClass="integridy-calendar"
+                                class="integridy-calendar-input"
+                    >
+                        <p:ajax event="dateSelect" listener="#{dashboardController.onStartDateChanged}"
+                                update="integridy-navForm:integridyDateSelectionPanel"/>
+                        <f:convertDateTime pattern="dd-MMM-yyyy HH:mm:ss" locale="en"/>
+                    </p:calendar>
+
+
+                </p:panel>
+
+
+                <p:menu toggleable="true" styleClass="integridyNavMenu">
+
+                    <p:menuitem value="Users" styleClass="nav-subitem" icon="fa fa-dot-circle-o"
+                                rendered="#{dashboardController.userAdmin}"
+                                outcome="/users/List.xhtml" onclick="navigate('User administration')"/>
+                    <p:menuitem value="Consumption" styleClass="nav-subitem" icon="fa fa-dot-circle-o"
+                                rendered="#{dashboardController.userAdminOrDso}"
+                                outcome="/consumption_dso/consumption_dso.xhtml" onclick="navigate('Consumption dso')"
+                    />
+
+                    <p:menuitem value="Forecast DSO" styleClass="nav-subitem" icon="fa fa-dot-circle-o"
+                                rendered="#{ dashboardController.userAdminOrDso}"
+                                outcome="/forecastAdmin/forecastAdmin.xhtml"
+                                onclick="navigate('Forecast DSO')"
+                    />
+                     <p:menuitem value="Forecast Consumer" styleClass="nav-subitem" icon="fa fa-dot-circle-o"
+                                rendered="#{ dashboardController.userDso}"
+                                outcome="/forecastConsumer/forecastConsumer.xhtml"
+                                onclick="navigate('Forecast Consumer')"
+                    />
+                    <p:menuitem value="Recommedations" styleClass="nav-subitem" icon="fa fa-dot-circle-o"
+                                rendered="#{dashboardController.userAdminOrDso}"
+                                outcome="/consumerRecommendations/consumerRecommendationsAdmin.xhtml"
+                                onclick="navigate('Consumer recommendations administration')"
+                    />
+                    <p:menuitem value="Optimization" styleClass="nav-subitem" icon="fa fa-dot-circle-o"
+                                rendered="#{dashboardController.userAdminOrDso}"
+                                outcome="/optimizationDSO/optimizationDSO.xhtml" onclick="navigate('Optimization')"
+                    />
+                    <p:menuitem value="What-if DSO" styleClass="nav-subitem" icon="fa fa-dot-circle-o"
+                                rendered="#{dashboardController.userAdminOrDso}"
+                                outcome="/whatif/whatif.xhtml" onclick="navigate('What-if scenario')"
+                    />
+                    <p:menuitem value="What-if consumer" styleClass="nav-subitem" icon="fa fa-dot-circle-o"
+                                rendered="#{dashboardController.userAdminOrDso}"
+                                outcome="/whatifconsumer/whatifconsumer.xhtml" onclick="navigate('What-if scenario')"
+                    />
+                    <p:menuitem value="Admin" styleClass="nav-subitem" icon="fa fa-dot-circle-o"
+                                rendered="#{dashboardController.userAdmin}"
+                    />
+                    <p:menuitem value="Rules" styleClass="nav-subitem" icon="fa fa-dot-circle-o"
+                                rendered="#{dashboardController.userAdminOrDso}"
+                                outcome="/rulesAdmin/rulesAdmin.xhtml"
+                                onclick="navigate('Notification and alerts rules')"
+                    />
+
+                    <p:menuitem value="Consumption" styleClass="nav-subitem" icon="fa fa-dot-circle-o"
+                                rendered="#{dashboardController.userClient}"
+                                outcome="/consumption_client/consumption_client.xhtml"
+                                onclick="navigate('Consumer situation')"
+                    />
+                    <p:menuitem value="Demand-Response" styleClass="nav-subitem" icon="fa fa-dot-circle-o"
+                                rendered="#{dashboardController.userClient}"
+                                outcome="/demand_response/demand_response.xhtml" onclick="navigate('Demand - response')"
+                    />
+                    <p:menuitem value="Rules" styleClass="nav-subitem" icon="fa fa-dot-circle-o"
+                                rendered="#{dashboardController.userClient}"
+                                outcome="/rulesConsumer/rulesConsumer.xhtml"
+                                onclick="navigate('Notifications and alerts rules')"
+                    />
+                    <p:menuitem value="Consumer prices" styleClass="nav-subitem" icon="fa fa-dot-circle-o"
+                                rendered="#{ dashboardController.userClient}"
+                                outcome="/consumerPrices.xhtml"
+                                onclick="navigate('Consumers prices')"
+                    />
+
+                    <p:menuitem value="Consumer prices comparison" styleClass="nav-subitem" icon="fa fa-dot-circle-o"
+                                rendered="#{ dashboardController.userClient}"
+                                outcome="/compareConsumerPrices.xhtml"
+                                onclick="navigate('Consumer prices comparison')"
+                    />
+
+                    <p:menuitem value="Consumption history" styleClass="nav-subitem" icon="fa fa-dot-circle-o"
+                                rendered="#{ dashboardController.userClient}"
+                                outcome="/istoric.xhtml"
+                                onclick="navigate('Consumption history')"
+                    />
+
+                    <p:menuitem value="Price model" styleClass="nav-subitem" icon="fa fa-dot-circle-o"
+                                rendered="#{ dashboardController.userAdminOrDso}"
+                                outcome="/consumerPrices/List.xhtml"
+                                onclick="navigate('Price model')"
+                    />
+                    <p:menuitem value="Consumers data" styleClass="nav-subitem" icon="fa fa-dot-circle-o"
+                                rendered="#{ dashboardController.userAdminOrDso}"
+                                outcome="/consumer/consumer_data.xhtml"
+                                onclick="navigate('Consumers data')"
+                    />
+                    <p:menuitem value="Consumers invoice" styleClass="nav-subitem" icon="fa fa-dot-circle-o"
+                                rendered="#{ dashboardController.userAdminOrDso or dashboardController.userClient}"
+                                outcome="/consumerInvoice/consumerInvoice.xhtml"
+                                onclick="navigate('Consumers invoice')"
+                    />
+                    <p:menuitem value="Action log" styleClass="nav-subitem" icon="fa fa-dot-circle-o"
+                                rendered="#{ dashboardController.userAdmin}"
+                                outcome="/actionLog/actionlog.xhtml"
+                                onclick="navigate('Action Log')"
+                    />
+                    <p:menuitem value="Invoice optimization" styleClass="nav-subitem" icon="fa fa-dot-circle-o"
+                                rendered="#{ dashboardController.userAdminOrDso or dashboardController.userClient}"
+                                outcome="/invoiceOptimization/invoiceoptimization.xhtml"
+                                onclick="navigate('Invoice optimization')"
+                    />
+                    <p:menuitem value="Invoice optimization peak" styleClass="nav-subitem" icon="fa fa-dot-circle-o"
+                                rendered="#{ dashboardController.userAdminOrDso or dashboardController.userClient}"
+                                outcome="/invoiceOptimization/invoiceoptimizationpeak.xhtml"
+                                onclick="navigate('Invoice optimization peak')"
+                    />
+
+                </p:menu>
+            </h:form>
+        </p:layoutUnit>
+
+        <p:layoutUnit position="center" styleClass="mainLayout">
+            <p:panel class="topNavigationPanel">
+                <i class="fa fa-bars toggleNavigationMenu" onclick="toggleNavigationMenu()"/>
+                <h:outputText value="#{dashboardController.currentPage}" styleClass="currentPageTitle"/>
+                
+                <span class="sign-out-container">
+                    <span><p:commandLink  action="#{dashboardController.signOut()}" title="Sign out"  immediate="true"
+                                 style="color:inherit;text-decoration: none;"> Sign out <i class="fa fa-sign-out"/></p:commandLink></span>
+                       
+                    </span>
+            </p:panel>
+
+            <ui:insert name="body"/>
+        </p:layoutUnit>
+
+        <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()"/>
+
+        <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false"
+                  showHeader="false">
+            <p:graphicImage name="/images/ajax-loader.gif"/>
+        </p:dialog>
+
+    </p:layout>
+
+    <script type="text/javascript">
+        var navDrawerCollapsed = false;
+
+
+        function collapseDrawer() {
+            if (!navDrawerCollapsed) {
+                PF('layoutVar').toggle('west');
+                navDrawerCollapsed = true;
+            }
+        }
+
+        function expandDrawer() {
+            if (navDrawerCollapsed) {
+                PF('layoutVar').toggle('west');
+                navDrawerCollapsed = false;
+            }
+        }
+
+        function toggleDrawer() {
+            if (navDrawerCollapsed) {
+                expandDrawer();
+            } else {
+                collapseDrawer();
+            }
+        }
+
+        function navigate(page) {
+            selectPageRc([{name: 'pageName', value: page}]);
+        }
+
+        function toggleNavigationMenu() {
+            toggleDrawer();
+        }
+
+        function responsiveNavDrawer() {
+            var windowWidth = window.innerWidth;
+            if (windowWidth &lt; 900) {
+                collapseDrawer();
+            }
+        }
+
+        function chartExtender3() {
+
+            this.cfg.seriesDefaults = {
+                linePattern: 'dotted',
+                showMarker: false,
+                shadow:0,
+                markerOptions: {
+                    show: false,
+                    size: 7 
+                },
+                lineWidth: 4
+
+            }
+
+            this.cfg.seriesDefaults.rendererOptions = {
+                barWidth: 3,
+                shadow: 0,
+            };
+            this.cfg.grid = {
+                borderWidth: 0,
+                background: '#ffffff',
+                shadow:0,
+                gridLineColor:'#E0E0E0'
+        };
+            this.cfg.axes.xaxis.tickOptions.showGridline = false;
+
+        }
+
+        function chartExtender() {
+
+            this.cfg.seriesDefaults = {
+                linePattern: 'dotted',
+                showMarker: false,
+                shadow:0,
+                markerOptions: {
+                    show: false,
+                    size: 1
+                },
+            }
+
+            this.cfg.seriesDefaults.rendererOptions = {
+                barWidth: 3,
+                shadow: 0,
+            };
+            this.cfg.grid = {
+                borderWidth: 0,
+                background: '#ffffff',
+                shadow:0,
+                gridLineColor:'#E0E0E0'
+            };
+            this.cfg.axes.xaxis.tickOptions.showGridline = false;
+
+        }
+
+        function chartExtender2() {
+
+            this.cfg.seriesDefaults = {
+                linePattern: 'dotted',
+                showMarker: false,
+                shadow:0,
+                markerOptions: {
+                    show: true,
+                    size: 7
+                },
+                lineWidth: 4
+            }
+
+            this.cfg.grid = {
+                borderWidth: 0,
+                background: '#ffffff',
+                shadow:0,
+                gridLineColor:'#E0E0E0'
+            };
+            this.cfg.axes.xaxis.tickOptions.showGridline = false;
+
+        }
+
+        window.addEventListener("resize", responsiveNavDrawer, false);
+
+
+    </script>
+
+</h:body>
+
+</html>

@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+    <ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+
+       
+            <h:form id="DsoSimpleRuleListForm">
+               <p:panel header="#{bundle.ListDsoSimpleRuleTitle}">
+                   <f:facet name="header">
+                       DSO Simple Rules List
+                       <p:commandButton id="togglerDSOList" type="button" value="Columns" style="float:right" icon="ui-icon-calculator" />
+                       <p:columnToggler datasource="datalistDSOSimpleRules" trigger="togglerDSOList" />
+                   </f:facet>
+                    <p:dataTable id="datalistDSOSimpleRules" value="#{dsoSimpleRuleController.items}" var="item"
+                                 selectionMode="single" selection="#{dsoSimpleRuleController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.id}"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 rows="10"
+                                 paginatorPosition="bottom"
+                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} Exporters"
+                                 styleClass="integridy-datatable"
+                                 scrollable="true"
+                                 >
+
+                         <p:ajax event="rowSelect"   update="createButtonDSOSimpleRules viewButtonDSOSimpleRules deleteButtonDSOSimpleRules editButtonDSOSimpleRules"/>
+                        <p:ajax event="rowUnselect" update="createButtonDSOSimpleRules viewButtonDSOSimpleRules deleteButtonDSOSimpleRules editButtonDSOSimpleRules"/>
+                                <f:facet name="Exporters">
+                                         <h:commandLink>
+                                            <p:graphicImage library="images" name="excel.png"/>
+                                            <p:dataExporter type="xls" target="datalistDSOSimpleRules" fileName="#{dsoSimpleRuleController.fileName}" />
+                                         </h:commandLink>
+
+                                         <h:commandLink>
+                                             <p:graphicImage library="images" name="pdf.png" width="24"/>
+                                             <p:dataExporter type="pdf" target="datalistDSOSimpleRules" fileName="#{dsoSimpleRuleController.fileName}"/>
+                                         </h:commandLink>
+
+                                         <h:commandLink>
+                                             <p:graphicImage library="images" name="csv.png" width="24"/>
+                                             <p:dataExporter type="csv" target="datalistDSOSimpleRules" fileName="#{dsoSimpleRuleController.fileName}" />
+                                         </h:commandLink>
+
+                                         <h:commandLink>
+                                             <p:graphicImage library="images" name="xml.png" width="24"/>
+                                             <p:dataExporter type="xml" target="datalistDSOSimpleRules" fileName="#{dsoSimpleRuleController.fileName}" />
+                                         </h:commandLink>
+                                 </f:facet>
+                       <p:column filterBy="#{item.id}" visible="false">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListConsumerSimpleRuleTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.ruleName}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListConsumerSimpleRuleTitle_ruleName}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.ruleName}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.ruleType.domainName}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListConsumerSimpleRuleTitle_ruleType}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.ruleType.domainName}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.operand1.operandName}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListConsumerSimpleRuleTitle_operand1}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.operand1.operandName}"/>
+                        </p:column>
+                        <p:column visible="false">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListConsumerSimpleRuleTitle_operand2}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.operand2.operandName}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.operator}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListConsumerSimpleRuleTitle_operator}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.operator}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListConsumerSimpleRuleTitle_vald1}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.vald1}"/>
+                        </p:column>
+                        <p:column visible="false">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListConsumerSimpleRuleTitle_vald2}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.vald2}"/>
+                        </p:column>
+                        <p:column visible="false">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListConsumerSimpleRuleTitle_createdOn}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.createdOn}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column visible="false">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListConsumerSimpleRuleTitle_lastUpdatedOn}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.lastUpdatedOn}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column visible="false">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListConsumerSimpleRuleTitle_validityStart}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.validityStart}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column visible="false">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListConsumerSimpleRuleTitle_validityEnd}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.validityEnd}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column visible="false">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListConsumerSimpleRuleTitle_numberOfRegistrations}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.numberOfRegistrations}"/>
+                        </p:column>
+                        <p:column visible="false">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListConsumerSimpleRuleTitle_startCronFormat}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.startCronFormat}"/>
+                        </p:column>
+                        <p:column visible="false">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListConsumerSimpleRuleTitle_endCronFormat}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.endCronFormat}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.severity}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListConsumerSimpleRuleTitle_severity}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.severity}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.message}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListConsumerSimpleRuleTitle_message}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.message}"/>
+                        </p:column>
+                        
+                        <p:column visible="false" filterBy="#{item.clientId}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListConsumerSimpleRuleTitle_clientId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.clientId}"/>
+                        </p:column>
+                        
+                        <p:column visible="false">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListConsumerSimpleRuleTitle_deviceId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.deviceId.deviceName}"/>
+                        </p:column>
+                        
+                       
+                       <f:facet name="footer">
+                           <p:commandButton id="createButtonDSOSimpleRules" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{dsoSimpleRuleController.prepareCreate}" update=":DsoSimpleRuleCreateForm" oncomplete="PF('DsoSimpleRuleCreateDialog').show()"/>
+                           <p:commandButton id="viewButtonDSOSimpleRules"   icon="ui-icon-search" value="#{bundle.View}" update=":DsoSimpleRuleViewForm" oncomplete="PF('DsoSimpleRuleViewDialog').show()" disabled="#{empty dsoSimpleRuleController.selected}"/>
+                           <p:commandButton id="editButtonDSOSimpleRules"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":DsoSimpleRuleEditForm" oncomplete="PF('DsoSimpleRuleEditDialog').show()" disabled="#{empty dsoSimpleRuleController.selected}"/>
+                           <p:commandButton id="deleteButtonDSOSimpleRules" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{dsoSimpleRuleController.destroy}" update=":growl,datalistDSOSimpleRules" disabled="#{empty dsoSimpleRuleController.selected}"/>
+                       </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            
+    
+    </ui:composition>
+

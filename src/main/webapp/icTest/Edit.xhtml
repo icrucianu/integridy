@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="IcTestEditDlg" widgetVar="IcTestEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditIcTestTitle}">
+            <h:form id="IcTestEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{icTestController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditIcTestLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{icTestController.selected.id}" title="#{bundle.EditIcTestTitle_id}" required="true" requiredMessage="#{bundle.EditIcTestRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.EditIcTestLabel_userName}" for="userName" />
+                        <p:inputText id="userName" value="#{icTestController.selected.userName}" title="#{bundle.EditIcTestTitle_userName}" required="true" requiredMessage="#{bundle.EditIcTestRequiredMessage_userName}"/>
+                        <p:outputLabel value="#{bundle.EditIcTestLabel_userAddress}" for="userAddress" />
+                        <p:inputText id="userAddress" value="#{icTestController.selected.userAddress}" title="#{bundle.EditIcTestTitle_userAddress}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{icTestController.update}" value="#{bundle.Save}" update="display,:IcTestListForm:datalist,:growl" oncomplete="handleSubmit(args, 'IcTestEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="IcTestEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

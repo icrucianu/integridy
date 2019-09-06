@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CumulDsoYCreateDlg" widgetVar="CumulDsoYCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateCumulDsoYTitle}">
+            <h:form id="CumulDsoYCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{cumulDsoYController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateCumulDsoYLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{cumulDsoYController.selected.id}" title="#{bundle.CreateCumulDsoYTitle_id}" required="true" requiredMessage="#{bundle.CreateCumulDsoYRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.CreateCumulDsoYLabel_activePow}" for="activePow" />
+                        <p:inputText id="activePow" value="#{cumulDsoYController.selected.activePow}" title="#{bundle.CreateCumulDsoYTitle_activePow}" />
+                        <p:outputLabel value="#{bundle.CreateCumulDsoYLabel_co2}" for="co2" />
+                        <p:inputText id="co2" value="#{cumulDsoYController.selected.co2}" title="#{bundle.CreateCumulDsoYTitle_co2}" />
+                        <p:outputLabel value="#{bundle.CreateCumulDsoYLabel_consumedActivePow}" for="consumedActivePow" />
+                        <p:inputText id="consumedActivePow" value="#{cumulDsoYController.selected.consumedActivePow}" title="#{bundle.CreateCumulDsoYTitle_consumedActivePow}" />
+                        <p:outputLabel value="#{bundle.CreateCumulDsoYLabel_consumedReactivePow}" for="consumedReactivePow" />
+                        <p:inputText id="consumedReactivePow" value="#{cumulDsoYController.selected.consumedReactivePow}" title="#{bundle.CreateCumulDsoYTitle_consumedReactivePow}" />
+                        <p:outputLabel value="#{bundle.CreateCumulDsoYLabel_createdTime}" for="createdTime" />
+                        <p:calendar id="createdTime" pattern="MM/dd/yyyy HH:mm:ss" value="#{cumulDsoYController.selected.createdTime}" title="#{bundle.EditCumulDsoYTitle_createdTime}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateCumulDsoYLabel_dayCost}" for="dayCost" />
+                        <p:inputText id="dayCost" value="#{cumulDsoYController.selected.dayCost}" title="#{bundle.CreateCumulDsoYTitle_dayCost}" />
+                        <p:outputLabel value="#{bundle.CreateCumulDsoYLabel_deviceNumber}" for="deviceNumber" />
+                        <p:inputText id="deviceNumber" value="#{cumulDsoYController.selected.deviceNumber}" title="#{bundle.CreateCumulDsoYTitle_deviceNumber}" />
+                        <p:outputLabel value="#{bundle.CreateCumulDsoYLabel_downTime}" for="downTime" />
+                        <p:inputText id="downTime" value="#{cumulDsoYController.selected.downTime}" title="#{bundle.CreateCumulDsoYTitle_downTime}" />
+                        <p:outputLabel value="#{bundle.CreateCumulDsoYLabel_energyMismatch}" for="energyMismatch" />
+                        <p:inputText id="energyMismatch" value="#{cumulDsoYController.selected.energyMismatch}" title="#{bundle.CreateCumulDsoYTitle_energyMismatch}" />
+                        <p:outputLabel value="#{bundle.CreateCumulDsoYLabel_energyMismatchRatio}" for="energyMismatchRatio" />
+                        <p:inputText id="energyMismatchRatio" value="#{cumulDsoYController.selected.energyMismatchRatio}" title="#{bundle.CreateCumulDsoYTitle_energyMismatchRatio}" />
+                        <p:outputLabel value="#{bundle.CreateCumulDsoYLabel_nightCost}" for="nightCost" />
+                        <p:inputText id="nightCost" value="#{cumulDsoYController.selected.nightCost}" title="#{bundle.CreateCumulDsoYTitle_nightCost}" />
+                        <p:outputLabel value="#{bundle.CreateCumulDsoYLabel_saidi}" for="saidi" />
+                        <p:inputText id="saidi" value="#{cumulDsoYController.selected.saidi}" title="#{bundle.CreateCumulDsoYTitle_saidi}" />
+                        <p:outputLabel value="#{bundle.CreateCumulDsoYLabel_phaseVoltage}" for="phaseVoltage" />
+                        <p:inputText id="phaseVoltage" value="#{cumulDsoYController.selected.phaseVoltage}" title="#{bundle.CreateCumulDsoYTitle_phaseVoltage}" />
+                        <p:outputLabel value="#{bundle.CreateCumulDsoYLabel_reactivePow}" for="reactivePow" />
+                        <p:inputText id="reactivePow" value="#{cumulDsoYController.selected.reactivePow}" title="#{bundle.CreateCumulDsoYTitle_reactivePow}" />
+                        <p:outputLabel value="#{bundle.CreateCumulDsoYLabel_sendInterval}" for="sendInterval" />
+                        <p:inputText id="sendInterval" value="#{cumulDsoYController.selected.sendInterval}" title="#{bundle.CreateCumulDsoYTitle_sendInterval}" />
+                        <p:outputLabel value="#{bundle.CreateCumulDsoYLabel_thdd}" for="thdd" />
+                        <p:inputText id="thdd" value="#{cumulDsoYController.selected.thdd}" title="#{bundle.CreateCumulDsoYTitle_thdd}" />
+                        <p:outputLabel value="#{bundle.CreateCumulDsoYLabel_upTime}" for="upTime" />
+                        <p:inputText id="upTime" value="#{cumulDsoYController.selected.upTime}" title="#{bundle.CreateCumulDsoYTitle_upTime}" />
+                        <p:outputLabel value="#{bundle.CreateCumulDsoYLabel_voltageDeviation}" for="voltageDeviation" />
+                        <p:inputText id="voltageDeviation" value="#{cumulDsoYController.selected.voltageDeviation}" title="#{bundle.CreateCumulDsoYTitle_voltageDeviation}" />
+                        <p:outputLabel value="#{bundle.CreateCumulDsoYLabel_idx12hours}" for="idx12hours" />
+                        <p:inputText id="idx12hours" value="#{cumulDsoYController.selected.idx12hours}" title="#{bundle.CreateCumulDsoYTitle_idx12hours}" />
+                        <p:outputLabel value="#{bundle.CreateCumulDsoYLabel_idx15minutes}" for="idx15minutes" />
+                        <p:inputText id="idx15minutes" value="#{cumulDsoYController.selected.idx15minutes}" title="#{bundle.CreateCumulDsoYTitle_idx15minutes}" />
+                        <p:outputLabel value="#{bundle.CreateCumulDsoYLabel_idx1day}" for="idx1day" />
+                        <p:inputText id="idx1day" value="#{cumulDsoYController.selected.idx1day}" title="#{bundle.CreateCumulDsoYTitle_idx1day}" />
+                        <p:outputLabel value="#{bundle.CreateCumulDsoYLabel_idx1hour}" for="idx1hour" />
+                        <p:inputText id="idx1hour" value="#{cumulDsoYController.selected.idx1hour}" title="#{bundle.CreateCumulDsoYTitle_idx1hour}" />
+                        <p:outputLabel value="#{bundle.CreateCumulDsoYLabel_idx1month}" for="idx1month" />
+                        <p:inputText id="idx1month" value="#{cumulDsoYController.selected.idx1month}" title="#{bundle.CreateCumulDsoYTitle_idx1month}" />
+                        <p:outputLabel value="#{bundle.CreateCumulDsoYLabel_idx1week}" for="idx1week" />
+                        <p:inputText id="idx1week" value="#{cumulDsoYController.selected.idx1week}" title="#{bundle.CreateCumulDsoYTitle_idx1week}" />
+                        <p:outputLabel value="#{bundle.CreateCumulDsoYLabel_idx1year}" for="idx1year" />
+                        <p:inputText id="idx1year" value="#{cumulDsoYController.selected.idx1year}" title="#{bundle.CreateCumulDsoYTitle_idx1year}" />
+                        <p:outputLabel value="#{bundle.CreateCumulDsoYLabel_idx3month}" for="idx3month" />
+                        <p:inputText id="idx3month" value="#{cumulDsoYController.selected.idx3month}" title="#{bundle.CreateCumulDsoYTitle_idx3month}" />
+                        <p:outputLabel value="#{bundle.CreateCumulDsoYLabel_idx6hours}" for="idx6hours" />
+                        <p:inputText id="idx6hours" value="#{cumulDsoYController.selected.idx6hours}" title="#{bundle.CreateCumulDsoYTitle_idx6hours}" />
+                        <p:outputLabel value="#{bundle.CreateCumulDsoYLabel_idx6month}" for="idx6month" />
+                        <p:inputText id="idx6month" value="#{cumulDsoYController.selected.idx6month}" title="#{bundle.CreateCumulDsoYTitle_idx6month}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{cumulDsoYController.create}" value="#{bundle.Save}" update="display,:CumulDsoYListForm:datalist,:growl" oncomplete="handleSubmit(args,'CumulDsoYCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="CumulDsoYCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

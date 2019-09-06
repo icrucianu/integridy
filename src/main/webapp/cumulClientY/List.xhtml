@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListCumulClientYTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="CumulClientYListForm">
+                <p:panel header="#{bundle.ListCumulClientYTitle}">
+                    <p:dataTable id="datalist" value="#{cumulClientYController.items}" var="item"
+                                 selectionMode="single" selection="#{cumulClientYController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.id}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCumulClientYTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCumulClientYTitle_activePow}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.activePow}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCumulClientYTitle_co2}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.co2}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCumulClientYTitle_consumedActivePow}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.consumedActivePow}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCumulClientYTitle_consumedReactivePow}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.consumedReactivePow}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCumulClientYTitle_createdTime}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.createdTime}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCumulClientYTitle_dayCost}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.dayCost}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCumulClientYTitle_deviceNumber}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.deviceNumber}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCumulClientYTitle_downTime}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.downTime}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCumulClientYTitle_energyMismatch}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.energyMismatch}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCumulClientYTitle_energyMismatchRatio}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.energyMismatchRatio}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCumulClientYTitle_nightCost}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nightCost}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCumulClientYTitle_saidi}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.saidi}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCumulClientYTitle_phaseVoltage}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.phaseVoltage}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCumulClientYTitle_reactivePow}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.reactivePow}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCumulClientYTitle_sendInterval}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.sendInterval}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCumulClientYTitle_thdd}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.thdd}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCumulClientYTitle_upTime}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.upTime}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCumulClientYTitle_voltageDeviation}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.voltageDeviation}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCumulClientYTitle_idx12hours}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idx12hours}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCumulClientYTitle_idx15minutes}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idx15minutes}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCumulClientYTitle_idx1day}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idx1day}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCumulClientYTitle_idx1hour}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idx1hour}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCumulClientYTitle_idx1month}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idx1month}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCumulClientYTitle_idx1week}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idx1week}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCumulClientYTitle_idx1year}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idx1year}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCumulClientYTitle_idx3month}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idx3month}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCumulClientYTitle_idx6hours}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idx6hours}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCumulClientYTitle_idx6month}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idx6month}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{cumulClientYController.prepareCreate}" update=":CumulClientYCreateForm" oncomplete="PF('CumulClientYCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":CumulClientYViewForm" oncomplete="PF('CumulClientYViewDialog').show()" disabled="#{empty cumulClientYController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":CumulClientYEditForm" oncomplete="PF('CumulClientYEditDialog').show()" disabled="#{empty cumulClientYController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{cumulClientYController.destroy}" update=":growl,datalist" disabled="#{empty cumulClientYController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

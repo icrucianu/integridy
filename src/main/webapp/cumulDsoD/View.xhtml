@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CumulDsoDViewDlg" widgetVar="CumulDsoDViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewCumulDsoDTitle}">
+            <h:form id="CumulDsoDViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{cumulDsoDController.selected != null}">
+                        <h:outputText value="#{bundle.ViewCumulDsoDLabel_id}"/>
+                        <h:outputText value="#{cumulDsoDController.selected.id}" title="#{bundle.ViewCumulDsoDTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewCumulDsoDLabel_activePow}"/>
+                        <h:outputText value="#{cumulDsoDController.selected.activePow}" title="#{bundle.ViewCumulDsoDTitle_activePow}"/>
+                        <h:outputText value="#{bundle.ViewCumulDsoDLabel_co2}"/>
+                        <h:outputText value="#{cumulDsoDController.selected.co2}" title="#{bundle.ViewCumulDsoDTitle_co2}"/>
+                        <h:outputText value="#{bundle.ViewCumulDsoDLabel_consumedActivePow}"/>
+                        <h:outputText value="#{cumulDsoDController.selected.consumedActivePow}" title="#{bundle.ViewCumulDsoDTitle_consumedActivePow}"/>
+                        <h:outputText value="#{bundle.ViewCumulDsoDLabel_consumedReactivePow}"/>
+                        <h:outputText value="#{cumulDsoDController.selected.consumedReactivePow}" title="#{bundle.ViewCumulDsoDTitle_consumedReactivePow}"/>
+                        <h:outputText value="#{bundle.ViewCumulDsoDLabel_createdTime}"/>
+                        <h:outputText value="#{cumulDsoDController.selected.createdTime}" title="#{bundle.ViewCumulDsoDTitle_createdTime}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewCumulDsoDLabel_dayCost}"/>
+                        <h:outputText value="#{cumulDsoDController.selected.dayCost}" title="#{bundle.ViewCumulDsoDTitle_dayCost}"/>
+                        <h:outputText value="#{bundle.ViewCumulDsoDLabel_deviceNumber}"/>
+                        <h:outputText value="#{cumulDsoDController.selected.deviceNumber}" title="#{bundle.ViewCumulDsoDTitle_deviceNumber}"/>
+                        <h:outputText value="#{bundle.ViewCumulDsoDLabel_downTime}"/>
+                        <h:outputText value="#{cumulDsoDController.selected.downTime}" title="#{bundle.ViewCumulDsoDTitle_downTime}"/>
+                        <h:outputText value="#{bundle.ViewCumulDsoDLabel_energyMismatch}"/>
+                        <h:outputText value="#{cumulDsoDController.selected.energyMismatch}" title="#{bundle.ViewCumulDsoDTitle_energyMismatch}"/>
+                        <h:outputText value="#{bundle.ViewCumulDsoDLabel_energyMismatchRatio}"/>
+                        <h:outputText value="#{cumulDsoDController.selected.energyMismatchRatio}" title="#{bundle.ViewCumulDsoDTitle_energyMismatchRatio}"/>
+                        <h:outputText value="#{bundle.ViewCumulDsoDLabel_nightCost}"/>
+                        <h:outputText value="#{cumulDsoDController.selected.nightCost}" title="#{bundle.ViewCumulDsoDTitle_nightCost}"/>
+                        <h:outputText value="#{bundle.ViewCumulDsoDLabel_saidi}"/>
+                        <h:outputText value="#{cumulDsoDController.selected.saidi}" title="#{bundle.ViewCumulDsoDTitle_saidi}"/>
+                        <h:outputText value="#{bundle.ViewCumulDsoDLabel_phaseVoltage}"/>
+                        <h:outputText value="#{cumulDsoDController.selected.phaseVoltage}" title="#{bundle.ViewCumulDsoDTitle_phaseVoltage}"/>
+                        <h:outputText value="#{bundle.ViewCumulDsoDLabel_reactivePow}"/>
+                        <h:outputText value="#{cumulDsoDController.selected.reactivePow}" title="#{bundle.ViewCumulDsoDTitle_reactivePow}"/>
+                        <h:outputText value="#{bundle.ViewCumulDsoDLabel_sendInterval}"/>
+                        <h:outputText value="#{cumulDsoDController.selected.sendInterval}" title="#{bundle.ViewCumulDsoDTitle_sendInterval}"/>
+                        <h:outputText value="#{bundle.ViewCumulDsoDLabel_thdd}"/>
+                        <h:outputText value="#{cumulDsoDController.selected.thdd}" title="#{bundle.ViewCumulDsoDTitle_thdd}"/>
+                        <h:outputText value="#{bundle.ViewCumulDsoDLabel_upTime}"/>
+                        <h:outputText value="#{cumulDsoDController.selected.upTime}" title="#{bundle.ViewCumulDsoDTitle_upTime}"/>
+                        <h:outputText value="#{bundle.ViewCumulDsoDLabel_voltageDeviation}"/>
+                        <h:outputText value="#{cumulDsoDController.selected.voltageDeviation}" title="#{bundle.ViewCumulDsoDTitle_voltageDeviation}"/>
+                        <h:outputText value="#{bundle.ViewCumulDsoDLabel_idx12hours}"/>
+                        <h:outputText value="#{cumulDsoDController.selected.idx12hours}" title="#{bundle.ViewCumulDsoDTitle_idx12hours}"/>
+                        <h:outputText value="#{bundle.ViewCumulDsoDLabel_idx15minutes}"/>
+                        <h:outputText value="#{cumulDsoDController.selected.idx15minutes}" title="#{bundle.ViewCumulDsoDTitle_idx15minutes}"/>
+                        <h:outputText value="#{bundle.ViewCumulDsoDLabel_idx1day}"/>
+                        <h:outputText value="#{cumulDsoDController.selected.idx1day}" title="#{bundle.ViewCumulDsoDTitle_idx1day}"/>
+                        <h:outputText value="#{bundle.ViewCumulDsoDLabel_idx1hour}"/>
+                        <h:outputText value="#{cumulDsoDController.selected.idx1hour}" title="#{bundle.ViewCumulDsoDTitle_idx1hour}"/>
+                        <h:outputText value="#{bundle.ViewCumulDsoDLabel_idx1month}"/>
+                        <h:outputText value="#{cumulDsoDController.selected.idx1month}" title="#{bundle.ViewCumulDsoDTitle_idx1month}"/>
+                        <h:outputText value="#{bundle.ViewCumulDsoDLabel_idx1week}"/>
+                        <h:outputText value="#{cumulDsoDController.selected.idx1week}" title="#{bundle.ViewCumulDsoDTitle_idx1week}"/>
+                        <h:outputText value="#{bundle.ViewCumulDsoDLabel_idx1year}"/>
+                        <h:outputText value="#{cumulDsoDController.selected.idx1year}" title="#{bundle.ViewCumulDsoDTitle_idx1year}"/>
+                        <h:outputText value="#{bundle.ViewCumulDsoDLabel_idx3month}"/>
+                        <h:outputText value="#{cumulDsoDController.selected.idx3month}" title="#{bundle.ViewCumulDsoDTitle_idx3month}"/>
+                        <h:outputText value="#{bundle.ViewCumulDsoDLabel_idx6hours}"/>
+                        <h:outputText value="#{cumulDsoDController.selected.idx6hours}" title="#{bundle.ViewCumulDsoDTitle_idx6hours}"/>
+                        <h:outputText value="#{bundle.ViewCumulDsoDLabel_idx6month}"/>
+                        <h:outputText value="#{cumulDsoDController.selected.idx6month}" title="#{bundle.ViewCumulDsoDTitle_idx6month}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="CumulDsoDViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

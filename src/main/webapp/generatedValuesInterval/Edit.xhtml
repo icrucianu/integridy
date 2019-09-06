@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="GeneratedValuesIntervalEditDlg" widgetVar="GeneratedValuesIntervalEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditGeneratedValuesIntervalTitle}">
+            <h:form id="GeneratedValuesIntervalEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{generatedValuesIntervalController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditGeneratedValuesIntervalLabel_hourOfDay}" for="hourOfDay" />
+                        <p:inputText id="hourOfDay" value="#{generatedValuesIntervalController.selected.hourOfDay}" title="#{bundle.EditGeneratedValuesIntervalTitle_hourOfDay}" required="true" requiredMessage="#{bundle.EditGeneratedValuesIntervalRequiredMessage_hourOfDay}"/>
+                        <p:outputLabel value="#{bundle.EditGeneratedValuesIntervalLabel_activePowI}" for="activePowI" />
+                        <p:inputText id="activePowI" value="#{generatedValuesIntervalController.selected.activePowI}" title="#{bundle.EditGeneratedValuesIntervalTitle_activePowI}" />
+                        <p:outputLabel value="#{bundle.EditGeneratedValuesIntervalLabel_co2I}" for="co2I" />
+                        <p:inputText id="co2I" value="#{generatedValuesIntervalController.selected.co2I}" title="#{bundle.EditGeneratedValuesIntervalTitle_co2I}" />
+                        <p:outputLabel value="#{bundle.EditGeneratedValuesIntervalLabel_consumedActivePowI}" for="consumedActivePowI" />
+                        <p:inputText id="consumedActivePowI" value="#{generatedValuesIntervalController.selected.consumedActivePowI}" title="#{bundle.EditGeneratedValuesIntervalTitle_consumedActivePowI}" />
+                        <p:outputLabel value="#{bundle.EditGeneratedValuesIntervalLabel_consumedReactivePowI}" for="consumedReactivePowI" />
+                        <p:inputText id="consumedReactivePowI" value="#{generatedValuesIntervalController.selected.consumedReactivePowI}" title="#{bundle.EditGeneratedValuesIntervalTitle_consumedReactivePowI}" />
+                        <p:outputLabel value="#{bundle.EditGeneratedValuesIntervalLabel_dayCostI}" for="dayCostI" />
+                        <p:inputText id="dayCostI" value="#{generatedValuesIntervalController.selected.dayCostI}" title="#{bundle.EditGeneratedValuesIntervalTitle_dayCostI}" />
+                        <p:outputLabel value="#{bundle.EditGeneratedValuesIntervalLabel_downTimeI}" for="downTimeI" />
+                        <p:inputText id="downTimeI" value="#{generatedValuesIntervalController.selected.downTimeI}" title="#{bundle.EditGeneratedValuesIntervalTitle_downTimeI}" />
+                        <p:outputLabel value="#{bundle.EditGeneratedValuesIntervalLabel_energyMismatchI}" for="energyMismatchI" />
+                        <p:inputText id="energyMismatchI" value="#{generatedValuesIntervalController.selected.energyMismatchI}" title="#{bundle.EditGeneratedValuesIntervalTitle_energyMismatchI}" />
+                        <p:outputLabel value="#{bundle.EditGeneratedValuesIntervalLabel_energyMismatchRatioI}" for="energyMismatchRatioI" />
+                        <p:inputText id="energyMismatchRatioI" value="#{generatedValuesIntervalController.selected.energyMismatchRatioI}" title="#{bundle.EditGeneratedValuesIntervalTitle_energyMismatchRatioI}" />
+                        <p:outputLabel value="#{bundle.EditGeneratedValuesIntervalLabel_nightCostI}" for="nightCostI" />
+                        <p:inputText id="nightCostI" value="#{generatedValuesIntervalController.selected.nightCostI}" title="#{bundle.EditGeneratedValuesIntervalTitle_nightCostI}" />
+                        <p:outputLabel value="#{bundle.EditGeneratedValuesIntervalLabel_saidiI}" for="saidiI" />
+                        <p:inputText id="saidiI" value="#{generatedValuesIntervalController.selected.saidiI}" title="#{bundle.EditGeneratedValuesIntervalTitle_saidiI}" />
+                        <p:outputLabel value="#{bundle.EditGeneratedValuesIntervalLabel_phaseVoltageI}" for="phaseVoltageI" />
+                        <p:inputText id="phaseVoltageI" value="#{generatedValuesIntervalController.selected.phaseVoltageI}" title="#{bundle.EditGeneratedValuesIntervalTitle_phaseVoltageI}" />
+                        <p:outputLabel value="#{bundle.EditGeneratedValuesIntervalLabel_reactivePowI}" for="reactivePowI" />
+                        <p:inputText id="reactivePowI" value="#{generatedValuesIntervalController.selected.reactivePowI}" title="#{bundle.EditGeneratedValuesIntervalTitle_reactivePowI}" />
+                        <p:outputLabel value="#{bundle.EditGeneratedValuesIntervalLabel_sendIntervalI}" for="sendIntervalI" />
+                        <p:inputText id="sendIntervalI" value="#{generatedValuesIntervalController.selected.sendIntervalI}" title="#{bundle.EditGeneratedValuesIntervalTitle_sendIntervalI}" />
+                        <p:outputLabel value="#{bundle.EditGeneratedValuesIntervalLabel_thddI}" for="thddI" />
+                        <p:inputText id="thddI" value="#{generatedValuesIntervalController.selected.thddI}" title="#{bundle.EditGeneratedValuesIntervalTitle_thddI}" />
+                        <p:outputLabel value="#{bundle.EditGeneratedValuesIntervalLabel_upTimeI}" for="upTimeI" />
+                        <p:inputText id="upTimeI" value="#{generatedValuesIntervalController.selected.upTimeI}" title="#{bundle.EditGeneratedValuesIntervalTitle_upTimeI}" />
+                        <p:outputLabel value="#{bundle.EditGeneratedValuesIntervalLabel_voltageDeviationI}" for="voltageDeviationI" />
+                        <p:inputText id="voltageDeviationI" value="#{generatedValuesIntervalController.selected.voltageDeviationI}" title="#{bundle.EditGeneratedValuesIntervalTitle_voltageDeviationI}" />
+                        <p:outputLabel value="#{bundle.EditGeneratedValuesIntervalLabel_idx12hoursI}" for="idx12hoursI" />
+                        <p:inputText id="idx12hoursI" value="#{generatedValuesIntervalController.selected.idx12hoursI}" title="#{bundle.EditGeneratedValuesIntervalTitle_idx12hoursI}" />
+                        <p:outputLabel value="#{bundle.EditGeneratedValuesIntervalLabel_idx15minutesI}" for="idx15minutesI" />
+                        <p:inputText id="idx15minutesI" value="#{generatedValuesIntervalController.selected.idx15minutesI}" title="#{bundle.EditGeneratedValuesIntervalTitle_idx15minutesI}" />
+                        <p:outputLabel value="#{bundle.EditGeneratedValuesIntervalLabel_idx1dayI}" for="idx1dayI" />
+                        <p:inputText id="idx1dayI" value="#{generatedValuesIntervalController.selected.idx1dayI}" title="#{bundle.EditGeneratedValuesIntervalTitle_idx1dayI}" />
+                        <p:outputLabel value="#{bundle.EditGeneratedValuesIntervalLabel_idx1hourI}" for="idx1hourI" />
+                        <p:inputText id="idx1hourI" value="#{generatedValuesIntervalController.selected.idx1hourI}" title="#{bundle.EditGeneratedValuesIntervalTitle_idx1hourI}" />
+                        <p:outputLabel value="#{bundle.EditGeneratedValuesIntervalLabel_idx1monthI}" for="idx1monthI" />
+                        <p:inputText id="idx1monthI" value="#{generatedValuesIntervalController.selected.idx1monthI}" title="#{bundle.EditGeneratedValuesIntervalTitle_idx1monthI}" />
+                        <p:outputLabel value="#{bundle.EditGeneratedValuesIntervalLabel_idx1weekI}" for="idx1weekI" />
+                        <p:inputText id="idx1weekI" value="#{generatedValuesIntervalController.selected.idx1weekI}" title="#{bundle.EditGeneratedValuesIntervalTitle_idx1weekI}" />
+                        <p:outputLabel value="#{bundle.EditGeneratedValuesIntervalLabel_idx1yearI}" for="idx1yearI" />
+                        <p:inputText id="idx1yearI" value="#{generatedValuesIntervalController.selected.idx1yearI}" title="#{bundle.EditGeneratedValuesIntervalTitle_idx1yearI}" />
+                        <p:outputLabel value="#{bundle.EditGeneratedValuesIntervalLabel_idx3monthI}" for="idx3monthI" />
+                        <p:inputText id="idx3monthI" value="#{generatedValuesIntervalController.selected.idx3monthI}" title="#{bundle.EditGeneratedValuesIntervalTitle_idx3monthI}" />
+                        <p:outputLabel value="#{bundle.EditGeneratedValuesIntervalLabel_idx6hoursI}" for="idx6hoursI" />
+                        <p:inputText id="idx6hoursI" value="#{generatedValuesIntervalController.selected.idx6hoursI}" title="#{bundle.EditGeneratedValuesIntervalTitle_idx6hoursI}" />
+                        <p:outputLabel value="#{bundle.EditGeneratedValuesIntervalLabel_idx6monthI}" for="idx6monthI" />
+                        <p:inputText id="idx6monthI" value="#{generatedValuesIntervalController.selected.idx6monthI}" title="#{bundle.EditGeneratedValuesIntervalTitle_idx6monthI}" />
+                        <p:outputLabel value="#{bundle.EditGeneratedValuesIntervalLabel_activePowX}" for="activePowX" />
+                        <p:inputText id="activePowX" value="#{generatedValuesIntervalController.selected.activePowX}" title="#{bundle.EditGeneratedValuesIntervalTitle_activePowX}" />
+                        <p:outputLabel value="#{bundle.EditGeneratedValuesIntervalLabel_co2X}" for="co2X" />
+                        <p:inputText id="co2X" value="#{generatedValuesIntervalController.selected.co2X}" title="#{bundle.EditGeneratedValuesIntervalTitle_co2X}" />
+                        <p:outputLabel value="#{bundle.EditGeneratedValuesIntervalLabel_consumedActivePowX}" for="consumedActivePowX" />
+                        <p:inputText id="consumedActivePowX" value="#{generatedValuesIntervalController.selected.consumedActivePowX}" title="#{bundle.EditGeneratedValuesIntervalTitle_consumedActivePowX}" />
+                        <p:outputLabel value="#{bundle.EditGeneratedValuesIntervalLabel_consumedReactivePowX}" for="consumedReactivePowX" />
+                        <p:inputText id="consumedReactivePowX" value="#{generatedValuesIntervalController.selected.consumedReactivePowX}" title="#{bundle.EditGeneratedValuesIntervalTitle_consumedReactivePowX}" />
+                        <p:outputLabel value="#{bundle.EditGeneratedValuesIntervalLabel_dayCostX}" for="dayCostX" />
+                        <p:inputText id="dayCostX" value="#{generatedValuesIntervalController.selected.dayCostX}" title="#{bundle.EditGeneratedValuesIntervalTitle_dayCostX}" />
+                        <p:outputLabel value="#{bundle.EditGeneratedValuesIntervalLabel_downTimeX}" for="downTimeX" />
+                        <p:inputText id="downTimeX" value="#{generatedValuesIntervalController.selected.downTimeX}" title="#{bundle.EditGeneratedValuesIntervalTitle_downTimeX}" />
+                        <p:outputLabel value="#{bundle.EditGeneratedValuesIntervalLabel_energyMismatchX}" for="energyMismatchX" />
+                        <p:inputText id="energyMismatchX" value="#{generatedValuesIntervalController.selected.energyMismatchX}" title="#{bundle.EditGeneratedValuesIntervalTitle_energyMismatchX}" />
+                        <p:outputLabel value="#{bundle.EditGeneratedValuesIntervalLabel_energyMismatchRatioX}" for="energyMismatchRatioX" />
+                        <p:inputText id="energyMismatchRatioX" value="#{generatedValuesIntervalController.selected.energyMismatchRatioX}" title="#{bundle.EditGeneratedValuesIntervalTitle_energyMismatchRatioX}" />
+                        <p:outputLabel value="#{bundle.EditGeneratedValuesIntervalLabel_nightCostX}" for="nightCostX" />
+                        <p:inputText id="nightCostX" value="#{generatedValuesIntervalController.selected.nightCostX}" title="#{bundle.EditGeneratedValuesIntervalTitle_nightCostX}" />
+                        <p:outputLabel value="#{bundle.EditGeneratedValuesIntervalLabel_saidiX}" for="saidiX" />
+                        <p:inputText id="saidiX" value="#{generatedValuesIntervalController.selected.saidiX}" title="#{bundle.EditGeneratedValuesIntervalTitle_saidiX}" />
+                        <p:outputLabel value="#{bundle.EditGeneratedValuesIntervalLabel_phaseVoltageX}" for="phaseVoltageX" />
+                        <p:inputText id="phaseVoltageX" value="#{generatedValuesIntervalController.selected.phaseVoltageX}" title="#{bundle.EditGeneratedValuesIntervalTitle_phaseVoltageX}" />
+                        <p:outputLabel value="#{bundle.EditGeneratedValuesIntervalLabel_reactivePowX}" for="reactivePowX" />
+                        <p:inputText id="reactivePowX" value="#{generatedValuesIntervalController.selected.reactivePowX}" title="#{bundle.EditGeneratedValuesIntervalTitle_reactivePowX}" />
+                        <p:outputLabel value="#{bundle.EditGeneratedValuesIntervalLabel_sendIntervalX}" for="sendIntervalX" />
+                        <p:inputText id="sendIntervalX" value="#{generatedValuesIntervalController.selected.sendIntervalX}" title="#{bundle.EditGeneratedValuesIntervalTitle_sendIntervalX}" />
+                        <p:outputLabel value="#{bundle.EditGeneratedValuesIntervalLabel_thddX}" for="thddX" />
+                        <p:inputText id="thddX" value="#{generatedValuesIntervalController.selected.thddX}" title="#{bundle.EditGeneratedValuesIntervalTitle_thddX}" />
+                        <p:outputLabel value="#{bundle.EditGeneratedValuesIntervalLabel_upTimeX}" for="upTimeX" />
+                        <p:inputText id="upTimeX" value="#{generatedValuesIntervalController.selected.upTimeX}" title="#{bundle.EditGeneratedValuesIntervalTitle_upTimeX}" />
+                        <p:outputLabel value="#{bundle.EditGeneratedValuesIntervalLabel_voltageDeviationX}" for="voltageDeviationX" />
+                        <p:inputText id="voltageDeviationX" value="#{generatedValuesIntervalController.selected.voltageDeviationX}" title="#{bundle.EditGeneratedValuesIntervalTitle_voltageDeviationX}" />
+                        <p:outputLabel value="#{bundle.EditGeneratedValuesIntervalLabel_idx12hoursX}" for="idx12hoursX" />
+                        <p:inputText id="idx12hoursX" value="#{generatedValuesIntervalController.selected.idx12hoursX}" title="#{bundle.EditGeneratedValuesIntervalTitle_idx12hoursX}" />
+                        <p:outputLabel value="#{bundle.EditGeneratedValuesIntervalLabel_idx15minutesX}" for="idx15minutesX" />
+                        <p:inputText id="idx15minutesX" value="#{generatedValuesIntervalController.selected.idx15minutesX}" title="#{bundle.EditGeneratedValuesIntervalTitle_idx15minutesX}" />
+                        <p:outputLabel value="#{bundle.EditGeneratedValuesIntervalLabel_idx1dayX}" for="idx1dayX" />
+                        <p:inputText id="idx1dayX" value="#{generatedValuesIntervalController.selected.idx1dayX}" title="#{bundle.EditGeneratedValuesIntervalTitle_idx1dayX}" />
+                        <p:outputLabel value="#{bundle.EditGeneratedValuesIntervalLabel_idx1hourX}" for="idx1hourX" />
+                        <p:inputText id="idx1hourX" value="#{generatedValuesIntervalController.selected.idx1hourX}" title="#{bundle.EditGeneratedValuesIntervalTitle_idx1hourX}" />
+                        <p:outputLabel value="#{bundle.EditGeneratedValuesIntervalLabel_idx1monthX}" for="idx1monthX" />
+                        <p:inputText id="idx1monthX" value="#{generatedValuesIntervalController.selected.idx1monthX}" title="#{bundle.EditGeneratedValuesIntervalTitle_idx1monthX}" />
+                        <p:outputLabel value="#{bundle.EditGeneratedValuesIntervalLabel_idx1weekX}" for="idx1weekX" />
+                        <p:inputText id="idx1weekX" value="#{generatedValuesIntervalController.selected.idx1weekX}" title="#{bundle.EditGeneratedValuesIntervalTitle_idx1weekX}" />
+                        <p:outputLabel value="#{bundle.EditGeneratedValuesIntervalLabel_idx1yearX}" for="idx1yearX" />
+                        <p:inputText id="idx1yearX" value="#{generatedValuesIntervalController.selected.idx1yearX}" title="#{bundle.EditGeneratedValuesIntervalTitle_idx1yearX}" />
+                        <p:outputLabel value="#{bundle.EditGeneratedValuesIntervalLabel_idx3monthX}" for="idx3monthX" />
+                        <p:inputText id="idx3monthX" value="#{generatedValuesIntervalController.selected.idx3monthX}" title="#{bundle.EditGeneratedValuesIntervalTitle_idx3monthX}" />
+                        <p:outputLabel value="#{bundle.EditGeneratedValuesIntervalLabel_idx6hoursX}" for="idx6hoursX" />
+                        <p:inputText id="idx6hoursX" value="#{generatedValuesIntervalController.selected.idx6hoursX}" title="#{bundle.EditGeneratedValuesIntervalTitle_idx6hoursX}" />
+                        <p:outputLabel value="#{bundle.EditGeneratedValuesIntervalLabel_idx6monthX}" for="idx6monthX" />
+                        <p:inputText id="idx6monthX" value="#{generatedValuesIntervalController.selected.idx6monthX}" title="#{bundle.EditGeneratedValuesIntervalTitle_idx6monthX}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{generatedValuesIntervalController.update}" value="#{bundle.Save}" update="display,:GeneratedValuesIntervalListForm:datalist,:growl" oncomplete="handleSubmit(args, 'GeneratedValuesIntervalEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="GeneratedValuesIntervalEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

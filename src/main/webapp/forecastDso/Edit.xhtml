@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ForecastDsoEditDlg" widgetVar="ForecastDsoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditForecastDsoTitle}">
+            <h:form id="ForecastDsoEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{forecastDsoController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditForecastDsoLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{forecastDsoController.selected.id}" title="#{bundle.EditForecastDsoTitle_id}" required="true" requiredMessage="#{bundle.EditForecastDsoRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.EditForecastDsoLabel_activePow}" for="activePow" />
+                        <p:inputText id="activePow" value="#{forecastDsoController.selected.activePow}" title="#{bundle.EditForecastDsoTitle_activePow}" />
+                        <p:outputLabel value="#{bundle.EditForecastDsoLabel_co2}" for="co2" />
+                        <p:inputText id="co2" value="#{forecastDsoController.selected.co2}" title="#{bundle.EditForecastDsoTitle_co2}" />
+                        <p:outputLabel value="#{bundle.EditForecastDsoLabel_consumedActivePow}" for="consumedActivePow" />
+                        <p:inputText id="consumedActivePow" value="#{forecastDsoController.selected.consumedActivePow}" title="#{bundle.EditForecastDsoTitle_consumedActivePow}" />
+                        <p:outputLabel value="#{bundle.EditForecastDsoLabel_consumedReactivePow}" for="consumedReactivePow" />
+                        <p:inputText id="consumedReactivePow" value="#{forecastDsoController.selected.consumedReactivePow}" title="#{bundle.EditForecastDsoTitle_consumedReactivePow}" />
+                        <p:outputLabel value="#{bundle.EditForecastDsoLabel_createdTime}" for="createdTime" />
+                        <p:calendar id="createdTime" pattern="MM/dd/yyyy HH:mm:ss" value="#{forecastDsoController.selected.createdTime}" title="#{bundle.EditForecastDsoTitle_createdTime}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditForecastDsoLabel_dayCost}" for="dayCost" />
+                        <p:inputText id="dayCost" value="#{forecastDsoController.selected.dayCost}" title="#{bundle.EditForecastDsoTitle_dayCost}" />
+                        <p:outputLabel value="#{bundle.EditForecastDsoLabel_deviceNumber}" for="deviceNumber" />
+                        <p:inputText id="deviceNumber" value="#{forecastDsoController.selected.deviceNumber}" title="#{bundle.EditForecastDsoTitle_deviceNumber}" />
+                        <p:outputLabel value="#{bundle.EditForecastDsoLabel_downTime}" for="downTime" />
+                        <p:inputText id="downTime" value="#{forecastDsoController.selected.downTime}" title="#{bundle.EditForecastDsoTitle_downTime}" />
+                        <p:outputLabel value="#{bundle.EditForecastDsoLabel_energyMismatch}" for="energyMismatch" />
+                        <p:inputText id="energyMismatch" value="#{forecastDsoController.selected.energyMismatch}" title="#{bundle.EditForecastDsoTitle_energyMismatch}" />
+                        <p:outputLabel value="#{bundle.EditForecastDsoLabel_energyMismatchRatio}" for="energyMismatchRatio" />
+                        <p:inputText id="energyMismatchRatio" value="#{forecastDsoController.selected.energyMismatchRatio}" title="#{bundle.EditForecastDsoTitle_energyMismatchRatio}" />
+                        <p:outputLabel value="#{bundle.EditForecastDsoLabel_nightCost}" for="nightCost" />
+                        <p:inputText id="nightCost" value="#{forecastDsoController.selected.nightCost}" title="#{bundle.EditForecastDsoTitle_nightCost}" />
+                        <p:outputLabel value="#{bundle.EditForecastDsoLabel_saidi}" for="saidi" />
+                        <p:inputText id="saidi" value="#{forecastDsoController.selected.saidi}" title="#{bundle.EditForecastDsoTitle_saidi}" />
+                        <p:outputLabel value="#{bundle.EditForecastDsoLabel_phaseVoltage}" for="phaseVoltage" />
+                        <p:inputText id="phaseVoltage" value="#{forecastDsoController.selected.phaseVoltage}" title="#{bundle.EditForecastDsoTitle_phaseVoltage}" />
+                        <p:outputLabel value="#{bundle.EditForecastDsoLabel_reactivePow}" for="reactivePow" />
+                        <p:inputText id="reactivePow" value="#{forecastDsoController.selected.reactivePow}" title="#{bundle.EditForecastDsoTitle_reactivePow}" />
+                        <p:outputLabel value="#{bundle.EditForecastDsoLabel_sendInterval}" for="sendInterval" />
+                        <p:inputText id="sendInterval" value="#{forecastDsoController.selected.sendInterval}" title="#{bundle.EditForecastDsoTitle_sendInterval}" />
+                        <p:outputLabel value="#{bundle.EditForecastDsoLabel_thdd}" for="thdd" />
+                        <p:inputText id="thdd" value="#{forecastDsoController.selected.thdd}" title="#{bundle.EditForecastDsoTitle_thdd}" />
+                        <p:outputLabel value="#{bundle.EditForecastDsoLabel_upTime}" for="upTime" />
+                        <p:inputText id="upTime" value="#{forecastDsoController.selected.upTime}" title="#{bundle.EditForecastDsoTitle_upTime}" />
+                        <p:outputLabel value="#{bundle.EditForecastDsoLabel_voltageDeviation}" for="voltageDeviation" />
+                        <p:inputText id="voltageDeviation" value="#{forecastDsoController.selected.voltageDeviation}" title="#{bundle.EditForecastDsoTitle_voltageDeviation}" />
+                        <p:outputLabel value="#{bundle.EditForecastDsoLabel_idx12hours}" for="idx12hours" />
+                        <p:inputText id="idx12hours" value="#{forecastDsoController.selected.idx12hours}" title="#{bundle.EditForecastDsoTitle_idx12hours}" />
+                        <p:outputLabel value="#{bundle.EditForecastDsoLabel_idx15minutes}" for="idx15minutes" />
+                        <p:inputText id="idx15minutes" value="#{forecastDsoController.selected.idx15minutes}" title="#{bundle.EditForecastDsoTitle_idx15minutes}" />
+                        <p:outputLabel value="#{bundle.EditForecastDsoLabel_idx1day}" for="idx1day" />
+                        <p:inputText id="idx1day" value="#{forecastDsoController.selected.idx1day}" title="#{bundle.EditForecastDsoTitle_idx1day}" />
+                        <p:outputLabel value="#{bundle.EditForecastDsoLabel_idx1hour}" for="idx1hour" />
+                        <p:inputText id="idx1hour" value="#{forecastDsoController.selected.idx1hour}" title="#{bundle.EditForecastDsoTitle_idx1hour}" />
+                        <p:outputLabel value="#{bundle.EditForecastDsoLabel_idx1month}" for="idx1month" />
+                        <p:inputText id="idx1month" value="#{forecastDsoController.selected.idx1month}" title="#{bundle.EditForecastDsoTitle_idx1month}" />
+                        <p:outputLabel value="#{bundle.EditForecastDsoLabel_idx1week}" for="idx1week" />
+                        <p:inputText id="idx1week" value="#{forecastDsoController.selected.idx1week}" title="#{bundle.EditForecastDsoTitle_idx1week}" />
+                        <p:outputLabel value="#{bundle.EditForecastDsoLabel_idx1year}" for="idx1year" />
+                        <p:inputText id="idx1year" value="#{forecastDsoController.selected.idx1year}" title="#{bundle.EditForecastDsoTitle_idx1year}" />
+                        <p:outputLabel value="#{bundle.EditForecastDsoLabel_idx3month}" for="idx3month" />
+                        <p:inputText id="idx3month" value="#{forecastDsoController.selected.idx3month}" title="#{bundle.EditForecastDsoTitle_idx3month}" />
+                        <p:outputLabel value="#{bundle.EditForecastDsoLabel_idx6hours}" for="idx6hours" />
+                        <p:inputText id="idx6hours" value="#{forecastDsoController.selected.idx6hours}" title="#{bundle.EditForecastDsoTitle_idx6hours}" />
+                        <p:outputLabel value="#{bundle.EditForecastDsoLabel_idx6month}" for="idx6month" />
+                        <p:inputText id="idx6month" value="#{forecastDsoController.selected.idx6month}" title="#{bundle.EditForecastDsoTitle_idx6month}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{forecastDsoController.update}" value="#{bundle.Save}" update="display,:ForecastDsoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ForecastDsoEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ForecastDsoEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

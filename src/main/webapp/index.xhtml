@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+          
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/mainframe.xhtml">
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.mainPageTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+
+            <h:form id="mapForm" styleClass="integridyMainForm">
+                <p:outputPanel deferred="true"  >
+                    <p:panelGrid rendered="#{dashboardController.userAdmin or dashboardController.userDso}" columns="2" columnClasses="ui-grid-col-6,ui-grid-col-6" styleClass="integridy-chart-wrapper" style="margin-top: 2%;">
+                        <p:column style="width:50%">
+                            <br/>
+                            <h:outputFormat value="#{bundle.chart_NationalEnergyProductionByType}" class="integridy-chart-description" style="display:#{!dashboardController.noChartData ? 'block' : 'none'};"/>
+                            <br/>
+                            <p:chart type="pie" style="height:300px;margin-top: 20px;display:#{!dashboardController.noChartData ? 'block' : 'none'};" 
+                                     widgetVar="dashboardProductionPieChart"
+                                     model="#{dashboardController.totalEnergyProductionPieChart}"/>
+                        </p:column>
+                        <p:column style="width:50%">
+                            <br/>
+                            <h:outputFormat value="#{bundle.chart_NationalEnergyProductionConsumption}" class="integridy-chart-description" style="display:#{!dashboardController.noChartData ? 'block' : 'none'};"/>
+                            <br/>
+                            <p:chart id="dashboardProductionConsumptionChart"  type="bar" model="#{dashboardController.totalEnergyProductionConsumptionChart}" style="height:300px;margin-top: 20px;" rendered="#{!dashboardController.noChartData}"
+                                     styleClass="integridy-chart" />
+                        </p:column>
+                    </p:panelGrid>
+                    <p:panelGrid rendered="#{dashboardController.consumer}" columns="2" columnClasses="ui-grid-col-8,ui-grid-col-4" styleClass="integridy-chart-wrapper" style="margin-top: 2%;">
+                        <p:column style="text-align: center">
+                            <br/>
+                            <h:outputFormat value="#{bundle.chart_clientConsumptionEvolution}" class="integridy-chart-description" style="display:block"/>
+                            <br/>
+                            <p:chart id="dashboardClientConsumptionEvolutionChart"  type="line" model="#{dashboardController.clientConsumptionEvolutionChart}" style="margin-top: 20px;"
+                                     styleClass="integridy-chart" />
+                        </p:column>
+                        <p:column style="text-align: center">
+                            <table style="margin-top: 125px; margin-bottom: 133px; width:100%; text-align:center">
+                                <tr></tr>
+                                <tr class="table_title">
+                                    <td>Index</td>
+                                    <td>Price</td>
+                                </tr>
+                                <tr></tr>
+                                <tr></tr>
+                                <tr></tr>
+                                <tr></tr>
+                                <tr></tr>
+                                <tr></tr>
+                                <tr></tr>
+                                <tr></tr>
+                                <tr class="table_font_bold">
+                                    <td>Today consumption<br />0155 KWh</td>
+                                    <td>Next bill estimation<br />70 RON</td>
+                                </tr>
+                                <tr></tr>
+                                <tr></tr>
+                                <tr></tr>
+                                <tr></tr>
+                                <tr class="table_font_bold">
+                                    <td>Total index<br />00068423 KWh</td>
+                                    <td>Invoiced<br />150 RON</td>
+                                </tr>
+                                <tr></tr>
+                            </table>
+                        </p:column>
+                    </p:panelGrid>
+                    
+                    
+                    <p:panelGrid  columns="2"  rendered="#{dashboardController.consumer}" styleClass="integridy-notifications-panelgrid">
+                        <p:column >
+                             <div class="integridy-alertlist-wrapper">
+
+                                        <p:panel id="Notifications" header="Notifications"  >
+                                            <p:dataTable id="clientNotificationList" 
+                                                         value="#{dashboardController.clientNotificationList}" 
+                                                         var="item" reflow="true" 
+                                                         rows="5"  
+                                                         styleClass="ets-dashboard-notifications"  
+                                                         emptyMessage="#{bundle.dashboardInfo_No_notifications}">
+
+                                                <p:column>
+                                                        <i class="fa fa-info-circle" style="padding-right: 10px;"/>
+                                                        <h:outputText value="#{item.longDescription} (#{item.emitter})" />
+                                                        <p:commandLink action="#{dashboardController.onClientNotificationDismiss(item.id, 1)}" update="clientNotificationList">
+                                                            <i class="fa fa-times dismissAlertIcon" style="float:right;" title="Dismiss" /> 
+                                                        </p:commandLink>
+                                                    
+                                                        <p:panel styleClass="notificationsDatePanel">
+                                                            <h:outputText  value="Issue date: " />
+                                                            <h:outputText  value="#{item.createdOn}" >
+                                                                <f:convertDateTime   type="date" pattern="dd-MM-yyyy HH:mm:ss"/>
+                                                            </h:outputText>
+                                                        </p:panel>
+                                                       
+
+                                                </p:column>
+
+                                            </p:dataTable>
+                                        </p:panel>
+                                    </div>
+                        </p:column>
+                        <p:column>
+                            <div class="integridy-alertlist-wrapper" rendered="#{dashboardController.consumer}"> 
+                                        <p:panel id="Alerts" header="Alerts">
+                                            <p:dataTable id="clientAlertList" 
+                                                         value="#{dashboardController.clientAlertList}" 
+                                                         var="item" reflow="true" 
+                                                         rows="5"  
+                                                         styleClass="ets-dashboard-alerts" 
+                                                         emptyMessage="#{bundle.dashboardInfo_No_alerts}">
+
+                                                <p:column>
+                                                    <i class="fa fa-warning" style="padding-right: 10px;"/>
+                                                    <h:outputText value="#{item.longDescription} (#{item.emitter})"/>
+                                                    <p:commandLink action="#{dashboardController.onClientNotificationDismiss(item.id, 2)}" update="clientAlertList">
+                                                        <i class="fa fa-times dismissAlertIcon" style="float:right;" title="Dismiss" /> 
+                                                    </p:commandLink>
+                                                    <p:panel styleClass="notificationsDatePanel">
+                                                            <h:outputText  value="Issue date: " />
+                                                            <h:outputText  value="#{item.createdOn}" >
+                                                                <f:convertDateTime   type="date" pattern="dd-MM-yyyy HH:mm:ss"/>
+                                                            </h:outputText>
+                                                        </p:panel>
+                                                </p:column>
+
+                                            </p:dataTable>
+                                        </p:panel>
+                                    </div>
+                        </p:column>
+                    </p:panelGrid>
+                    
+                    
+                    <p:panelGrid columns="2"  rendered="#{!dashboardController.consumer}" styleClass="integridy-notifications-panelgrid">
+                      
+                                    <p:panel id="DsoNotifications" header="Notifications"  >
+                                        <p:dataTable id="dsoNotificationList"
+                                                      value="#{dashboardController.dsoNotificationList}" 
+                                                     var="item" 
+                                                     reflow="true"
+                                                     rows="5"  
+                                                     styleClass="ets-dashboard-notifications"  
+                                                     emptyMessage="No notifications"
+                                                     
+                                                     >
+
+                                            <p:column >
+                                                <i class="fa fa-info-circle" style="padding-right: 10px;"/>
+                                                <h:outputText value="#{item.longDescription}"/>
+                                                <p:commandLink action="#{dashboardController.onDsoDismis(item.id, 1)}" update="dsoNotificationList">
+                                                    <i class="fa fa-times dismissAlertIcon" style="float:right;" title="Dismiss"  /> 
+                                                </p:commandLink>  
+                                                <p:panel styleClass="notificationsDatePanel">
+                                                            <h:outputText  value="Issue date: " />
+                                                            <h:outputText  value="#{item.createdOn}" >
+                                                                <f:convertDateTime   type="date" pattern="dd-MM-yyyy HH:mm:ss"/>
+                                                            </h:outputText>
+                                                        </p:panel>
+                                            </p:column>
+
+
+
+                                        </p:dataTable>
+                                    </p:panel>
+                             
+
+                                    <p:panel id="DsoAlerts" header="Alerts">
+                                        <p:dataTable id="dsoAlertList" value="#{dashboardController.dsoAlertList}" 
+                                                     var="item" reflow="true" rows="5"  styleClass="ets-dashboard-alerts" emptyMessage="No alerts">
+
+                                            <p:column>
+                                                <i class="fa fa-warning" style="padding-right: 10px;"/>
+                                                
+                                                <h:outputText value="#{item.longDescription}"/>
+                                                <p:commandLink action="#{dashboardController.onDsoDismis(item.id, 2)}" update="dsoAlertList">
+                                                    <i class="fa fa-times dismissAlertIcon" style="float:right;" title="Dismiss"  /> 
+                                                </p:commandLink>
+                                                <p:panel styleClass="notificationsDatePanel">
+                                                    <h:outputText  value="Issue date: " />
+                                                    <h:outputText  value="#{item.createdOn}" >
+                                                        <f:convertDateTime   type="date" pattern="dd-MM-yyyy HH:mm:ss"/>
+                                                    </h:outputText>
+                                                </p:panel>
+                                            </p:column>
+
+                                        </p:dataTable>
+                                    </p:panel>
+                              
+                    </p:panelGrid>
+
+                </p:outputPanel>
+            </h:form>
+
+            <!--jQuery-->
+            <h:outputScript library="primefaces" name="jquery/jquery.js"/>
+            <script type="text/javascript">
+
+            </script>
+
+        </ui:define>
+    </ui:composition>
+
+</html>

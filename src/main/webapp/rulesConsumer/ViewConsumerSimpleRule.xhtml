@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ConsumerSimpleRuleViewDlg" widgetVar="ConsumerSimpleRuleViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewConsumerSimpleRuleTitle}">
+            <h:form id="ConsumerSimpleRuleViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{consumerSimpleRuleController.selected != null}">
+                        <h:outputText value="#{bundle.ViewConsumerSimpleRuleLabel_id}"/>
+                        <h:outputText value="#{consumerSimpleRuleController.selected.id}" title="#{bundle.ViewConsumerSimpleRuleTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewConsumerSimpleRuleLabel_ruleName}"/>
+                        <h:outputText value="#{consumerSimpleRuleController.selected.ruleName}" title="#{bundle.ViewConsumerSimpleRuleTitle_ruleName}"/>
+                        <h:outputText value="#{bundle.ViewConsumerSimpleRuleLabel_operator}"/>
+                        <h:outputText value="#{consumerSimpleRuleController.selected.operator}" title="#{bundle.ViewConsumerSimpleRuleTitle_operator}"/>
+                        <h:outputText value="#{bundle.ViewConsumerSimpleRuleLabel_vald1}"/>
+                        <h:outputText value="#{consumerSimpleRuleController.selected.vald1}" title="#{bundle.ViewConsumerSimpleRuleTitle_vald1}"/>
+                        <h:outputText value="#{bundle.ViewConsumerSimpleRuleLabel_vald2}"/>
+                        <h:outputText value="#{consumerSimpleRuleController.selected.vald2}" title="#{bundle.ViewConsumerSimpleRuleTitle_vald2}"/>
+                        <h:outputText value="#{bundle.ViewConsumerSimpleRuleLabel_createdOn}"/>
+                        <h:outputText value="#{consumerSimpleRuleController.selected.createdOn}" title="#{bundle.ViewConsumerSimpleRuleTitle_createdOn}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewConsumerSimpleRuleLabel_lastUpdatedOn}"/>
+                        <h:outputText value="#{consumerSimpleRuleController.selected.lastUpdatedOn}" title="#{bundle.ViewConsumerSimpleRuleTitle_lastUpdatedOn}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewConsumerSimpleRuleLabel_validityStart}"/>
+                        <h:outputText value="#{consumerSimpleRuleController.selected.validityStart}" title="#{bundle.ViewConsumerSimpleRuleTitle_validityStart}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewConsumerSimpleRuleLabel_validityEnd}"/>
+                        <h:outputText value="#{consumerSimpleRuleController.selected.validityEnd}" title="#{bundle.ViewConsumerSimpleRuleTitle_validityEnd}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewConsumerSimpleRuleLabel_numberOfRegistrations}"/>
+                        <h:outputText value="#{consumerSimpleRuleController.selected.numberOfRegistrations}" title="#{bundle.ViewConsumerSimpleRuleTitle_numberOfRegistrations}"/>
+                        <h:outputText value="#{bundle.ViewConsumerSimpleRuleLabel_startCronFormat}"/>
+                        <h:outputText value="#{consumerSimpleRuleController.selected.startCronFormat}" title="#{bundle.ViewConsumerSimpleRuleTitle_startCronFormat}"/>
+                        <h:outputText value="#{bundle.ViewConsumerSimpleRuleLabel_endCronFormat}"/>
+                        <h:outputText value="#{consumerSimpleRuleController.selected.endCronFormat}" title="#{bundle.ViewConsumerSimpleRuleTitle_endCronFormat}"/>
+                        <h:outputText value="#{bundle.ViewConsumerSimpleRuleLabel_severity}"/>
+                        <h:outputText value="#{consumerSimpleRuleController.selected.severity}" title="#{bundle.ViewConsumerSimpleRuleTitle_severity}"/>
+                        <h:outputText value="#{bundle.ViewConsumerSimpleRuleLabel_message}"/>
+                        <h:outputText value="#{consumerSimpleRuleController.selected.message}" title="#{bundle.ViewConsumerSimpleRuleTitle_message}"/>
+                        <h:outputText value="#{bundle.ViewConsumerSimpleRuleLabel_clientId}"/>
+                        <h:outputText value="#{consumerSimpleRuleController.selected.clientId}" title="#{bundle.ViewConsumerSimpleRuleTitle_clientId}"/>
+                        <h:outputText value="#{bundle.ViewConsumerSimpleRuleLabel_ruleType}"/>
+                        <h:outputText value="#{consumerSimpleRuleController.selected.ruleType}" title="#{bundle.ViewConsumerSimpleRuleTitle_ruleType}"/>
+                        <h:outputText value="#{bundle.ViewConsumerSimpleRuleLabel_operand1}"/>
+                        <h:outputText value="#{consumerSimpleRuleController.selected.operand1}" title="#{bundle.ViewConsumerSimpleRuleTitle_operand1}"/>
+                        <h:outputText value="#{bundle.ViewConsumerSimpleRuleLabel_operand2}"/>
+                        <h:outputText value="#{consumerSimpleRuleController.selected.operand2}" title="#{bundle.ViewConsumerSimpleRuleTitle_operand2}"/>
+                        <h:outputText value="#{bundle.ViewConsumerSimpleRuleLabel_deviceId}"/>
+                        <h:outputText value="#{consumerSimpleRuleController.selected.deviceId}" title="#{bundle.ViewConsumerSimpleRuleTitle_deviceId}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="PF('ConsumerSimpleRuleViewDialog').hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

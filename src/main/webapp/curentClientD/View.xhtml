@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CurentClientDViewDlg" widgetVar="CurentClientDViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewCurentClientDTitle}">
+            <h:form id="CurentClientDViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{curentClientDController.selected != null}">
+                        <h:outputText value="#{bundle.ViewCurentClientDLabel_id}"/>
+                        <h:outputText value="#{curentClientDController.selected.id}" title="#{bundle.ViewCurentClientDTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewCurentClientDLabel_activePow}"/>
+                        <h:outputText value="#{curentClientDController.selected.activePow}" title="#{bundle.ViewCurentClientDTitle_activePow}"/>
+                        <h:outputText value="#{bundle.ViewCurentClientDLabel_co2}"/>
+                        <h:outputText value="#{curentClientDController.selected.co2}" title="#{bundle.ViewCurentClientDTitle_co2}"/>
+                        <h:outputText value="#{bundle.ViewCurentClientDLabel_consumedActivePow}"/>
+                        <h:outputText value="#{curentClientDController.selected.consumedActivePow}" title="#{bundle.ViewCurentClientDTitle_consumedActivePow}"/>
+                        <h:outputText value="#{bundle.ViewCurentClientDLabel_consumedReactivePow}"/>
+                        <h:outputText value="#{curentClientDController.selected.consumedReactivePow}" title="#{bundle.ViewCurentClientDTitle_consumedReactivePow}"/>
+                        <h:outputText value="#{bundle.ViewCurentClientDLabel_createdTime}"/>
+                        <h:outputText value="#{curentClientDController.selected.createdTime}" title="#{bundle.ViewCurentClientDTitle_createdTime}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewCurentClientDLabel_dayCost}"/>
+                        <h:outputText value="#{curentClientDController.selected.dayCost}" title="#{bundle.ViewCurentClientDTitle_dayCost}"/>
+                        <h:outputText value="#{bundle.ViewCurentClientDLabel_deviceNumber}"/>
+                        <h:outputText value="#{curentClientDController.selected.deviceNumber}" title="#{bundle.ViewCurentClientDTitle_deviceNumber}"/>
+                        <h:outputText value="#{bundle.ViewCurentClientDLabel_downTime}"/>
+                        <h:outputText value="#{curentClientDController.selected.downTime}" title="#{bundle.ViewCurentClientDTitle_downTime}"/>
+                        <h:outputText value="#{bundle.ViewCurentClientDLabel_energyMismatch}"/>
+                        <h:outputText value="#{curentClientDController.selected.energyMismatch}" title="#{bundle.ViewCurentClientDTitle_energyMismatch}"/>
+                        <h:outputText value="#{bundle.ViewCurentClientDLabel_energyMismatchRatio}"/>
+                        <h:outputText value="#{curentClientDController.selected.energyMismatchRatio}" title="#{bundle.ViewCurentClientDTitle_energyMismatchRatio}"/>
+                        <h:outputText value="#{bundle.ViewCurentClientDLabel_nightCost}"/>
+                        <h:outputText value="#{curentClientDController.selected.nightCost}" title="#{bundle.ViewCurentClientDTitle_nightCost}"/>
+                        <h:outputText value="#{bundle.ViewCurentClientDLabel_saidi}"/>
+                        <h:outputText value="#{curentClientDController.selected.saidi}" title="#{bundle.ViewCurentClientDTitle_saidi}"/>
+                        <h:outputText value="#{bundle.ViewCurentClientDLabel_phaseVoltage}"/>
+                        <h:outputText value="#{curentClientDController.selected.phaseVoltage}" title="#{bundle.ViewCurentClientDTitle_phaseVoltage}"/>
+                        <h:outputText value="#{bundle.ViewCurentClientDLabel_reactivePow}"/>
+                        <h:outputText value="#{curentClientDController.selected.reactivePow}" title="#{bundle.ViewCurentClientDTitle_reactivePow}"/>
+                        <h:outputText value="#{bundle.ViewCurentClientDLabel_sendInterval}"/>
+                        <h:outputText value="#{curentClientDController.selected.sendInterval}" title="#{bundle.ViewCurentClientDTitle_sendInterval}"/>
+                        <h:outputText value="#{bundle.ViewCurentClientDLabel_thdd}"/>
+                        <h:outputText value="#{curentClientDController.selected.thdd}" title="#{bundle.ViewCurentClientDTitle_thdd}"/>
+                        <h:outputText value="#{bundle.ViewCurentClientDLabel_upTime}"/>
+                        <h:outputText value="#{curentClientDController.selected.upTime}" title="#{bundle.ViewCurentClientDTitle_upTime}"/>
+                        <h:outputText value="#{bundle.ViewCurentClientDLabel_voltageDeviation}"/>
+                        <h:outputText value="#{curentClientDController.selected.voltageDeviation}" title="#{bundle.ViewCurentClientDTitle_voltageDeviation}"/>
+                        <h:outputText value="#{bundle.ViewCurentClientDLabel_idx12hours}"/>
+                        <h:outputText value="#{curentClientDController.selected.idx12hours}" title="#{bundle.ViewCurentClientDTitle_idx12hours}"/>
+                        <h:outputText value="#{bundle.ViewCurentClientDLabel_idx15minutes}"/>
+                        <h:outputText value="#{curentClientDController.selected.idx15minutes}" title="#{bundle.ViewCurentClientDTitle_idx15minutes}"/>
+                        <h:outputText value="#{bundle.ViewCurentClientDLabel_idx1day}"/>
+                        <h:outputText value="#{curentClientDController.selected.idx1day}" title="#{bundle.ViewCurentClientDTitle_idx1day}"/>
+                        <h:outputText value="#{bundle.ViewCurentClientDLabel_idx1hour}"/>
+                        <h:outputText value="#{curentClientDController.selected.idx1hour}" title="#{bundle.ViewCurentClientDTitle_idx1hour}"/>
+                        <h:outputText value="#{bundle.ViewCurentClientDLabel_idx1month}"/>
+                        <h:outputText value="#{curentClientDController.selected.idx1month}" title="#{bundle.ViewCurentClientDTitle_idx1month}"/>
+                        <h:outputText value="#{bundle.ViewCurentClientDLabel_idx1week}"/>
+                        <h:outputText value="#{curentClientDController.selected.idx1week}" title="#{bundle.ViewCurentClientDTitle_idx1week}"/>
+                        <h:outputText value="#{bundle.ViewCurentClientDLabel_idx1year}"/>
+                        <h:outputText value="#{curentClientDController.selected.idx1year}" title="#{bundle.ViewCurentClientDTitle_idx1year}"/>
+                        <h:outputText value="#{bundle.ViewCurentClientDLabel_idx3month}"/>
+                        <h:outputText value="#{curentClientDController.selected.idx3month}" title="#{bundle.ViewCurentClientDTitle_idx3month}"/>
+                        <h:outputText value="#{bundle.ViewCurentClientDLabel_idx6hours}"/>
+                        <h:outputText value="#{curentClientDController.selected.idx6hours}" title="#{bundle.ViewCurentClientDTitle_idx6hours}"/>
+                        <h:outputText value="#{bundle.ViewCurentClientDLabel_idx6month}"/>
+                        <h:outputText value="#{curentClientDController.selected.idx6month}" title="#{bundle.ViewCurentClientDTitle_idx6month}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="CurentClientDViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

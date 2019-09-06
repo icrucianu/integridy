@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ErrorLogViewDlg" widgetVar="ErrorLogViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewErrorLogTitle}">
+            <h:form id="ErrorLogViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{errorLogController.selected != null}">
+                        <h:outputText value="#{bundle.ViewErrorLogLabel_id}"/>
+                        <h:outputText value="#{errorLogController.selected.id}" title="#{bundle.ViewErrorLogTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewErrorLogLabel_errCode}"/>
+                        <h:outputText value="#{errorLogController.selected.errCode}" title="#{bundle.ViewErrorLogTitle_errCode}"/>
+                        <h:outputText value="#{bundle.ViewErrorLogLabel_severity}"/>
+                        <h:outputText value="#{errorLogController.selected.severity}" title="#{bundle.ViewErrorLogTitle_severity}"/>
+                        <h:outputText value="#{bundle.ViewErrorLogLabel_shortDescription}"/>
+                        <h:outputText value="#{errorLogController.selected.shortDescription}" title="#{bundle.ViewErrorLogTitle_shortDescription}"/>
+                        <h:outputText value="#{bundle.ViewErrorLogLabel_longDescription}"/>
+                        <h:outputText value="#{errorLogController.selected.longDescription}" title="#{bundle.ViewErrorLogTitle_longDescription}"/>
+                        <h:outputText value="#{bundle.ViewErrorLogLabel_lastUpdatedOn}"/>
+                        <h:outputText value="#{errorLogController.selected.lastUpdatedOn}" title="#{bundle.ViewErrorLogTitle_lastUpdatedOn}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewErrorLogLabel_userId}"/>
+                        <h:outputText value="#{errorLogController.selected.userId}" title="#{bundle.ViewErrorLogTitle_userId}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="ErrorLogViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

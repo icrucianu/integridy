@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ConsumerSimpleRuleCreateDlg" widgetVar="ConsumerSimpleRuleCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateConsumerSimpleRuleTitle}">
+            <h:form id="ConsumerSimpleRuleCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{consumerSimpleRuleController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateConsumerSimpleRuleLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{consumerSimpleRuleController.selected.id}" title="#{bundle.CreateConsumerSimpleRuleTitle_id}" required="true" requiredMessage="#{bundle.CreateConsumerSimpleRuleRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.CreateConsumerSimpleRuleLabel_ruleName}" for="ruleName" />
+                        <p:inputText id="ruleName" value="#{consumerSimpleRuleController.selected.ruleName}" title="#{bundle.CreateConsumerSimpleRuleTitle_ruleName}" />
+                        <p:outputLabel value="#{bundle.CreateConsumerSimpleRuleLabel_operator}" for="operator" />
+                        <p:inputText id="operator" value="#{consumerSimpleRuleController.selected.operator}" title="#{bundle.CreateConsumerSimpleRuleTitle_operator}" />
+                        <p:outputLabel value="#{bundle.CreateConsumerSimpleRuleLabel_vald1}" for="vald1" />
+                        <p:inputText id="vald1" value="#{consumerSimpleRuleController.selected.vald1}" title="#{bundle.CreateConsumerSimpleRuleTitle_vald1}" />
+                        <p:outputLabel value="#{bundle.CreateConsumerSimpleRuleLabel_vald2}" for="vald2" />
+                        <p:inputText id="vald2" value="#{consumerSimpleRuleController.selected.vald2}" title="#{bundle.CreateConsumerSimpleRuleTitle_vald2}" />
+                        <p:outputLabel value="#{bundle.CreateConsumerSimpleRuleLabel_createdOn}" for="createdOn" />
+                        <p:calendar id="createdOn" pattern="MM/dd/yyyy HH:mm:ss" value="#{consumerSimpleRuleController.selected.createdOn}" title="#{bundle.EditConsumerSimpleRuleTitle_createdOn}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateConsumerSimpleRuleLabel_lastUpdatedOn}" for="lastUpdatedOn" />
+                        <p:calendar id="lastUpdatedOn" pattern="MM/dd/yyyy HH:mm:ss" value="#{consumerSimpleRuleController.selected.lastUpdatedOn}" title="#{bundle.EditConsumerSimpleRuleTitle_lastUpdatedOn}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateConsumerSimpleRuleLabel_validityStart}" for="validityStart" />
+                        <p:calendar id="validityStart" pattern="MM/dd/yyyy HH:mm:ss" value="#{consumerSimpleRuleController.selected.validityStart}" title="#{bundle.EditConsumerSimpleRuleTitle_validityStart}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateConsumerSimpleRuleLabel_validityEnd}" for="validityEnd" />
+                        <p:calendar id="validityEnd" pattern="MM/dd/yyyy HH:mm:ss" value="#{consumerSimpleRuleController.selected.validityEnd}" title="#{bundle.EditConsumerSimpleRuleTitle_validityEnd}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateConsumerSimpleRuleLabel_numberOfRegistrations}" for="numberOfRegistrations" />
+                        <p:inputText id="numberOfRegistrations" value="#{consumerSimpleRuleController.selected.numberOfRegistrations}" title="#{bundle.CreateConsumerSimpleRuleTitle_numberOfRegistrations}" />
+                        <p:outputLabel value="#{bundle.CreateConsumerSimpleRuleLabel_startCronFormat}" for="startCronFormat" />
+                        <p:inputText id="startCronFormat" value="#{consumerSimpleRuleController.selected.startCronFormat}" title="#{bundle.CreateConsumerSimpleRuleTitle_startCronFormat}" />
+                        <p:outputLabel value="#{bundle.CreateConsumerSimpleRuleLabel_endCronFormat}" for="endCronFormat" />
+                        <p:inputText id="endCronFormat" value="#{consumerSimpleRuleController.selected.endCronFormat}" title="#{bundle.CreateConsumerSimpleRuleTitle_endCronFormat}" />
+                        <p:outputLabel value="#{bundle.CreateConsumerSimpleRuleLabel_severity}" for="severity" />
+                        <p:inputText id="severity" value="#{consumerSimpleRuleController.selected.severity}" title="#{bundle.CreateConsumerSimpleRuleTitle_severity}" />
+                        <p:outputLabel value="#{bundle.CreateConsumerSimpleRuleLabel_message}" for="message" />
+                        <p:inputText id="message" value="#{consumerSimpleRuleController.selected.message}" title="#{bundle.CreateConsumerSimpleRuleTitle_message}" />
+                        <p:outputLabel value="#{bundle.CreateConsumerSimpleRuleLabel_clientId}" for="clientId" />
+                        <p:selectOneMenu id="clientId" value="#{consumerSimpleRuleController.selected.clientId}" >
+                            <f:selectItems value="#{consumerClientController.itemsAvailableSelectOne}"
+                                           var="clientIdItem"
+                                           itemValue="#{clientIdItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateConsumerSimpleRuleLabel_ruleType}" for="ruleType" />
+                        <p:selectOneMenu id="ruleType" value="#{consumerSimpleRuleController.selected.ruleType}" >
+                            <f:selectItems value="#{nRuleDomainController.itemsAvailableSelectOne}"
+                                           var="ruleTypeItem"
+                                           itemValue="#{ruleTypeItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateConsumerSimpleRuleLabel_operand1}" for="operand1" />
+                        <p:selectOneMenu id="operand1" value="#{consumerSimpleRuleController.selected.operand1}" >
+                            <f:selectItems value="#{nRuleOperandController.itemsAvailableSelectOne}"
+                                           var="operand1Item"
+                                           itemValue="#{operand1Item}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateConsumerSimpleRuleLabel_operand2}" for="operand2" />
+                        <p:selectOneMenu id="operand2" value="#{consumerSimpleRuleController.selected.operand2}" >
+                            <f:selectItems value="#{nRuleOperandController.itemsAvailableSelectOne}"
+                                           var="operand2Item"
+                                           itemValue="#{operand2Item}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateConsumerSimpleRuleLabel_deviceId}" for="deviceId" />
+                        <p:selectOneMenu id="deviceId" value="#{consumerSimpleRuleController.selected.deviceId}" >
+                            <f:selectItems value="#{smartMeterController.itemsAvailableSelectOne}"
+                                           var="deviceIdItem"
+                                           itemValue="#{deviceIdItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{consumerSimpleRuleController.create}" value="#{bundle.Save}" update="display,:ConsumerSimpleRuleListForm:datalist,:growl" oncomplete="handleSubmit(args,'ConsumerSimpleRuleCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ConsumerSimpleRuleCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

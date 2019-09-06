@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ConsumptionPointCreateDlg" widgetVar="ConsumptionPointCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateConsumptionPointTitle}">
+            <h:form id="ConsumptionPointCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{consumptionPointController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateConsumptionPointLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{consumptionPointController.selected.id}" title="#{bundle.CreateConsumptionPointTitle_id}" required="true" requiredMessage="#{bundle.CreateConsumptionPointRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.CreateConsumptionPointLabel_pointName}" for="pointName" />
+                        <p:inputText id="pointName" value="#{consumptionPointController.selected.pointName}" title="#{bundle.CreateConsumptionPointTitle_pointName}" required="true" requiredMessage="#{bundle.CreateConsumptionPointRequiredMessage_pointName}"/>
+                        <p:outputLabel value="#{bundle.CreateConsumptionPointLabel_pointType}" for="pointType" />
+                        <p:inputText id="pointType" value="#{consumptionPointController.selected.pointType}" title="#{bundle.CreateConsumptionPointTitle_pointType}" />
+                        <p:outputLabel value="#{bundle.CreateConsumptionPointLabel_address}" for="address" />
+                        <p:inputText id="address" value="#{consumptionPointController.selected.address}" title="#{bundle.CreateConsumptionPointTitle_address}" />
+                        <p:outputLabel value="#{bundle.CreateConsumptionPointLabel_validityStart}" for="validityStart" />
+                        <p:calendar id="validityStart" pattern="MM/dd/yyyy" value="#{consumptionPointController.selected.validityStart}" title="#{bundle.EditConsumptionPointTitle_validityStart}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateConsumptionPointLabel_validityEnd}" for="validityEnd" />
+                        <p:calendar id="validityEnd" pattern="MM/dd/yyyy" value="#{consumptionPointController.selected.validityEnd}" title="#{bundle.EditConsumptionPointTitle_validityEnd}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateConsumptionPointLabel_clientId}" for="clientId" />
+                        <p:selectOneMenu id="clientId" value="#{consumptionPointController.selected.clientId}" >
+                            <f:selectItems value="#{consumerClientController.itemsAvailableSelectOne}"
+                                           var="clientIdItem"
+                                           itemValue="#{clientIdItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{consumptionPointController.create}" value="#{bundle.Save}" update="display,:ConsumptionPointListForm:datalist,:growl" oncomplete="handleSubmit(args,'ConsumptionPointCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ConsumptionPointCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

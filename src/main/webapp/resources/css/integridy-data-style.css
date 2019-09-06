@@ -1,0 +1,43 @@
+
+.chartsContainer{
+    width:100%;
+    margin-bottom: 100px;
+    border:1px solid #F4F4F4;
+    background: #ffffff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.chartsPanelContainer{
+    width:100%;
+    border:1px solid #F4F4F4;
+}
+
+.integridy-da-chart{
+    width:80%;
+    height:400px;
+}
+
+#forecastChartContainer, #patternChartContainer{
+    margin:0px auto;
+}
+
+
+.integridy-da-chart-header{
+    margin-top:15px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: #EE2F41;
+    font-size: 21px;
+    text-align:center;
+}
+
+.integridy-da-chart-col{
+    
+    width:50%;
+}
+canvas{
+
+  width:1000px !important;
+  height:400px !important;
+
+}

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ClientComplexRuleEditDlg" widgetVar="ClientComplexRuleEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditClientComplexRuleTitle}">
+            <h:form id="ClientComplexRuleEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{clientComplexRuleController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditClientComplexRuleLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{clientComplexRuleController.selected.id}" title="#{bundle.EditClientComplexRuleTitle_id}" required="true" requiredMessage="#{bundle.EditClientComplexRuleRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.EditClientComplexRuleLabel_ruleName}" for="ruleName" />
+                        <p:inputText id="ruleName" value="#{clientComplexRuleController.selected.ruleName}" title="#{bundle.EditClientComplexRuleTitle_ruleName}" />
+                        <p:outputLabel value="#{bundle.EditClientComplexRuleLabel_ruleType}" for="ruleType" />
+                        <p:inputText id="ruleType" value="#{clientComplexRuleController.selected.ruleType}" title="#{bundle.EditClientComplexRuleTitle_ruleType}" />
+                        <p:outputLabel value="#{bundle.EditClientComplexRuleLabel_rule1}" for="rule1" />
+                        <p:inputText id="rule1" value="#{clientComplexRuleController.selected.rule1}" title="#{bundle.EditClientComplexRuleTitle_rule1}" />
+                        <p:outputLabel value="#{bundle.EditClientComplexRuleLabel_rule2}" for="rule2" />
+                        <p:inputText id="rule2" value="#{clientComplexRuleController.selected.rule2}" title="#{bundle.EditClientComplexRuleTitle_rule2}" />
+                        <p:outputLabel value="#{bundle.EditClientComplexRuleLabel_operator}" for="operator" />
+                        <p:inputText id="operator" value="#{clientComplexRuleController.selected.operator}" title="#{bundle.EditClientComplexRuleTitle_operator}" />
+                        <p:outputLabel value="#{bundle.EditClientComplexRuleLabel_createdOn}" for="createdOn" />
+                        <p:calendar id="createdOn" pattern="MM/dd/yyyy HH:mm:ss" value="#{clientComplexRuleController.selected.createdOn}" title="#{bundle.EditClientComplexRuleTitle_createdOn}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditClientComplexRuleLabel_lastUpdatedOn}" for="lastUpdatedOn" />
+                        <p:calendar id="lastUpdatedOn" pattern="MM/dd/yyyy HH:mm:ss" value="#{clientComplexRuleController.selected.lastUpdatedOn}" title="#{bundle.EditClientComplexRuleTitle_lastUpdatedOn}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditClientComplexRuleLabel_validityStart}" for="validityStart" />
+                        <p:calendar id="validityStart" pattern="MM/dd/yyyy HH:mm:ss" value="#{clientComplexRuleController.selected.validityStart}" title="#{bundle.EditClientComplexRuleTitle_validityStart}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditClientComplexRuleLabel_validityEnd}" for="validityEnd" />
+                        <p:calendar id="validityEnd" pattern="MM/dd/yyyy HH:mm:ss" value="#{clientComplexRuleController.selected.validityEnd}" title="#{bundle.EditClientComplexRuleTitle_validityEnd}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditClientComplexRuleLabel_clientId}" for="clientId" />
+                        <p:selectOneMenu id="clientId" value="#{clientComplexRuleController.selected.clientId}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{consumerClientController.itemsAvailableSelectOne}"
+                                           var="clientIdItem"
+                                           itemValue="#{clientIdItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{clientComplexRuleController.update}" value="#{bundle.Save}" update="display,:ClientComplexRuleListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ClientComplexRuleEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ClientComplexRuleEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

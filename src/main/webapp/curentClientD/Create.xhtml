@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CurentClientDCreateDlg" widgetVar="CurentClientDCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateCurentClientDTitle}">
+            <h:form id="CurentClientDCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{curentClientDController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateCurentClientDLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{curentClientDController.selected.id}" title="#{bundle.CreateCurentClientDTitle_id}" required="true" requiredMessage="#{bundle.CreateCurentClientDRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.CreateCurentClientDLabel_activePow}" for="activePow" />
+                        <p:inputText id="activePow" value="#{curentClientDController.selected.activePow}" title="#{bundle.CreateCurentClientDTitle_activePow}" />
+                        <p:outputLabel value="#{bundle.CreateCurentClientDLabel_co2}" for="co2" />
+                        <p:inputText id="co2" value="#{curentClientDController.selected.co2}" title="#{bundle.CreateCurentClientDTitle_co2}" />
+                        <p:outputLabel value="#{bundle.CreateCurentClientDLabel_consumedActivePow}" for="consumedActivePow" />
+                        <p:inputText id="consumedActivePow" value="#{curentClientDController.selected.consumedActivePow}" title="#{bundle.CreateCurentClientDTitle_consumedActivePow}" />
+                        <p:outputLabel value="#{bundle.CreateCurentClientDLabel_consumedReactivePow}" for="consumedReactivePow" />
+                        <p:inputText id="consumedReactivePow" value="#{curentClientDController.selected.consumedReactivePow}" title="#{bundle.CreateCurentClientDTitle_consumedReactivePow}" />
+                        <p:outputLabel value="#{bundle.CreateCurentClientDLabel_createdTime}" for="createdTime" />
+                        <p:calendar id="createdTime" pattern="MM/dd/yyyy HH:mm:ss" value="#{curentClientDController.selected.createdTime}" title="#{bundle.EditCurentClientDTitle_createdTime}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateCurentClientDLabel_dayCost}" for="dayCost" />
+                        <p:inputText id="dayCost" value="#{curentClientDController.selected.dayCost}" title="#{bundle.CreateCurentClientDTitle_dayCost}" />
+                        <p:outputLabel value="#{bundle.CreateCurentClientDLabel_deviceNumber}" for="deviceNumber" />
+                        <p:inputText id="deviceNumber" value="#{curentClientDController.selected.deviceNumber}" title="#{bundle.CreateCurentClientDTitle_deviceNumber}" />
+                        <p:outputLabel value="#{bundle.CreateCurentClientDLabel_downTime}" for="downTime" />
+                        <p:inputText id="downTime" value="#{curentClientDController.selected.downTime}" title="#{bundle.CreateCurentClientDTitle_downTime}" />
+                        <p:outputLabel value="#{bundle.CreateCurentClientDLabel_energyMismatch}" for="energyMismatch" />
+                        <p:inputText id="energyMismatch" value="#{curentClientDController.selected.energyMismatch}" title="#{bundle.CreateCurentClientDTitle_energyMismatch}" />
+                        <p:outputLabel value="#{bundle.CreateCurentClientDLabel_energyMismatchRatio}" for="energyMismatchRatio" />
+                        <p:inputText id="energyMismatchRatio" value="#{curentClientDController.selected.energyMismatchRatio}" title="#{bundle.CreateCurentClientDTitle_energyMismatchRatio}" />
+                        <p:outputLabel value="#{bundle.CreateCurentClientDLabel_nightCost}" for="nightCost" />
+                        <p:inputText id="nightCost" value="#{curentClientDController.selected.nightCost}" title="#{bundle.CreateCurentClientDTitle_nightCost}" />
+                        <p:outputLabel value="#{bundle.CreateCurentClientDLabel_saidi}" for="saidi" />
+                        <p:inputText id="saidi" value="#{curentClientDController.selected.saidi}" title="#{bundle.CreateCurentClientDTitle_saidi}" />
+                        <p:outputLabel value="#{bundle.CreateCurentClientDLabel_phaseVoltage}" for="phaseVoltage" />
+                        <p:inputText id="phaseVoltage" value="#{curentClientDController.selected.phaseVoltage}" title="#{bundle.CreateCurentClientDTitle_phaseVoltage}" />
+                        <p:outputLabel value="#{bundle.CreateCurentClientDLabel_reactivePow}" for="reactivePow" />
+                        <p:inputText id="reactivePow" value="#{curentClientDController.selected.reactivePow}" title="#{bundle.CreateCurentClientDTitle_reactivePow}" />
+                        <p:outputLabel value="#{bundle.CreateCurentClientDLabel_sendInterval}" for="sendInterval" />
+                        <p:inputText id="sendInterval" value="#{curentClientDController.selected.sendInterval}" title="#{bundle.CreateCurentClientDTitle_sendInterval}" />
+                        <p:outputLabel value="#{bundle.CreateCurentClientDLabel_thdd}" for="thdd" />
+                        <p:inputText id="thdd" value="#{curentClientDController.selected.thdd}" title="#{bundle.CreateCurentClientDTitle_thdd}" />
+                        <p:outputLabel value="#{bundle.CreateCurentClientDLabel_upTime}" for="upTime" />
+                        <p:inputText id="upTime" value="#{curentClientDController.selected.upTime}" title="#{bundle.CreateCurentClientDTitle_upTime}" />
+                        <p:outputLabel value="#{bundle.CreateCurentClientDLabel_voltageDeviation}" for="voltageDeviation" />
+                        <p:inputText id="voltageDeviation" value="#{curentClientDController.selected.voltageDeviation}" title="#{bundle.CreateCurentClientDTitle_voltageDeviation}" />
+                        <p:outputLabel value="#{bundle.CreateCurentClientDLabel_idx12hours}" for="idx12hours" />
+                        <p:inputText id="idx12hours" value="#{curentClientDController.selected.idx12hours}" title="#{bundle.CreateCurentClientDTitle_idx12hours}" />
+                        <p:outputLabel value="#{bundle.CreateCurentClientDLabel_idx15minutes}" for="idx15minutes" />
+                        <p:inputText id="idx15minutes" value="#{curentClientDController.selected.idx15minutes}" title="#{bundle.CreateCurentClientDTitle_idx15minutes}" />
+                        <p:outputLabel value="#{bundle.CreateCurentClientDLabel_idx1day}" for="idx1day" />
+                        <p:inputText id="idx1day" value="#{curentClientDController.selected.idx1day}" title="#{bundle.CreateCurentClientDTitle_idx1day}" />
+                        <p:outputLabel value="#{bundle.CreateCurentClientDLabel_idx1hour}" for="idx1hour" />
+                        <p:inputText id="idx1hour" value="#{curentClientDController.selected.idx1hour}" title="#{bundle.CreateCurentClientDTitle_idx1hour}" />
+                        <p:outputLabel value="#{bundle.CreateCurentClientDLabel_idx1month}" for="idx1month" />
+                        <p:inputText id="idx1month" value="#{curentClientDController.selected.idx1month}" title="#{bundle.CreateCurentClientDTitle_idx1month}" />
+                        <p:outputLabel value="#{bundle.CreateCurentClientDLabel_idx1week}" for="idx1week" />
+                        <p:inputText id="idx1week" value="#{curentClientDController.selected.idx1week}" title="#{bundle.CreateCurentClientDTitle_idx1week}" />
+                        <p:outputLabel value="#{bundle.CreateCurentClientDLabel_idx1year}" for="idx1year" />
+                        <p:inputText id="idx1year" value="#{curentClientDController.selected.idx1year}" title="#{bundle.CreateCurentClientDTitle_idx1year}" />
+                        <p:outputLabel value="#{bundle.CreateCurentClientDLabel_idx3month}" for="idx3month" />
+                        <p:inputText id="idx3month" value="#{curentClientDController.selected.idx3month}" title="#{bundle.CreateCurentClientDTitle_idx3month}" />
+                        <p:outputLabel value="#{bundle.CreateCurentClientDLabel_idx6hours}" for="idx6hours" />
+                        <p:inputText id="idx6hours" value="#{curentClientDController.selected.idx6hours}" title="#{bundle.CreateCurentClientDTitle_idx6hours}" />
+                        <p:outputLabel value="#{bundle.CreateCurentClientDLabel_idx6month}" for="idx6month" />
+                        <p:inputText id="idx6month" value="#{curentClientDController.selected.idx6month}" title="#{bundle.CreateCurentClientDTitle_idx6month}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{curentClientDController.create}" value="#{bundle.Save}" update="display,:CurentClientDListForm:datalist,:growl" oncomplete="handleSubmit(args,'CurentClientDCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="CurentClientDCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AccountEditDlg" 
+                  widgetVar="AccountEditDialog" 
+                  modal="true" 
+                  draggable="true" 
+                  resizable="false" 
+                  appendTo="@(body)" 
+                  header="Edit account data" 
+                  responsive = "true" 
+                  height="350" width="400" >
+            <h:form id="AccountEditForm"  >
+                <h:panelGroup id="display">
+                    <h:outputText styleClass="h2-subtitle" value ="#{myAccountController.currentUser.username}"/><br/>
+                    <h:outputText value ="Version: #{myAccountController.currentUser.version}"/><br/>
+                    <h:outputText value ="Created: "/>
+                    <h:outputText value ="#{myAccountController.currentUser.creationDate}">
+                        <f:convertDateTime type="date" pattern="dd-MM-yyyy"/>
+                    </h:outputText>
+                    <p:separator/>    
+                    
+                    <p:panelGrid  columns="2" rendered="#{myAccountController.currentUser!= null}" styleClass="integridyHeaderGrid">
+                        <p:outputLabel value="#{bundle.EditUsersLabel_firstName}" for="firstName" />
+                        <p:inputText id="firstName" value="#{myAccountController.currentUser.firstName}" title="#{bundle.EditUsersTitle_firstName}" required="true" requiredMessage="#{bundle.EditUsersRequiredMessage_firstName}"/>
+                        <p:outputLabel value="#{bundle.EditUsersLabel_lastName}" for="lastName" />
+                        <p:inputText id="lastName" value="#{myAccountController.currentUser.lastName}" title="#{bundle.EditUsersTitle_lastName}" required="true" requiredMessage="#{bundle.EditUsersRequiredMessage_lastName}"/>
+                        <p:outputLabel value="#{bundle.EditUsersLabel_email}" for="email" />
+                        <p:inputText id="email" value="#{myAccountController.currentUser.email}" title="#{bundle.EditUsersTitle_email}" />
+                        <p:outputLabel value="Change password? " for="changePassword" />
+                        <p:selectBooleanCheckbox id="changePassword" value="#{myAccountController.changePassword}">
+                            <p:ajax event="change" update=":AccountEditForm"/>
+                        </p:selectBooleanCheckbox>
+                        
+                        <h:outputLabel for="oldPassword" value="Old Password"  />
+                        <p:password id="oldPassword" value="#{myAccountController.oldPassword}"  autocomplete="off" disabled="#{!myAccountController.changePassword}"  />
+                        <h:outputLabel for="newPwd1" value="New Password"  />
+                        <p:password id="newPwd1" value="#{myAccountController.newPassword1}"  match="newPwd2" autocomplete="off" disabled="#{!myAccountController.changePassword}" />
+                        <h:outputLabel for="newPwd2" value="Repeat new password"  />
+                        <p:password id="newPwd2" value="#{myAccountController.newPassword2}" autocomplete="off" disabled="#{!myAccountController.changePassword}" /> 
+                    </p:panelGrid>
+                    
+                     
+                    <p:commandButton actionListener="#{myAccountController.updateAccountData()}" value="#{bundle.Save}" update="display,:myAccountForm,:growl"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('AccountEditDialog').hide()"/>
+                </h:panelGroup>
+            </h:form>
+              
+           
+        </p:dialog>
+
+    </ui:composition>
+</html>

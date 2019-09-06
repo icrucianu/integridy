@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ConsumerPricesEditDlg" widgetVar="ConsumerPricesEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditConsumerPricesTitle}">
+            <h:form id="ConsumerPricesEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{consumerPricesController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateConsumerPricesLabel_priceCode}" for="priceCode" />
+                        <p:inputText id="priceCode" value="#{consumerPricesController.selected.priceCode}" 
+                                     title="#{bundle.CreateConsumerPricesLabel_priceCode}" 
+                                     required="true" 
+                                     requiredMessage="#{bundle.CreateConsumerPricesRequiredMessage_priceCode}"/>
+                        
+                        
+                        <p:outputLabel value="#{bundle.CreateConsumerPricesLabel_priceDef}" for="priceDef" />
+                        <p:inputText id="priceDef" 
+                                     value="#{consumerPricesController.selected.priceDef}" 
+                                     title="#{bundle.CreateConsumerPricesTitle_priceDef}" 
+                                     required="true" requiredMessage="#{bundle.CreateConsumerPricesRequiredMessage_priceDef}"/>
+                        
+                        <p:outputLabel value="#{bundle.CreateConsumerPricesLabel_priceType}" for="priceType" />
+                        <p:selectOneMenu id="priceType" value="#{consumerPricesController.selected.priceType}" >
+                            <p:ajax event="change" update="display" listener="#{consumerPricesController.priceTypeSelectionChanged}" />
+                            <f:selectItems value="#{consumerPricesController.priceTypes}"
+                                           var="type"
+                                           itemLabel="#{type.priceType}"
+                                           itemValue="#{type}"/>
+                            
+                        </p:selectOneMenu>
+                        
+                        <p:outputLabel value="#{bundle.CreateConsumerPricesLabel_priceDefault}" for="priceDefault" />
+                        <p:selectBooleanCheckbox id="priceDefault" value="#{consumerPricesController.selected.defaultPrice}" />
+                        
+                        
+                        
+                        <p:outputLabel value="#{bundle.CreateConsumerPricesLabel_startTimePeriod}" 
+                                       for="startTimePeriod" 
+                                       rendered="#{consumerPricesController.showDiffControls}"/>
+                        <p:calendar id="startTimePeriod" 
+                                    pattern="HH:mm" 
+                                    value="#{consumerPricesController.selected.startTimePeriod}" 
+                                    title="#{bundle.EditConsumerPricesTitle_startTimePeriod}"
+                                     timeZone="GMT+2"
+                                    showOn="button"
+                                    timeOnly="true"
+                                    rendered="#{consumerPricesController.showDiffControls}"/>
+                        <p:outputLabel value="#{bundle.CreateConsumerPricesLabel_endTimePeriod}" for="endTimePeriod"
+                                       rendered="#{consumerPricesController.showDiffControls}"/>
+                        <p:calendar id="endTimePeriod" 
+                                    pattern="HH:mm" 
+                                    value="#{consumerPricesController.selected.endTimePeriod}" 
+                                    title="#{bundle.EditConsumerPricesTitle_endTimePeriod}"  
+                                    showOn="button"
+                                    timeZone="GMT+2"
+                                    timeOnly="true"
+                                    rendered="#{consumerPricesController.showDiffControls}"/>
+                        <p:outputLabel value="#{bundle.CreateConsumerPricesLabel_dayPriceVal}" for="priceVal" rendered="#{consumerPricesController.showDiffControls}" />
+                         <p:outputLabel value="#{bundle.CreateConsumerPricesLabel_priceVal}" for="priceVal" rendered="#{!consumerPricesController.showDiffControls}" />
+                        <p:inputText id="priceVal" 
+                                     value="#{consumerPricesController.selected.priceVal}" 
+                                     title="#{bundle.CreateConsumerPricesTitle_priceVal}"
+                                     required="true"/>
+                        
+                        
+                        <p:outputLabel value="#{bundle.CreateConsumerPricesLabel_nightPriceVal}" 
+                                       for="nightPriceVal" 
+                                       rendered="#{consumerPricesController.showDiffControls}"/>
+                        <p:inputText id="nightPriceVal" value="#{consumerPricesController.selected.nightPriceVal}" 
+                                     title="#{bundle.CreateConsumerPricesTitle_nightPriceVal}" 
+                                     required="true"
+                                     rendered="#{consumerPricesController.showDiffControls}"/>
+                        
+                        
+                       
+                        <p:outputLabel value="#{bundle.CreateConsumerPricesLabel_validityStart}" for="validityStart" />
+                        <p:calendar id="validityStart" 
+                                    pattern="dd/MM/yyyy" 
+                                    value="#{consumerPricesController.selected.validityStart}" 
+                                    title="#{bundle.EditConsumerPricesTitle_validityStart}"  
+                                    showOn="button"
+                                    required="true"
+                                    timeZone="GMT+2"/>
+                        <p:outputLabel value="#{bundle.CreateConsumerPricesLabel_validityEnd}" for="validityEnd" />
+                        <p:calendar id="validityEnd" 
+                                    pattern="dd/MM/yyyy" 
+                                    value="#{consumerPricesController.selected.validityEnd}" 
+                                    title="#{bundle.EditConsumerPricesTitle_validityEnd}"  
+                                    showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateConsumerPricesLabel_createdOn}" for="createdOn" />
+                         <p:calendar id="createdOn"  
+                                    pattern="dd/MM/yyyy" 
+                                    value="#{consumerPricesController.selected.createdOn}" 
+                                    title="#{bundle.EditConsumerPricesTitle_createdOn}"  
+                                    showOn="button"
+                                    timeZone="GMT+2"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{consumerPricesController.update}" value="#{bundle.Save}" update="display,:ConsumerPricesListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ConsumerPricesEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('ConsumerPricesEditDialog').hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="OptimumDsoCreateDlg" widgetVar="OptimumDsoCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateOptimumDsoTitle}">
+            <h:form id="OptimumDsoCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{optimumDsoController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateOptimumDsoLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{optimumDsoController.selected.id}" title="#{bundle.CreateOptimumDsoTitle_id}" required="true" requiredMessage="#{bundle.CreateOptimumDsoRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.CreateOptimumDsoLabel_activePow}" for="activePow" />
+                        <p:inputText id="activePow" value="#{optimumDsoController.selected.activePow}" title="#{bundle.CreateOptimumDsoTitle_activePow}" />
+                        <p:outputLabel value="#{bundle.CreateOptimumDsoLabel_co2}" for="co2" />
+                        <p:inputText id="co2" value="#{optimumDsoController.selected.co2}" title="#{bundle.CreateOptimumDsoTitle_co2}" />
+                        <p:outputLabel value="#{bundle.CreateOptimumDsoLabel_consumedActivePow}" for="consumedActivePow" />
+                        <p:inputText id="consumedActivePow" value="#{optimumDsoController.selected.consumedActivePow}" title="#{bundle.CreateOptimumDsoTitle_consumedActivePow}" />
+                        <p:outputLabel value="#{bundle.CreateOptimumDsoLabel_consumedReactivePow}" for="consumedReactivePow" />
+                        <p:inputText id="consumedReactivePow" value="#{optimumDsoController.selected.consumedReactivePow}" title="#{bundle.CreateOptimumDsoTitle_consumedReactivePow}" />
+                        <p:outputLabel value="#{bundle.CreateOptimumDsoLabel_createdTime}" for="createdTime" />
+                        <p:calendar id="createdTime" pattern="MM/dd/yyyy HH:mm:ss" value="#{optimumDsoController.selected.createdTime}" title="#{bundle.EditOptimumDsoTitle_createdTime}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateOptimumDsoLabel_dayCost}" for="dayCost" />
+                        <p:inputText id="dayCost" value="#{optimumDsoController.selected.dayCost}" title="#{bundle.CreateOptimumDsoTitle_dayCost}" />
+                        <p:outputLabel value="#{bundle.CreateOptimumDsoLabel_deviceNumber}" for="deviceNumber" />
+                        <p:inputText id="deviceNumber" value="#{optimumDsoController.selected.deviceNumber}" title="#{bundle.CreateOptimumDsoTitle_deviceNumber}" />
+                        <p:outputLabel value="#{bundle.CreateOptimumDsoLabel_downTime}" for="downTime" />
+                        <p:inputText id="downTime" value="#{optimumDsoController.selected.downTime}" title="#{bundle.CreateOptimumDsoTitle_downTime}" />
+                        <p:outputLabel value="#{bundle.CreateOptimumDsoLabel_energyMismatch}" for="energyMismatch" />
+                        <p:inputText id="energyMismatch" value="#{optimumDsoController.selected.energyMismatch}" title="#{bundle.CreateOptimumDsoTitle_energyMismatch}" />
+                        <p:outputLabel value="#{bundle.CreateOptimumDsoLabel_energyMismatchRatio}" for="energyMismatchRatio" />
+                        <p:inputText id="energyMismatchRatio" value="#{optimumDsoController.selected.energyMismatchRatio}" title="#{bundle.CreateOptimumDsoTitle_energyMismatchRatio}" />
+                        <p:outputLabel value="#{bundle.CreateOptimumDsoLabel_nightCost}" for="nightCost" />
+                        <p:inputText id="nightCost" value="#{optimumDsoController.selected.nightCost}" title="#{bundle.CreateOptimumDsoTitle_nightCost}" />
+                        <p:outputLabel value="#{bundle.CreateOptimumDsoLabel_saidi}" for="saidi" />
+                        <p:inputText id="saidi" value="#{optimumDsoController.selected.saidi}" title="#{bundle.CreateOptimumDsoTitle_saidi}" />
+                        <p:outputLabel value="#{bundle.CreateOptimumDsoLabel_phaseVoltage}" for="phaseVoltage" />
+                        <p:inputText id="phaseVoltage" value="#{optimumDsoController.selected.phaseVoltage}" title="#{bundle.CreateOptimumDsoTitle_phaseVoltage}" />
+                        <p:outputLabel value="#{bundle.CreateOptimumDsoLabel_reactivePow}" for="reactivePow" />
+                        <p:inputText id="reactivePow" value="#{optimumDsoController.selected.reactivePow}" title="#{bundle.CreateOptimumDsoTitle_reactivePow}" />
+                        <p:outputLabel value="#{bundle.CreateOptimumDsoLabel_sendInterval}" for="sendInterval" />
+                        <p:inputText id="sendInterval" value="#{optimumDsoController.selected.sendInterval}" title="#{bundle.CreateOptimumDsoTitle_sendInterval}" />
+                        <p:outputLabel value="#{bundle.CreateOptimumDsoLabel_thdd}" for="thdd" />
+                        <p:inputText id="thdd" value="#{optimumDsoController.selected.thdd}" title="#{bundle.CreateOptimumDsoTitle_thdd}" />
+                        <p:outputLabel value="#{bundle.CreateOptimumDsoLabel_upTime}" for="upTime" />
+                        <p:inputText id="upTime" value="#{optimumDsoController.selected.upTime}" title="#{bundle.CreateOptimumDsoTitle_upTime}" />
+                        <p:outputLabel value="#{bundle.CreateOptimumDsoLabel_voltageDeviation}" for="voltageDeviation" />
+                        <p:inputText id="voltageDeviation" value="#{optimumDsoController.selected.voltageDeviation}" title="#{bundle.CreateOptimumDsoTitle_voltageDeviation}" />
+                        <p:outputLabel value="#{bundle.CreateOptimumDsoLabel_idx12hours}" for="idx12hours" />
+                        <p:inputText id="idx12hours" value="#{optimumDsoController.selected.idx12hours}" title="#{bundle.CreateOptimumDsoTitle_idx12hours}" />
+                        <p:outputLabel value="#{bundle.CreateOptimumDsoLabel_idx15minutes}" for="idx15minutes" />
+                        <p:inputText id="idx15minutes" value="#{optimumDsoController.selected.idx15minutes}" title="#{bundle.CreateOptimumDsoTitle_idx15minutes}" />
+                        <p:outputLabel value="#{bundle.CreateOptimumDsoLabel_idx1day}" for="idx1day" />
+                        <p:inputText id="idx1day" value="#{optimumDsoController.selected.idx1day}" title="#{bundle.CreateOptimumDsoTitle_idx1day}" />
+                        <p:outputLabel value="#{bundle.CreateOptimumDsoLabel_idx1hour}" for="idx1hour" />
+                        <p:inputText id="idx1hour" value="#{optimumDsoController.selected.idx1hour}" title="#{bundle.CreateOptimumDsoTitle_idx1hour}" />
+                        <p:outputLabel value="#{bundle.CreateOptimumDsoLabel_idx1month}" for="idx1month" />
+                        <p:inputText id="idx1month" value="#{optimumDsoController.selected.idx1month}" title="#{bundle.CreateOptimumDsoTitle_idx1month}" />
+                        <p:outputLabel value="#{bundle.CreateOptimumDsoLabel_idx1week}" for="idx1week" />
+                        <p:inputText id="idx1week" value="#{optimumDsoController.selected.idx1week}" title="#{bundle.CreateOptimumDsoTitle_idx1week}" />
+                        <p:outputLabel value="#{bundle.CreateOptimumDsoLabel_idx1year}" for="idx1year" />
+                        <p:inputText id="idx1year" value="#{optimumDsoController.selected.idx1year}" title="#{bundle.CreateOptimumDsoTitle_idx1year}" />
+                        <p:outputLabel value="#{bundle.CreateOptimumDsoLabel_idx3month}" for="idx3month" />
+                        <p:inputText id="idx3month" value="#{optimumDsoController.selected.idx3month}" title="#{bundle.CreateOptimumDsoTitle_idx3month}" />
+                        <p:outputLabel value="#{bundle.CreateOptimumDsoLabel_idx6hours}" for="idx6hours" />
+                        <p:inputText id="idx6hours" value="#{optimumDsoController.selected.idx6hours}" title="#{bundle.CreateOptimumDsoTitle_idx6hours}" />
+                        <p:outputLabel value="#{bundle.CreateOptimumDsoLabel_idx6month}" for="idx6month" />
+                        <p:inputText id="idx6month" value="#{optimumDsoController.selected.idx6month}" title="#{bundle.CreateOptimumDsoTitle_idx6month}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{optimumDsoController.create}" value="#{bundle.Save}" update="display,:OptimumDsoListForm:datalist,:growl" oncomplete="handleSubmit(args,'OptimumDsoCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="OptimumDsoCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

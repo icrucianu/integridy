@@ -1,0 +1,91 @@
+.ui-menu{
+    /*width: auto !important;*/
+    width:auto !important;
+}
+
+.integridyNavMenu{
+    border-radius: 0px !important;
+/*    margin-left:10% !important;
+    margin-right:10% !important;*/
+    border: none !important;
+    background: none !important;
+    margin:0px auto !important;
+    width:80% !important;
+
+}
+
+.integridyNavMenu .ui-menuitem{
+    /*background: blue !important;*/
+    font-size:14px !important;
+    padding-top:1px !important;
+    padding-bottom:1px !important;
+}
+
+.nav-subitem{
+    font-size:13px !important;
+    padding-left: 5% !important;
+/*    padding-left: 12% !important;
+    padding-right: 12% !important;*/
+}
+
+.integridyNavMenu .ui-menu-list{
+    background: #5EA928 !important;
+    font-size: 15px !important;
+    background: none !important;
+}
+.integridyNavMenu .ui-widget-header{
+    background: none !important;
+    /*background: red !important;*/
+}
+ui-widget-header  > a > span{
+    padding-left:25px !important;
+    float:right;
+}
+.integridyNavMenu h3{
+    font-weight: normal !important;
+    background: none !important;
+}
+.integridyNavMenu .ui-menuitem .ui-icon{
+    padding-right:5px;
+}
+
+.ui-icon-triangle-1-s,  .ui-icon-triangle-1-e{
+    /*display:none !important;*/
+}
+.ui-menuitem-link > .ui-icon-triangle-1-s{
+  display: none !important;
+}
+.ui-layout-resizer{
+    background:#d8d8d9 !important;
+}
+
+
+.integridyNavMenu .ui-menuitem-link:hover{
+    background: #5EA928 !important;
+    border-radius: 2px !important;
+}
+
+/*User profile*/
+.integridyUserPanel{
+    color:#4B4E56 !important;
+    border:none !important;
+    padding:0px !important;
+    background: none !important;
+    margin-bottom: 2%;
+}
+
+/*Station select*/
+.etsStationPanel{
+    margin-top: 10%;
+    border:none !important;
+}
+.integridyDateSelectionPanel{
+    border:none !important;
+    margin-bottom:5%;
+}
+
+.integridy-apply-filters-btn{
+    margin-top:10px;
+    border-radius: 3px !important;
+}
+

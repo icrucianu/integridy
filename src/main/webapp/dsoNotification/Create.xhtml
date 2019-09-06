@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DsoNotificationCreateDlg" widgetVar="DsoNotificationCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateDsoNotificationTitle}">
+            <h:form id="DsoNotificationCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{dsoNotificationController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateDsoNotificationLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{dsoNotificationController.selected.id}" title="#{bundle.CreateDsoNotificationTitle_id}" required="true" requiredMessage="#{bundle.CreateDsoNotificationRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.CreateDsoNotificationLabel_notifCode}" for="notifCode" />
+                        <p:inputText id="notifCode" value="#{dsoNotificationController.selected.notifCode}" title="#{bundle.CreateDsoNotificationTitle_notifCode}" required="true" requiredMessage="#{bundle.CreateDsoNotificationRequiredMessage_notifCode}"/>
+                        <p:outputLabel value="#{bundle.CreateDsoNotificationLabel_severity}" for="severity" />
+                        <p:inputText id="severity" value="#{dsoNotificationController.selected.severity}" title="#{bundle.CreateDsoNotificationTitle_severity}" />
+                        <p:outputLabel value="#{bundle.CreateDsoNotificationLabel_shortDescription}" for="shortDescription" />
+                        <p:inputText id="shortDescription" value="#{dsoNotificationController.selected.shortDescription}" title="#{bundle.CreateDsoNotificationTitle_shortDescription}" />
+                        <p:outputLabel value="#{bundle.CreateDsoNotificationLabel_longDescription}" for="longDescription" />
+                        <p:inputText id="longDescription" value="#{dsoNotificationController.selected.longDescription}" title="#{bundle.CreateDsoNotificationTitle_longDescription}" />
+                        <p:outputLabel value="#{bundle.CreateDsoNotificationLabel_emitter}" for="emitter" />
+                        <p:inputText id="emitter" value="#{dsoNotificationController.selected.emitter}" title="#{bundle.CreateDsoNotificationTitle_emitter}" />
+                        <p:outputLabel value="#{bundle.CreateDsoNotificationLabel_createdOn}" for="createdOn" />
+                        <p:calendar id="createdOn" pattern="MM/dd/yyyy HH:mm:ss" value="#{dsoNotificationController.selected.createdOn}" title="#{bundle.EditDsoNotificationTitle_createdOn}"  showOn="button"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{dsoNotificationController.create}" value="#{bundle.Save}" update="display,:DsoNotificationListForm:datalist,:growl" oncomplete="handleSubmit(args,'DsoNotificationCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="DsoNotificationCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

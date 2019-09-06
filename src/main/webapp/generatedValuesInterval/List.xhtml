@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListGeneratedValuesIntervalTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="GeneratedValuesIntervalListForm">
+                <p:panel header="#{bundle.ListGeneratedValuesIntervalTitle}">
+                    <p:dataTable id="datalist" value="#{generatedValuesIntervalController.items}" var="item"
+                                 selectionMode="single" selection="#{generatedValuesIntervalController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.hourOfDay}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListGeneratedValuesIntervalTitle_hourOfDay}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.hourOfDay}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListGeneratedValuesIntervalTitle_activePowI}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.activePowI}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListGeneratedValuesIntervalTitle_co2I}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.co2I}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListGeneratedValuesIntervalTitle_consumedActivePowI}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.consumedActivePowI}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListGeneratedValuesIntervalTitle_consumedReactivePowI}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.consumedReactivePowI}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListGeneratedValuesIntervalTitle_dayCostI}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.dayCostI}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListGeneratedValuesIntervalTitle_downTimeI}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.downTimeI}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListGeneratedValuesIntervalTitle_energyMismatchI}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.energyMismatchI}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListGeneratedValuesIntervalTitle_energyMismatchRatioI}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.energyMismatchRatioI}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListGeneratedValuesIntervalTitle_nightCostI}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nightCostI}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListGeneratedValuesIntervalTitle_saidiI}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.saidiI}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListGeneratedValuesIntervalTitle_phaseVoltageI}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.phaseVoltageI}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListGeneratedValuesIntervalTitle_reactivePowI}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.reactivePowI}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListGeneratedValuesIntervalTitle_sendIntervalI}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.sendIntervalI}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListGeneratedValuesIntervalTitle_thddI}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.thddI}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListGeneratedValuesIntervalTitle_upTimeI}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.upTimeI}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListGeneratedValuesIntervalTitle_voltageDeviationI}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.voltageDeviationI}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListGeneratedValuesIntervalTitle_idx12hoursI}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idx12hoursI}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListGeneratedValuesIntervalTitle_idx15minutesI}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idx15minutesI}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListGeneratedValuesIntervalTitle_idx1dayI}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idx1dayI}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListGeneratedValuesIntervalTitle_idx1hourI}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idx1hourI}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListGeneratedValuesIntervalTitle_idx1monthI}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idx1monthI}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListGeneratedValuesIntervalTitle_idx1weekI}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idx1weekI}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListGeneratedValuesIntervalTitle_idx1yearI}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idx1yearI}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListGeneratedValuesIntervalTitle_idx3monthI}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idx3monthI}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListGeneratedValuesIntervalTitle_idx6hoursI}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idx6hoursI}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListGeneratedValuesIntervalTitle_idx6monthI}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idx6monthI}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListGeneratedValuesIntervalTitle_activePowX}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.activePowX}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListGeneratedValuesIntervalTitle_co2X}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.co2X}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListGeneratedValuesIntervalTitle_consumedActivePowX}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.consumedActivePowX}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListGeneratedValuesIntervalTitle_consumedReactivePowX}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.consumedReactivePowX}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListGeneratedValuesIntervalTitle_dayCostX}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.dayCostX}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListGeneratedValuesIntervalTitle_downTimeX}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.downTimeX}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListGeneratedValuesIntervalTitle_energyMismatchX}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.energyMismatchX}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListGeneratedValuesIntervalTitle_energyMismatchRatioX}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.energyMismatchRatioX}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListGeneratedValuesIntervalTitle_nightCostX}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nightCostX}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListGeneratedValuesIntervalTitle_saidiX}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.saidiX}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListGeneratedValuesIntervalTitle_phaseVoltageX}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.phaseVoltageX}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListGeneratedValuesIntervalTitle_reactivePowX}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.reactivePowX}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListGeneratedValuesIntervalTitle_sendIntervalX}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.sendIntervalX}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListGeneratedValuesIntervalTitle_thddX}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.thddX}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListGeneratedValuesIntervalTitle_upTimeX}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.upTimeX}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListGeneratedValuesIntervalTitle_voltageDeviationX}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.voltageDeviationX}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListGeneratedValuesIntervalTitle_idx12hoursX}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idx12hoursX}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListGeneratedValuesIntervalTitle_idx15minutesX}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idx15minutesX}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListGeneratedValuesIntervalTitle_idx1dayX}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idx1dayX}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListGeneratedValuesIntervalTitle_idx1hourX}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idx1hourX}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListGeneratedValuesIntervalTitle_idx1monthX}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idx1monthX}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListGeneratedValuesIntervalTitle_idx1weekX}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idx1weekX}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListGeneratedValuesIntervalTitle_idx1yearX}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idx1yearX}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListGeneratedValuesIntervalTitle_idx3monthX}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idx3monthX}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListGeneratedValuesIntervalTitle_idx6hoursX}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idx6hoursX}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListGeneratedValuesIntervalTitle_idx6monthX}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idx6monthX}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{generatedValuesIntervalController.prepareCreate}" update=":GeneratedValuesIntervalCreateForm" oncomplete="PF('GeneratedValuesIntervalCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":GeneratedValuesIntervalViewForm" oncomplete="PF('GeneratedValuesIntervalViewDialog').show()" disabled="#{empty generatedValuesIntervalController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":GeneratedValuesIntervalEditForm" oncomplete="PF('GeneratedValuesIntervalEditDialog').show()" disabled="#{empty generatedValuesIntervalController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{generatedValuesIntervalController.destroy}" update=":growl,datalist" disabled="#{empty generatedValuesIntervalController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

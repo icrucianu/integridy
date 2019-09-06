@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ConsumptionRecordCreateDlg" widgetVar="ConsumptionRecordCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateConsumptionRecordTitle}">
+            <h:form id="ConsumptionRecordCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{consumptionRecordController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateConsumptionRecordLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{consumptionRecordController.selected.id}" title="#{bundle.CreateConsumptionRecordTitle_id}" required="true" requiredMessage="#{bundle.CreateConsumptionRecordRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.CreateConsumptionRecordLabel_activePow}" for="activePow" />
+                        <p:inputText id="activePow" value="#{consumptionRecordController.selected.activePow}" title="#{bundle.CreateConsumptionRecordTitle_activePow}" />
+                        <p:outputLabel value="#{bundle.CreateConsumptionRecordLabel_co2}" for="co2" />
+                        <p:inputText id="co2" value="#{consumptionRecordController.selected.co2}" title="#{bundle.CreateConsumptionRecordTitle_co2}" />
+                        <p:outputLabel value="#{bundle.CreateConsumptionRecordLabel_consumedActivePow}" for="consumedActivePow" />
+                        <p:inputText id="consumedActivePow" value="#{consumptionRecordController.selected.consumedActivePow}" title="#{bundle.CreateConsumptionRecordTitle_consumedActivePow}" />
+                        <p:outputLabel value="#{bundle.CreateConsumptionRecordLabel_consumedReactivePow}" for="consumedReactivePow" />
+                        <p:inputText id="consumedReactivePow" value="#{consumptionRecordController.selected.consumedReactivePow}" title="#{bundle.CreateConsumptionRecordTitle_consumedReactivePow}" />
+                        <p:outputLabel value="#{bundle.CreateConsumptionRecordLabel_createdTime}" for="createdTime" />
+                        <p:calendar id="createdTime" pattern="MM/dd/yyyy HH:mm:ss" value="#{consumptionRecordController.selected.createdTime}" title="#{bundle.EditConsumptionRecordTitle_createdTime}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateConsumptionRecordLabel_dayCost}" for="dayCost" />
+                        <p:inputText id="dayCost" value="#{consumptionRecordController.selected.dayCost}" title="#{bundle.CreateConsumptionRecordTitle_dayCost}" />
+                        <p:outputLabel value="#{bundle.CreateConsumptionRecordLabel_deviceNumber}" for="deviceNumber" />
+                        <p:inputText id="deviceNumber" value="#{consumptionRecordController.selected.deviceNumber}" title="#{bundle.CreateConsumptionRecordTitle_deviceNumber}" />
+                        <p:outputLabel value="#{bundle.CreateConsumptionRecordLabel_downTime}" for="downTime" />
+                        <p:inputText id="downTime" value="#{consumptionRecordController.selected.downTime}" title="#{bundle.CreateConsumptionRecordTitle_downTime}" />
+                        <p:outputLabel value="#{bundle.CreateConsumptionRecordLabel_energyMismatch}" for="energyMismatch" />
+                        <p:inputText id="energyMismatch" value="#{consumptionRecordController.selected.energyMismatch}" title="#{bundle.CreateConsumptionRecordTitle_energyMismatch}" />
+                        <p:outputLabel value="#{bundle.CreateConsumptionRecordLabel_energyMismatchRatio}" for="energyMismatchRatio" />
+                        <p:inputText id="energyMismatchRatio" value="#{consumptionRecordController.selected.energyMismatchRatio}" title="#{bundle.CreateConsumptionRecordTitle_energyMismatchRatio}" />
+                        <p:outputLabel value="#{bundle.CreateConsumptionRecordLabel_nightCost}" for="nightCost" />
+                        <p:inputText id="nightCost" value="#{consumptionRecordController.selected.nightCost}" title="#{bundle.CreateConsumptionRecordTitle_nightCost}" />
+                        <p:outputLabel value="#{bundle.CreateConsumptionRecordLabel_saidi}" for="saidi" />
+                        <p:inputText id="saidi" value="#{consumptionRecordController.selected.saidi}" title="#{bundle.CreateConsumptionRecordTitle_saidi}" />
+                        <p:outputLabel value="#{bundle.CreateConsumptionRecordLabel_phaseVoltage}" for="phaseVoltage" />
+                        <p:inputText id="phaseVoltage" value="#{consumptionRecordController.selected.phaseVoltage}" title="#{bundle.CreateConsumptionRecordTitle_phaseVoltage}" />
+                        <p:outputLabel value="#{bundle.CreateConsumptionRecordLabel_reactivePow}" for="reactivePow" />
+                        <p:inputText id="reactivePow" value="#{consumptionRecordController.selected.reactivePow}" title="#{bundle.CreateConsumptionRecordTitle_reactivePow}" />
+                        <p:outputLabel value="#{bundle.CreateConsumptionRecordLabel_sendInterval}" for="sendInterval" />
+                        <p:inputText id="sendInterval" value="#{consumptionRecordController.selected.sendInterval}" title="#{bundle.CreateConsumptionRecordTitle_sendInterval}" />
+                        <p:outputLabel value="#{bundle.CreateConsumptionRecordLabel_thdd}" for="thdd" />
+                        <p:inputText id="thdd" value="#{consumptionRecordController.selected.thdd}" title="#{bundle.CreateConsumptionRecordTitle_thdd}" />
+                        <p:outputLabel value="#{bundle.CreateConsumptionRecordLabel_upTime}" for="upTime" />
+                        <p:inputText id="upTime" value="#{consumptionRecordController.selected.upTime}" title="#{bundle.CreateConsumptionRecordTitle_upTime}" />
+                        <p:outputLabel value="#{bundle.CreateConsumptionRecordLabel_voltageDeviation}" for="voltageDeviation" />
+                        <p:inputText id="voltageDeviation" value="#{consumptionRecordController.selected.voltageDeviation}" title="#{bundle.CreateConsumptionRecordTitle_voltageDeviation}" />
+                        <p:outputLabel value="#{bundle.CreateConsumptionRecordLabel_idx12hours}" for="idx12hours" />
+                        <p:inputText id="idx12hours" value="#{consumptionRecordController.selected.idx12hours}" title="#{bundle.CreateConsumptionRecordTitle_idx12hours}" />
+                        <p:outputLabel value="#{bundle.CreateConsumptionRecordLabel_idx15minutes}" for="idx15minutes" />
+                        <p:inputText id="idx15minutes" value="#{consumptionRecordController.selected.idx15minutes}" title="#{bundle.CreateConsumptionRecordTitle_idx15minutes}" />
+                        <p:outputLabel value="#{bundle.CreateConsumptionRecordLabel_idx1day}" for="idx1day" />
+                        <p:inputText id="idx1day" value="#{consumptionRecordController.selected.idx1day}" title="#{bundle.CreateConsumptionRecordTitle_idx1day}" />
+                        <p:outputLabel value="#{bundle.CreateConsumptionRecordLabel_idx1hour}" for="idx1hour" />
+                        <p:inputText id="idx1hour" value="#{consumptionRecordController.selected.idx1hour}" title="#{bundle.CreateConsumptionRecordTitle_idx1hour}" />
+                        <p:outputLabel value="#{bundle.CreateConsumptionRecordLabel_idx1month}" for="idx1month" />
+                        <p:inputText id="idx1month" value="#{consumptionRecordController.selected.idx1month}" title="#{bundle.CreateConsumptionRecordTitle_idx1month}" />
+                        <p:outputLabel value="#{bundle.CreateConsumptionRecordLabel_idx1week}" for="idx1week" />
+                        <p:inputText id="idx1week" value="#{consumptionRecordController.selected.idx1week}" title="#{bundle.CreateConsumptionRecordTitle_idx1week}" />
+                        <p:outputLabel value="#{bundle.CreateConsumptionRecordLabel_idx1year}" for="idx1year" />
+                        <p:inputText id="idx1year" value="#{consumptionRecordController.selected.idx1year}" title="#{bundle.CreateConsumptionRecordTitle_idx1year}" />
+                        <p:outputLabel value="#{bundle.CreateConsumptionRecordLabel_idx3month}" for="idx3month" />
+                        <p:inputText id="idx3month" value="#{consumptionRecordController.selected.idx3month}" title="#{bundle.CreateConsumptionRecordTitle_idx3month}" />
+                        <p:outputLabel value="#{bundle.CreateConsumptionRecordLabel_idx6hours}" for="idx6hours" />
+                        <p:inputText id="idx6hours" value="#{consumptionRecordController.selected.idx6hours}" title="#{bundle.CreateConsumptionRecordTitle_idx6hours}" />
+                        <p:outputLabel value="#{bundle.CreateConsumptionRecordLabel_idx6month}" for="idx6month" />
+                        <p:inputText id="idx6month" value="#{consumptionRecordController.selected.idx6month}" title="#{bundle.CreateConsumptionRecordTitle_idx6month}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{consumptionRecordController.create}" value="#{bundle.Save}" update="display,:ConsumptionRecordListForm:datalist,:growl" oncomplete="handleSubmit(args,'ConsumptionRecordCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ConsumptionRecordCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

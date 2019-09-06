@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AssocUserRoleEditDlg" widgetVar="AssocUserRoleEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditAssocUserRoleTitle}">
+            <h:form id="AssocUserRoleEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{assocUserRoleController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditAssocUserRoleLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{assocUserRoleController.selected.id}" title="#{bundle.EditAssocUserRoleTitle_id}" required="true" requiredMessage="#{bundle.EditAssocUserRoleRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.EditAssocUserRoleLabel_validityStart}" for="validityStart" />
+                        <p:calendar id="validityStart" pattern="MM/dd/yyyy" value="#{assocUserRoleController.selected.validityStart}" title="#{bundle.EditAssocUserRoleTitle_validityStart}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditAssocUserRoleLabel_validityEnd}" for="validityEnd" />
+                        <p:calendar id="validityEnd" pattern="MM/dd/yyyy" value="#{assocUserRoleController.selected.validityEnd}" title="#{bundle.EditAssocUserRoleTitle_validityEnd}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditAssocUserRoleLabel_lastUpdatedOn}" for="lastUpdatedOn" />
+                        <p:calendar id="lastUpdatedOn" pattern="MM/dd/yyyy HH:mm:ss" value="#{assocUserRoleController.selected.lastUpdatedOn}" title="#{bundle.EditAssocUserRoleTitle_lastUpdatedOn}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditAssocUserRoleLabel_roleId}" for="roleId" />
+                        <p:selectOneMenu id="roleId" value="#{assocUserRoleController.selected.roleId}" required="true" requiredMessage="#{bundle.EditAssocUserRoleRequiredMessage_roleId}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{roleController.itemsAvailableSelectOne}"
+                                           var="roleIdItem"
+                                           itemValue="#{roleIdItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditAssocUserRoleLabel_userId}" for="userId" />
+                        <p:selectOneMenu id="userId" value="#{assocUserRoleController.selected.userId}" required="true" requiredMessage="#{bundle.EditAssocUserRoleRequiredMessage_userId}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{usersController.itemsAvailableSelectOne}"
+                                           var="userIdItem"
+                                           itemValue="#{userIdItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{assocUserRoleController.update}" value="#{bundle.Save}" update="display,:AssocUserRoleListForm:datalist,:growl" oncomplete="handleSubmit(args, 'AssocUserRoleEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="AssocUserRoleEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

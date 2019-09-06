@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="WhatIfParametersCreateDlg" widgetVar="WhatIfParametersCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateWhatIfParametersTitle}">
+            <h:form id="WhatIfParametersCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{whatIfParametersController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateWhatIfParametersLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{whatIfParametersController.selected.id}" title="#{bundle.CreateWhatIfParametersTitle_id}" required="true" requiredMessage="#{bundle.CreateWhatIfParametersRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.CreateWhatIfParametersLabel_paramName}" for="paramName" />
+                        <p:inputText id="paramName" value="#{whatIfParametersController.selected.paramName}" title="#{bundle.CreateWhatIfParametersTitle_paramName}" />
+                        <p:outputLabel value="#{bundle.CreateWhatIfParametersLabel_paramDval}" for="paramDval" />
+                        <p:inputText id="paramDval" value="#{whatIfParametersController.selected.paramDval}" title="#{bundle.CreateWhatIfParametersTitle_paramDval}" />
+                        <p:outputLabel value="#{bundle.CreateWhatIfParametersLabel_lastUpdatedOn}" for="lastUpdatedOn" />
+                        <p:calendar id="lastUpdatedOn" pattern="MM/dd/yyyy HH:mm:ss" value="#{whatIfParametersController.selected.lastUpdatedOn}" title="#{bundle.EditWhatIfParametersTitle_lastUpdatedOn}"  showOn="button"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{whatIfParametersController.create}" value="#{bundle.Save}" update="display,:WhatIfParametersListForm:datalist,:growl" oncomplete="handleSubmit(args,'WhatIfParametersCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="WhatIfParametersCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

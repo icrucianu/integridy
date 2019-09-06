@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DsoComplexRuleViewDlg" widgetVar="DsoComplexRuleViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewDsoComplexRuleTitle}">
+            <h:form id="DsoComplexRuleViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{dsoComplexRuleController.selected != null}">
+                        <h:outputText value="#{bundle.ViewDsoComplexRuleLabel_id}"/>
+                        <h:outputText value="#{dsoComplexRuleController.selected.id}" title="#{bundle.ViewDsoComplexRuleTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewDsoComplexRuleLabel_ruleName}"/>
+                        <h:outputText value="#{dsoComplexRuleController.selected.ruleName}" title="#{bundle.ViewDsoComplexRuleTitle_ruleName}"/>
+                        <h:outputText value="#{bundle.ViewDsoComplexRuleLabel_ruleType}"/>
+                        <h:outputText value="#{dsoComplexRuleController.selected.ruleType}" title="#{bundle.ViewDsoComplexRuleTitle_ruleType}"/>
+                        <h:outputText value="#{bundle.ViewDsoComplexRuleLabel_rule1}"/>
+                        <h:outputText value="#{dsoComplexRuleController.selected.rule1}" title="#{bundle.ViewDsoComplexRuleTitle_rule1}"/>
+                        <h:outputText value="#{bundle.ViewDsoComplexRuleLabel_rule2}"/>
+                        <h:outputText value="#{dsoComplexRuleController.selected.rule2}" title="#{bundle.ViewDsoComplexRuleTitle_rule2}"/>
+                        <h:outputText value="#{bundle.ViewDsoComplexRuleLabel_operator}"/>
+                        <h:outputText value="#{dsoComplexRuleController.selected.operator}" title="#{bundle.ViewDsoComplexRuleTitle_operator}"/>
+                        <h:outputText value="#{bundle.ViewDsoComplexRuleLabel_createdOn}"/>
+                        <h:outputText value="#{dsoComplexRuleController.selected.createdOn}" title="#{bundle.ViewDsoComplexRuleTitle_createdOn}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewDsoComplexRuleLabel_lastUpdatedOn}"/>
+                        <h:outputText value="#{dsoComplexRuleController.selected.lastUpdatedOn}" title="#{bundle.ViewDsoComplexRuleTitle_lastUpdatedOn}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewDsoComplexRuleLabel_validityStart}"/>
+                        <h:outputText value="#{dsoComplexRuleController.selected.validityStart}" title="#{bundle.ViewDsoComplexRuleTitle_validityStart}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewDsoComplexRuleLabel_validityEnd}"/>
+                        <h:outputText value="#{dsoComplexRuleController.selected.validityEnd}" title="#{bundle.ViewDsoComplexRuleTitle_validityEnd}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="DsoComplexRuleViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

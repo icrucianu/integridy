@@ -1,0 +1,38 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Aug 21, 2018, 10:31:10 AM
+    Author     : roxanam
+*/
+
+.nav-pills {
+  border-bottom:1px solid #eeeeee;
+}
+.nav-pills > li.active > a{
+    background:none !important;
+    color: black !important;
+    font-weight: bold;
+}
+.nav-pills > li > a{
+  color:black;
+}
+.nav-pills > li > a:hover{
+  border-radius: 0px;
+  background:#eeeeee;
+}
+.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus{
+  border-radius: 0px;
+  background: none;
+  color:black;
+}
+.nav-pills >li.active{
+  border-bottom:5px solid orange;
+}
+.tabHeader{
+    color:#F39501;
+    margin-top:15px;;
+    font-size:15px;
+}

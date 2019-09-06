@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ConsumerPricesViewDlg" widgetVar="ConsumerPricesViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewConsumerPricesTitle}">
+            <h:form id="ConsumerPricesViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{consumerPricesController.selected != null}">
+                        <h:outputText value="#{bundle.ViewConsumerPricesLabel_id}"/>
+                        <h:outputText value="#{consumerPricesController.selected.id}" title="#{bundle.ViewConsumerPricesTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewConsumerPricesLabel_priceDef}"/>
+                        <h:outputText value="#{consumerPricesController.selected.priceDef}" title="#{bundle.ViewConsumerPricesTitle_priceDef}"/>
+                        <h:outputText value="#{bundle.ViewConsumerPricesLabel_startTimePeriod}"/>
+                        <h:outputText value="#{consumerPricesController.selected.startTimePeriod}" title="#{bundle.ViewConsumerPricesTitle_startTimePeriod}">
+                            <f:convertDateTime pattern="HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewConsumerPricesLabel_endTimePeriod}"/>
+                        <h:outputText value="#{consumerPricesController.selected.endTimePeriod}" title="#{bundle.ViewConsumerPricesTitle_endTimePeriod}">
+                            <f:convertDateTime pattern="HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewConsumerPricesLabel_priceVal}"/>
+                        <h:outputText value="#{consumerPricesController.selected.priceVal}" title="#{bundle.ViewConsumerPricesTitle_priceVal}"/>
+                        <h:outputText value="#{bundle.ViewConsumerPricesLabel_createdOn}"/>
+                        <h:outputText value="#{consumerPricesController.selected.createdOn}" title="#{bundle.ViewConsumerPricesTitle_createdOn}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewConsumerPricesLabel_validityStart}"/>
+                        <h:outputText value="#{consumerPricesController.selected.validityStart}" title="#{bundle.ViewConsumerPricesTitle_validityStart}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewConsumerPricesLabel_validityEnd}"/>
+                        <h:outputText value="#{consumerPricesController.selected.validityEnd}" title="#{bundle.ViewConsumerPricesTitle_validityEnd}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="PF('ConsumerPricesViewDialog').hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

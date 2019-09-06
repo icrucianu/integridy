@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ConsumerClientViewDlg" widgetVar="ConsumerClientViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewConsumerClientTitle}">
+            <h:form id="ConsumerClientViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{consumerClientController.selected != null}">
+                        <h:outputText value="#{bundle.ViewConsumerClientLabel_fullName}"/>
+                        <h:outputText value="#{consumerClientController.selected.fullName}" title="#{bundle.ViewConsumerClientTitle_fullName}"/>
+                        <h:outputText value="#{bundle.ViewConsumerClientLabel_consumerType}"/>
+                        <h:outputText value="#{consumerClientController.selected.consumerType}" title="#{bundle.ViewConsumerClientTitle_consumerType}"/>
+                        <h:outputText value="#{bundle.ViewConsumerClientLabel_billingAddress}"/>
+                        <h:outputText value="#{consumerClientController.selected.billingAddress}" title="#{bundle.ViewConsumerClientTitle_billingAddress}"/>
+                        <h:outputText value="#{bundle.ViewConsumerClientLabel_email}"/>
+                        <h:outputText value="#{consumerClientController.selected.email}" title="#{bundle.ViewConsumerClientTitle_email}"/>
+                        <h:outputText value="#{bundle.ViewConsumerClientLabel_mainPhone}"/>
+                        <h:outputText value="#{consumerClientController.selected.mainPhone}" title="#{bundle.ViewConsumerClientTitle_mainPhone}"/>
+                        <h:outputText value="#{bundle.ViewConsumerClientLabel_createdOn}"/>
+                        <h:outputText value="#{consumerClientController.selected.createdOn}" title="#{bundle.ViewConsumerClientTitle_createdOn}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewConsumerClientLabel_lastUpdatedOn}"/>
+                        <h:outputText value="#{consumerClientController.selected.lastUpdatedOn}" title="#{bundle.ViewConsumerClientTitle_lastUpdatedOn}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewConsumerClientLabel_userId}"/>
+                        <h:outputText value="#{consumerClientController.selected.userId}" title="#{bundle.ViewConsumerClientTitle_userId}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="PF('ConsumerClientViewDialog').hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

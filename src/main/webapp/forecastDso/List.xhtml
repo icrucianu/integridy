@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListForecastDsoTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="ForecastDsoListForm">
+                <p:panel header="#{bundle.ListForecastDsoTitle}">
+                    <p:dataTable id="datalist" value="#{forecastDsoController.items}" var="item"
+                                 selectionMode="single" selection="#{forecastDsoController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.id}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListForecastDsoTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListForecastDsoTitle_activePow}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.activePow}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListForecastDsoTitle_co2}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.co2}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListForecastDsoTitle_consumedActivePow}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.consumedActivePow}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListForecastDsoTitle_consumedReactivePow}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.consumedReactivePow}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListForecastDsoTitle_createdTime}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.createdTime}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListForecastDsoTitle_dayCost}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.dayCost}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListForecastDsoTitle_deviceNumber}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.deviceNumber}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListForecastDsoTitle_downTime}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.downTime}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListForecastDsoTitle_energyMismatch}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.energyMismatch}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListForecastDsoTitle_energyMismatchRatio}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.energyMismatchRatio}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListForecastDsoTitle_nightCost}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nightCost}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListForecastDsoTitle_saidi}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.saidi}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListForecastDsoTitle_phaseVoltage}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.phaseVoltage}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListForecastDsoTitle_reactivePow}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.reactivePow}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListForecastDsoTitle_sendInterval}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.sendInterval}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListForecastDsoTitle_thdd}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.thdd}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListForecastDsoTitle_upTime}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.upTime}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListForecastDsoTitle_voltageDeviation}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.voltageDeviation}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListForecastDsoTitle_idx12hours}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idx12hours}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListForecastDsoTitle_idx15minutes}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idx15minutes}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListForecastDsoTitle_idx1day}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idx1day}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListForecastDsoTitle_idx1hour}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idx1hour}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListForecastDsoTitle_idx1month}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idx1month}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListForecastDsoTitle_idx1week}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idx1week}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListForecastDsoTitle_idx1year}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idx1year}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListForecastDsoTitle_idx3month}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idx3month}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListForecastDsoTitle_idx6hours}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idx6hours}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListForecastDsoTitle_idx6month}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idx6month}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{forecastDsoController.prepareCreate}" update=":ForecastDsoCreateForm" oncomplete="PF('ForecastDsoCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":ForecastDsoViewForm" oncomplete="PF('ForecastDsoViewDialog').show()" disabled="#{empty forecastDsoController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":ForecastDsoEditForm" oncomplete="PF('ForecastDsoEditDialog').show()" disabled="#{empty forecastDsoController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{forecastDsoController.destroy}" update=":growl,datalist" disabled="#{empty forecastDsoController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

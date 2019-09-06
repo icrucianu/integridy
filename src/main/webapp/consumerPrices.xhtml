@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/mainframe.xhtml">
+
+
+    <ui:define name="title">
+        <h:outputText value="#{bundle.ListConsumerPricesTitle}"></h:outputText>
+    </ui:define>
+
+    <ui:define name="body">
+        <h:form id="ConsumerPricesListForm">
+            <p:panel>
+
+                <p:outputLabel value="Validity start:" />
+                <p:calendar styleClass="calendarInput" pattern="dd.MM.yyyy" value="#{consumerPricesController.validityStart}"/><i class="fa fa-calendar"></i>
+                <p:outputLabel value="Validity end:" />
+                <p:calendar styleClass="calendarInput" pattern="dd.MM.yyyy" value="#{consumerPricesController.validityEnd}"/><i class="fa fa-calendar"></i>
+
+                <p:commandButton id="filterButton"
+                                 styleClass="es-btn es-btn-primary"
+                                 value="Filter"
+                                 actionListener="#{consumerPricesController.filter()}"
+                                 update="datalist"
+                />
+
+                <p:dataTable id="datalist" value="#{consumerPricesController.pricesInBetween}" var="item"
+                             selectionMode="single" selection="#{consumerPricesController.selected}"
+                             paginator="true"
+                             rowKey="#{item.id}"
+                             rows="10"
+                             rowsPerPageTemplate="10,20,30,40,50"
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} Exporters"
+                >
+
+                    <f:facet name="Exporters">
+                        <h:commandLink>
+                            <p:graphicImage library="images" name="excel.png"/>
+                            <p:dataExporter type="xls" target="datalist" fileName="#{consumerPricesController.fileName}" />
+                        </h:commandLink>
+
+                        <h:commandLink>
+                            <p:graphicImage library="images" name="pdf.png" width="24"/>
+                            <p:dataExporter type="pdf" target="datalist" fileName="#{consumerPricesController.fileName}"/>
+                        </h:commandLink>
+
+                        <h:commandLink>
+                            <p:graphicImage library="images" name="csv.png" width="24"/>
+                            <p:dataExporter type="csv" target="datalist" fileName="#{consumerPricesController.fileName}" />
+                        </h:commandLink>
+
+                        <h:commandLink>
+                            <p:graphicImage library="images" name="xml.png" width="24"/>
+                            <p:dataExporter type="xml" target="datalist" fileName="#{consumerPricesController.fileName}" />
+                        </h:commandLink>
+                    </f:facet>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListConsumerPricesTitle_id}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.id}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListConsumerPricesTitle_priceCode}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.priceCode}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListConsumerPricesTitle_priceType}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.priceType}"/>
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListConsumerPricesTitle_priceDef}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.priceDef}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListConsumerPricesTitle_startTimePeriod}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.startTimePeriod}">
+                            <f:convertDateTime pattern="HH:mm"  timeZone="GMT+2"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListConsumerPricesTitle_endTimePeriod}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.endTimePeriod}">
+                            <f:convertDateTime pattern="HH:mm" timeZone="GMT+2"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListConsumerPricesTitle_priceVal}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.priceVal}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListConsumerPricesTitle_nightPriceVal}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.nightPriceVal}"/>
+                    </p:column>
+                    <p:column visible="false">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListConsumerPricesTitle_createdOn}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.createdOn}">
+                            <f:convertDateTime pattern="MM/dd/yyyy " timeZone="GMT+2" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListConsumerPricesTitle_validityStart}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.validityStart}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT+2" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListConsumerPricesTitle_validityEnd}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.validityEnd}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT+2" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListConsumerPricesTitle_priceDefault}"/>
+                        </f:facet>
+                        <p:selectBooleanCheckbox value="#{item.defaultPrice}" disabled="true" />
+                    </p:column>
+
+                </p:dataTable>
+            </p:panel>
+        </h:form>
+
+    </ui:define>
+</ui:composition>
+
+</html>

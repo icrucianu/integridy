@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SmartMeterCreateDlg" widgetVar="SmartMeterCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateSmartMeterTitle}">
+            <h:form id="SmartMeterCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{consumerClientController.selectedSmartMeter != null}">
+                        <p:outputLabel value="#{bundle.CreateSmartMeterLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{consumerClientController.selectedSmartMeter.id}" title="#{bundle.CreateSmartMeterTitle_id}"/>
+                        <p:outputLabel value="#{bundle.CreateSmartMeterLabel_deviceName}" for="deviceName" />
+                        <p:inputText id="deviceName" value="#{consumerClientController.selectedSmartMeter.deviceName}" title="#{bundle.CreateSmartMeterTitle_deviceName}" />
+                        <p:outputLabel value="#{bundle.CreateSmartMeterLabel_serialNo}" for="serialNo" />
+                        <p:inputText id="serialNo" value="#{consumerClientController.selectedSmartMeter.serialNo}" title="#{bundle.CreateSmartMeterTitle_serialNo}" />
+                        <p:outputLabel value="#{bundle.CreateSmartMeterLabel_deviceType}" for="deviceType" />
+                        <p:inputText id="deviceType" value="#{consumerClientController.selectedSmartMeter.deviceType}" title="#{bundle.CreateSmartMeterTitle_deviceType}" />
+                        <p:outputLabel value="#{bundle.CreateSmartMeterLabel_validityFrom}" for="validityFrom" />
+                        <p:calendar id="validityFrom" pattern="MM/dd/yyyy" value="#{consumerClientController.selectedSmartMeter.validityFrom}" title="#{bundle.EditSmartMeterTitle_validityFrom}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateSmartMeterLabel_validityTo}" for="validityTo" />
+                        <p:calendar id="validityTo" pattern="MM/dd/yyyy" value="#{consumerClientController.selectedSmartMeter.validityTo}" title="#{bundle.EditSmartMeterTitle_validityTo}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateSmartMeterLabel_consumptionPointId}" for="consumptionPointId" />
+                        <p:selectOneMenu id="consumptionPointId" value="#{consumerClientController.selectedSmartMeter.consumptionPointId}" >
+                            <f:selectItems value="#{consumptionPointController.itemsAvailableSelectOne}"
+                                           var="consumptionPointIdItem"
+                                           itemValue="#{consumptionPointIdItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{consumerClientController.createSmartMeter}" value="#{bundle.Save}" update="display,:ConsumerClientListForm:datalistSmartMeter,:growl" oncomplete="handleSubmit(args,'SmartMeterCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('SmartMeterCreateDialog').hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

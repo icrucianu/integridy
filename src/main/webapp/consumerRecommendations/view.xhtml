@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui" >
+
+    <ui:composition>
+
+        <p:dialog id="ConsumerRecommendationViewDlg" widgetVar="ConsumerRecommendationAdminViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewConsumerRecommendationTitle}">
+            <h:form id="ConsumerRecommendationAdminViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{consumerRecommendationsAdminController.selectedRecommendation != null}">
+                        <h:outputText value="#{bundle.ViewConsumerRecommendationLabel_notifCode}"/>
+                        <h:outputText value="#{consumerRecommendationsAdminController.selectedRecommendation.notifCode}" title="#{bundle.ViewConsumerRecommendationTitle_notifCode}"/>
+                        <h:outputText value="#{bundle.ViewConsumerRecommendationLabel_severity}"/>
+                        <h:outputText value="#{consumerRecommendationsAdminController.selectedRecommendation.severity}" title="#{bundle.ViewConsumerRecommendationTitle_severity}"/>
+                        <h:outputText value="#{bundle.ViewConsumerRecommendationLabel_shortDescription}"/>
+                        <h:outputText value="#{consumerRecommendationsAdminController.selectedRecommendation.shortDescription}" title="#{bundle.ViewConsumerRecommendationTitle_shortDescription}"/>
+                        <h:outputText value="#{bundle.ViewConsumerRecommendationLabel_longDescription}"/>
+                        <h:outputText value="#{consumerRecommendationsAdminController.selectedRecommendation.longDescription}" title="#{bundle.ViewConsumerRecommendationTitle_longDescription}"/>
+                        <h:outputText value="#{bundle.ViewConsumerRecommendationLabel_emitter}"/>
+                        <h:outputText value="#{consumerRecommendationsAdminController.selectedRecommendation.emitter}" title="#{bundle.ViewConsumerRecommendationTitle_emitter}"/>
+                        <h:outputText value="#{bundle.ViewConsumerRecommendationLabel_createdOn}"/>
+                        <h:outputText value="#{consumerRecommendationsAdminController.selectedRecommendation.createdOn}" title="#{bundle.ViewConsumerRecommendationTitle_createdOn}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewConsumerRecommendationLabel_status}"/>
+                        <h:outputText value="#{consumerRecommendationsAdminController.selectedRecommendation.status}" title="#{bundle.ViewConsumerRecommendationTitle_status}"/>
+                        <h:outputText value="#{bundle.ViewConsumerRecommendationLabel_reduceIntervalStart}"/>
+                        <h:outputText value="#{consumerRecommendationsAdminController.selectedRecommendation.reduceIntervalStart}" title="#{bundle.ViewConsumerRecommendationTitle_reduceIntervalStart}"/>
+                        <h:outputText value="#{bundle.ViewConsumerRecommendationLabel_reduceIntervalStop}"/>
+                        <h:outputText value="#{consumerRecommendationsAdminController.selectedRecommendation.reduceIntervalStop}" title="#{bundle.ViewConsumerRecommendationTitle_reduceIntervalStop}"/>
+                        <h:outputText value="#{bundle.ViewConsumerRecommendationLabel_quantity}"/>
+                        <h:outputText value="#{consumerRecommendationsAdminController.selectedRecommendation.quantity}" title="#{bundle.ViewConsumerRecommendationTitle_quantity}"/>
+                        <h:outputText value="#{bundle.ViewConsumerRecommendationLabel_confirmedDate}"/>
+                        <h:outputText value="#{consumerRecommendationsAdminController.selectedRecommendation.confirmedDate}" title="#{bundle.ViewConsumerRecommendationTitle_confirmedDate}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewConsumerRecommendationLabel_confirmationStatus}"/>
+                        <h:outputText value="#{consumerRecommendationsAdminController.selectedRecommendation.confirmationStatus}" title="#{bundle.ViewConsumerRecommendationTitle_confirmationStatus}"/>
+                        <h:outputText value="#{bundle.ViewConsumerRecommendationLabel_reduceDayOfWeek}"/>
+                        <h:outputText value="#{consumerRecommendationsAdminController.selectedRecommendation.reduceDayOfWeek}" title="#{bundle.ViewConsumerRecommendationTitle_reduceDayOfWeek}"/>
+                        <h:outputText value="#{bundle.ViewConsumerRecommendationLabel_clientId}"/>
+                        <h:outputText value="#{consumerRecommendationsAdminController.selectedRecommendation.clientId}" title="#{bundle.ViewConsumerRecommendationTitle_clientId}"/>
+                        
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}"  onclick="PF('ConsumerRecommendationAdminViewDialog').hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

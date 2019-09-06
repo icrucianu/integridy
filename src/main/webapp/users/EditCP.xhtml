@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ConsumptionPointEditDlg" widgetVar="ConsumptionPointEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditConsumptionPointTitle}">
+            <h:form id="ConsumptionPointEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{consumerClientController.selectedConsumptionPoint != null}">
+                        <p:outputLabel value="#{bundle.EditConsumptionPointLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{consumerClientController.selectedConsumptionPoint.id}" title="#{bundle.EditConsumptionPointTitle_id}" required="true" requiredMessage="#{bundle.EditConsumptionPointRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.EditConsumptionPointLabel_pointName}" for="pointName" />
+                        <p:inputText id="pointName" value="#{consumerClientController.selectedConsumptionPoint.pointName}" title="#{bundle.EditConsumptionPointTitle_pointName}" required="true" requiredMessage="#{bundle.EditConsumptionPointRequiredMessage_pointName}"/>
+                        <p:outputLabel value="#{bundle.EditConsumptionPointLabel_pointType}" for="pointType" />
+                        <p:inputText id="pointType" value="#{consumerClientController.selectedConsumptionPoint.pointType}" title="#{bundle.EditConsumptionPointTitle_pointType}" />
+                        <p:outputLabel value="#{bundle.EditConsumptionPointLabel_address}" for="address" />
+                        <p:inputText id="address" value="#{consumerClientController.selectedConsumptionPoint.address}" title="#{bundle.EditConsumptionPointTitle_address}" />
+                        <p:outputLabel value="#{bundle.EditConsumptionPointLabel_validityStart}" for="validityStart" />
+                        <p:calendar id="validityStart" pattern="MM/dd/yyyy" value="#{consumerClientController.selectedConsumptionPoint.validityStart}" title="#{bundle.EditConsumptionPointTitle_validityStart}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditConsumptionPointLabel_validityEnd}" for="validityEnd" />
+                        <p:calendar id="validityEnd" pattern="MM/dd/yyyy" value="#{consumerClientController.selectedConsumptionPoint.validityEnd}" title="#{bundle.EditConsumptionPointTitle_validityEnd}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditConsumptionPointLabel_clientId}" for="clientId" />
+                        <p:selectOneMenu id="clientId" value="#{consumerClientController.selectedConsumptionPoint.clientId}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{consumerClientController.itemsAvailableSelectOne}"
+                                           var="clientIdItem"
+                                           itemValue="#{clientIdItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{consumerClientController.updateConsumptionPoint()}" value="#{bundle.Save}" update="display,:ConsumerClientListForm:datalistConsumptionPoint,:growl" oncomplete="handleSubmit(args, 'ConsumptionPointEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('ConsumptionPointEditDialog').hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

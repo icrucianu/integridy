@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+
+
+    <ui:composition template="/mainframe.xhtml">
+        <ui:define name="title">
+            <h:outputText value="My Account"></h:outputText>
+           
+        </ui:define>
+
+    
+        <ui:define name="body"> 
+            <h:form id="myAccountForm">
+               
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-md-6 ui-lg-6">
+                        <div class="content-panel">
+
+                            <div >
+                                <h:outputText styleClass="h2-title" value ="#{myAccountController.currentUser.username}"/><br/>
+                                <p:separator/>
+                                <div class="content-panel">
+                                <h:outputText styleClass="h2-subtitle" value ="#{myAccountController.currentUser.firstName}"/><br/>
+                                <h:outputText styleClass="h2-subtitle" value ="#{myAccountController.currentUser.lastName}"/><br/>
+                                <h:outputText styleClass="h2-subtitle" value ="#{myAccountController.currentUser.email}"/><br/>
+                                <h:outputText styleClass="h2-subtitle" value ="Role: #{dashboardController.currentUserRole}"/>
+                               
+                                <p:commandButton  style="float: right;"
+                                                  value="EDIT" 
+                                                  update=":AccountEditForm"
+                                                  oncomplete="PF('AccountEditDialog').show()"
+                                                  class="account-button-edit" 
+                                                  icon="fa fa-pencil" />
+                                 
+                                
+                              </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+                 
+                <h:panelGroup layout="block" rendered="#{dashboardController.userClient}"  >
+                <div class="ui-g-12 ui-md-6 ui-lg-6" >
+                    <div class="content-panel">
+                        <h:outputText styleClass="h2-title" value ="My devices"/><br/>
+                              <p:separator/>
+                    <p:panelGrid id="devicesPanel" columns="2" styleClass="integridyHeaderGrid">
+                         <p:tree value="#{myAccountController.root}" selectionMode="single" selection="#{myAccountController.selectedNode}"   var="node" animate="true">
+                                             <p:ajax event="select" 
+                                                    listener="#{myAccountController.onNodeSelect}" 
+                                                    update=":myAccountForm:panelNodeDetails growl"  />
+                                            <p:treeNode type="CP" icon="fa fa-home" styleClass="h2-subtitle" >
+                                                <h:outputText styleClass="h2-subtitle" value="#{node.name}(#{node.nodeType})" />
+                                            </p:treeNode>
+                                            <p:treeNode type="SM" icon="fa fa-tablet" styleClass="h3-subtitle">
+                                                <h:outputText value="#{node.name}(#{node.nodeType})" />
+                                            </p:treeNode>
+                                        </p:tree> 
+                        <h:panelGroup id="panelNodeDetails" layout="block"   >
+                            <p:panelGrid  id="cpPanel" rendered="#{myAccountController.selectedConsumptionPoint != null}"  >
+                                <p:panelGrid columns="2"  styleClass="integridyHeaderGrid">
+                                    <h:outputText styleClass="h3-title" value ="Name: "/>
+                                    <h:outputText styleClass="h3-title" value ="#{myAccountController.selectedConsumptionPoint.pointName}"/>
+                                    <h:outputText styleClass="h3-title" value ="Type: "/>
+                                    <h:outputText styleClass="h3-subtitle" value ="#{myAccountController.selectedConsumptionPoint.pointType}"/>
+                                    <h:outputText styleClass="h3-title" value ="Address: "/>
+                                    <h:outputText styleClass="h3-subtitle" value ="#{myAccountController.selectedConsumptionPoint.address}"/>
+                                    <h:outputText styleClass="h3-title" value ="Start date: "/>
+                                    <h:outputText styleClass="h3-subtitle" value ="#{myAccountController.selectedConsumptionPoint.validityStart!=null?myAccountController.selectedConsumptionPoint.validityStart:'-'}"/>
+                                    <h:outputText styleClass="h3-title" value ="End date: "/>
+                                    <h:outputText styleClass="h3-subtitle" value ="#{myAccountController.selectedConsumptionPoint.validityEnd!=null?myAccountController.selectedConsumptionPoint.validityEnd:'-'}"/>
+                                </p:panelGrid>
+                            </p:panelGrid>
+                            <p:panelGrid id="smPanel" rendered="#{myAccountController.selectedSmartMeter != null}"  >
+                                <p:panelGrid columns="2"  styleClass="integridyHeaderGrid">
+                                    <h:outputText styleClass="h3-title" value ="Name: "/>
+                                    <h:outputText styleClass="h3-title" value ="#{myAccountController.selectedSmartMeter.deviceName}"/>
+                                    <h:outputText styleClass="h3-title" value ="Type: "/>
+                                    <h:outputText styleClass="h3-subtitle" value ="#{myAccountController.selectedSmartMeter.deviceType}"/>
+                                    <h:outputText styleClass="h3-title" value ="Serial No "/>
+                                    <h:outputText styleClass="h3-subtitle" value ="#{myAccountController.selectedSmartMeter.serialNo}"/>
+                                    <h:outputText styleClass="h3-title" value ="Start date: "/>
+                                    <h:outputText styleClass="h3-subtitle" value ="#{myAccountController.selectedSmartMeter.validityFrom!=null?myAccountController.selectedselectedSmartMeter.validityFrom:'-'}"/>
+                                    <h:outputText styleClass="h3-title" value ="End date: "/>
+                                    <h:outputText styleClass="h3-subtitle" value ="#{myAccountController.selectedSmartMeter.validityTo!=null?myAccountController.selectedselectedSmartMeter.validityTo:'-'}"/>
+                                </p:panelGrid>
+                            </p:panelGrid>
+                        </h:panelGroup>
+                    </p:panelGrid>                 
+                    </div> 
+               </div>
+                </h:panelGroup>
+            </h:form>
+          <ui:include src="EditUserData.xhtml"/>
+        </ui:define>
+
+    </ui:composition>
+
+
+</html>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/mainframe.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="Demand response"/>   
+        </ui:define>
+
+        <ui:define name="body">
+
+            <h:form id="ConsumerRecommendationListForm">
+               <p:panel header="Customer recommendation options">
+                   <p:panelGrid columns="2" styleClass="integridyHeaderGrid" style="vertical-align: center">
+                    <h:outputText value="Receive recommendations?"/> 
+                     <p:inputSwitch value="true">
+
+                    </p:inputSwitch>
+                    </p:panelGrid>
+                </p:panel>
+                <p:panelGrid columns="2"  styleClass="integridyRecommendationsGrid" >
+                   
+                    <p:panel header="New Recommendations" style="text-align:center;">
+                        <p:dataGrid id="recommendationsList" 
+                                    var="recommendation" 
+                                    value="#{consumerRecommendationController.items}" 
+                                    columns="1" styleClass="integridy-recommendation-datagrid">
+
+                            <p:panel id="pnl"  style="text-align:center;width: 500px;border:none" >
+                                <div class="content-panel">  
+                                    <h:panelGrid columns="1" style="width:100%">
+                                        <h:outputText value="#{recommendation.longDescription}"/>
+                                    </h:panelGrid>
+
+                                    <p:commandButton  value="Will try" />
+                                    <p:commandButton  value="Not possible"  />
+                                    </div>  
+                            </p:panel>
+
+                            <!--                        <p:draggable for="pnl" revert="true" handle=".ui-panel-titlebar" stack=".ui-panel"/>-->
+                        </p:dataGrid>
+                   </p:panel>
+                   
+                    <h:panelGroup>
+                         
+                    <p:fieldset id="activeTasks" legend="Active Tasks" >
+                        <p:dataTable id="datalist" value="#{consumerRecommendationController.items}" var="item"
+                                 selectionMode="single" selection="#{consumerRecommendationController.selected}"
+                                
+                                 rowKey="#{item.id}"
+                                
+                                 scrollable="true"
+                                 >
+                        <p:column style="width:40px;">
+                            
+                            <h:outputText value="#{item.longDescription}">
+                               
+                            </h:outputText>
+                        </p:column >
+                        </p:dataTable>
+                    </p:fieldset>
+                    
+                     </h:panelGroup>                           
+                        
+                   
+                </p:panelGrid>
+            </h:form>
+
+
+           
+
+        </ui:define>
+    </ui:composition>
+</html>

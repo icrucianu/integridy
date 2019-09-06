@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Integridy - Account confirmation</title>
+        <h:outputScript library="js" name="jsfcrud.js"/>
+        <h:outputStylesheet library="css" name="integridy-mainframe.css"/>
+
+    </h:head>
+    <f:metadata>
+        <f:viewParam name="apptoken" value="#{accountConfirmationController.accountConfirmationToken}"/>
+        <f:viewAction action="#{accountConfirmationController.onLoadPage()}"/>
+    </f:metadata>  
+    <h:body style="background:#F4F4F4">
+
+        <h:form prependId="false" id="accountConfirmationForm" styleClass="integridyMainForm integridyAuthForm">
+
+            <h:panelGrid styleClass="panelGridCenter" style="width:250px;text-align:center">
+                <h:outputText value="WELCOME TO" styleClass="login-header"/>
+                <p:graphicImage library="images" name="integridy-logo.png"/>
+                <h:outputText value="version 0.1" styleClass="ui-message"/>
+            </h:panelGrid>
+            <h:panelGrid  rendered="#{accountConfirmationController.crtUser.enabled}" columns="1" styleClass="panelGridCenter" style="width:250px;text-align:center;margin-top:30px;">
+                <p:outputLabel value="This account was already activated!"  />
+               <p:commandButton value="Go to login page" id="goToLoginPageBtn" styleClass="login-button"  action="/faces/login.xhtml"/>
+            </h:panelGrid>
+
+            <h:panelGrid  rendered="#{!accountConfirmationController.crtUser.enabled}" columns="1" styleClass="panelGridCenter" style="width:250px;text-align:center;margin-top:30px;">
+                <p:outputLabel value="Username:"  />
+                <p:outputLabel value="#{accountConfirmationController.crtUser.username}"  />
+                 <p:outputLabel value="Email:"  />
+                <p:outputLabel value="#{accountConfirmationController.crtUser.email}"  />
+                
+                <p:commandButton value="Activate account" id="loginBtn" styleClass="login-button"  action="#{accountConfirmationController.activateAccount}"/>
+            </h:panelGrid>
+                
+        </h:form>
+    </h:body>
+</html>

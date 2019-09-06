@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="OptimumDsoViewDlg" widgetVar="OptimumDsoViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewOptimumDsoTitle}">
+            <h:form id="OptimumDsoViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{optimumDsoController.selected != null}">
+                        <h:outputText value="#{bundle.ViewOptimumDsoLabel_id}"/>
+                        <h:outputText value="#{optimumDsoController.selected.id}" title="#{bundle.ViewOptimumDsoTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewOptimumDsoLabel_activePow}"/>
+                        <h:outputText value="#{optimumDsoController.selected.activePow}" title="#{bundle.ViewOptimumDsoTitle_activePow}"/>
+                        <h:outputText value="#{bundle.ViewOptimumDsoLabel_co2}"/>
+                        <h:outputText value="#{optimumDsoController.selected.co2}" title="#{bundle.ViewOptimumDsoTitle_co2}"/>
+                        <h:outputText value="#{bundle.ViewOptimumDsoLabel_consumedActivePow}"/>
+                        <h:outputText value="#{optimumDsoController.selected.consumedActivePow}" title="#{bundle.ViewOptimumDsoTitle_consumedActivePow}"/>
+                        <h:outputText value="#{bundle.ViewOptimumDsoLabel_consumedReactivePow}"/>
+                        <h:outputText value="#{optimumDsoController.selected.consumedReactivePow}" title="#{bundle.ViewOptimumDsoTitle_consumedReactivePow}"/>
+                        <h:outputText value="#{bundle.ViewOptimumDsoLabel_createdTime}"/>
+                        <h:outputText value="#{optimumDsoController.selected.createdTime}" title="#{bundle.ViewOptimumDsoTitle_createdTime}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewOptimumDsoLabel_dayCost}"/>
+                        <h:outputText value="#{optimumDsoController.selected.dayCost}" title="#{bundle.ViewOptimumDsoTitle_dayCost}"/>
+                        <h:outputText value="#{bundle.ViewOptimumDsoLabel_deviceNumber}"/>
+                        <h:outputText value="#{optimumDsoController.selected.deviceNumber}" title="#{bundle.ViewOptimumDsoTitle_deviceNumber}"/>
+                        <h:outputText value="#{bundle.ViewOptimumDsoLabel_downTime}"/>
+                        <h:outputText value="#{optimumDsoController.selected.downTime}" title="#{bundle.ViewOptimumDsoTitle_downTime}"/>
+                        <h:outputText value="#{bundle.ViewOptimumDsoLabel_energyMismatch}"/>
+                        <h:outputText value="#{optimumDsoController.selected.energyMismatch}" title="#{bundle.ViewOptimumDsoTitle_energyMismatch}"/>
+                        <h:outputText value="#{bundle.ViewOptimumDsoLabel_energyMismatchRatio}"/>
+                        <h:outputText value="#{optimumDsoController.selected.energyMismatchRatio}" title="#{bundle.ViewOptimumDsoTitle_energyMismatchRatio}"/>
+                        <h:outputText value="#{bundle.ViewOptimumDsoLabel_nightCost}"/>
+                        <h:outputText value="#{optimumDsoController.selected.nightCost}" title="#{bundle.ViewOptimumDsoTitle_nightCost}"/>
+                        <h:outputText value="#{bundle.ViewOptimumDsoLabel_saidi}"/>
+                        <h:outputText value="#{optimumDsoController.selected.saidi}" title="#{bundle.ViewOptimumDsoTitle_saidi}"/>
+                        <h:outputText value="#{bundle.ViewOptimumDsoLabel_phaseVoltage}"/>
+                        <h:outputText value="#{optimumDsoController.selected.phaseVoltage}" title="#{bundle.ViewOptimumDsoTitle_phaseVoltage}"/>
+                        <h:outputText value="#{bundle.ViewOptimumDsoLabel_reactivePow}"/>
+                        <h:outputText value="#{optimumDsoController.selected.reactivePow}" title="#{bundle.ViewOptimumDsoTitle_reactivePow}"/>
+                        <h:outputText value="#{bundle.ViewOptimumDsoLabel_sendInterval}"/>
+                        <h:outputText value="#{optimumDsoController.selected.sendInterval}" title="#{bundle.ViewOptimumDsoTitle_sendInterval}"/>
+                        <h:outputText value="#{bundle.ViewOptimumDsoLabel_thdd}"/>
+                        <h:outputText value="#{optimumDsoController.selected.thdd}" title="#{bundle.ViewOptimumDsoTitle_thdd}"/>
+                        <h:outputText value="#{bundle.ViewOptimumDsoLabel_upTime}"/>
+                        <h:outputText value="#{optimumDsoController.selected.upTime}" title="#{bundle.ViewOptimumDsoTitle_upTime}"/>
+                        <h:outputText value="#{bundle.ViewOptimumDsoLabel_voltageDeviation}"/>
+                        <h:outputText value="#{optimumDsoController.selected.voltageDeviation}" title="#{bundle.ViewOptimumDsoTitle_voltageDeviation}"/>
+                        <h:outputText value="#{bundle.ViewOptimumDsoLabel_idx12hours}"/>
+                        <h:outputText value="#{optimumDsoController.selected.idx12hours}" title="#{bundle.ViewOptimumDsoTitle_idx12hours}"/>
+                        <h:outputText value="#{bundle.ViewOptimumDsoLabel_idx15minutes}"/>
+                        <h:outputText value="#{optimumDsoController.selected.idx15minutes}" title="#{bundle.ViewOptimumDsoTitle_idx15minutes}"/>
+                        <h:outputText value="#{bundle.ViewOptimumDsoLabel_idx1day}"/>
+                        <h:outputText value="#{optimumDsoController.selected.idx1day}" title="#{bundle.ViewOptimumDsoTitle_idx1day}"/>
+                        <h:outputText value="#{bundle.ViewOptimumDsoLabel_idx1hour}"/>
+                        <h:outputText value="#{optimumDsoController.selected.idx1hour}" title="#{bundle.ViewOptimumDsoTitle_idx1hour}"/>
+                        <h:outputText value="#{bundle.ViewOptimumDsoLabel_idx1month}"/>
+                        <h:outputText value="#{optimumDsoController.selected.idx1month}" title="#{bundle.ViewOptimumDsoTitle_idx1month}"/>
+                        <h:outputText value="#{bundle.ViewOptimumDsoLabel_idx1week}"/>
+                        <h:outputText value="#{optimumDsoController.selected.idx1week}" title="#{bundle.ViewOptimumDsoTitle_idx1week}"/>
+                        <h:outputText value="#{bundle.ViewOptimumDsoLabel_idx1year}"/>
+                        <h:outputText value="#{optimumDsoController.selected.idx1year}" title="#{bundle.ViewOptimumDsoTitle_idx1year}"/>
+                        <h:outputText value="#{bundle.ViewOptimumDsoLabel_idx3month}"/>
+                        <h:outputText value="#{optimumDsoController.selected.idx3month}" title="#{bundle.ViewOptimumDsoTitle_idx3month}"/>
+                        <h:outputText value="#{bundle.ViewOptimumDsoLabel_idx6hours}"/>
+                        <h:outputText value="#{optimumDsoController.selected.idx6hours}" title="#{bundle.ViewOptimumDsoTitle_idx6hours}"/>
+                        <h:outputText value="#{bundle.ViewOptimumDsoLabel_idx6month}"/>
+                        <h:outputText value="#{optimumDsoController.selected.idx6month}" title="#{bundle.ViewOptimumDsoTitle_idx6month}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="OptimumDsoViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

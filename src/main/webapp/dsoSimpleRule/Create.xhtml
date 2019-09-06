@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DsoSimpleRuleCreateDlg" widgetVar="DsoSimpleRuleCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateDsoSimpleRuleTitle}">
+            <h:form id="DsoSimpleRuleCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{dsoSimpleRuleController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateDsoSimpleRuleLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{dsoSimpleRuleController.selected.id}" title="#{bundle.CreateDsoSimpleRuleTitle_id}" required="true" requiredMessage="#{bundle.CreateDsoSimpleRuleRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.CreateDsoSimpleRuleLabel_ruleName}" for="ruleName" />
+                        <p:inputText id="ruleName" value="#{dsoSimpleRuleController.selected.ruleName}" title="#{bundle.CreateDsoSimpleRuleTitle_ruleName}" />
+                        <p:outputLabel value="#{bundle.CreateDsoSimpleRuleLabel_operator}" for="operator" />
+                        <p:inputText id="operator" value="#{dsoSimpleRuleController.selected.operator}" title="#{bundle.CreateDsoSimpleRuleTitle_operator}" />
+                        <p:outputLabel value="#{bundle.CreateDsoSimpleRuleLabel_vald1}" for="vald1" />
+                        <p:inputText id="vald1" value="#{dsoSimpleRuleController.selected.vald1}" title="#{bundle.CreateDsoSimpleRuleTitle_vald1}" />
+                        <p:outputLabel value="#{bundle.CreateDsoSimpleRuleLabel_vald2}" for="vald2" />
+                        <p:inputText id="vald2" value="#{dsoSimpleRuleController.selected.vald2}" title="#{bundle.CreateDsoSimpleRuleTitle_vald2}" />
+                        <p:outputLabel value="#{bundle.CreateDsoSimpleRuleLabel_createdOn}" for="createdOn" />
+                        <p:calendar id="createdOn" pattern="MM/dd/yyyy HH:mm:ss" value="#{dsoSimpleRuleController.selected.createdOn}" title="#{bundle.EditDsoSimpleRuleTitle_createdOn}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateDsoSimpleRuleLabel_lastUpdatedOn}" for="lastUpdatedOn" />
+                        <p:calendar id="lastUpdatedOn" pattern="MM/dd/yyyy HH:mm:ss" value="#{dsoSimpleRuleController.selected.lastUpdatedOn}" title="#{bundle.EditDsoSimpleRuleTitle_lastUpdatedOn}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateDsoSimpleRuleLabel_validityStart}" for="validityStart" />
+                        <p:calendar id="validityStart" pattern="MM/dd/yyyy HH:mm:ss" value="#{dsoSimpleRuleController.selected.validityStart}" title="#{bundle.EditDsoSimpleRuleTitle_validityStart}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateDsoSimpleRuleLabel_validityEnd}" for="validityEnd" />
+                        <p:calendar id="validityEnd" pattern="MM/dd/yyyy HH:mm:ss" value="#{dsoSimpleRuleController.selected.validityEnd}" title="#{bundle.EditDsoSimpleRuleTitle_validityEnd}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateDsoSimpleRuleLabel_numberOfRegistrations}" for="numberOfRegistrations" />
+                        <p:inputText id="numberOfRegistrations" value="#{dsoSimpleRuleController.selected.numberOfRegistrations}" title="#{bundle.CreateDsoSimpleRuleTitle_numberOfRegistrations}" />
+                        <p:outputLabel value="#{bundle.CreateDsoSimpleRuleLabel_startCronFormat}" for="startCronFormat" />
+                        <p:inputText id="startCronFormat" value="#{dsoSimpleRuleController.selected.startCronFormat}" title="#{bundle.CreateDsoSimpleRuleTitle_startCronFormat}" />
+                        <p:outputLabel value="#{bundle.CreateDsoSimpleRuleLabel_endCronFormat}" for="endCronFormat" />
+                        <p:inputText id="endCronFormat" value="#{dsoSimpleRuleController.selected.endCronFormat}" title="#{bundle.CreateDsoSimpleRuleTitle_endCronFormat}" />
+                        <p:outputLabel value="#{bundle.CreateDsoSimpleRuleLabel_clientId}" for="clientId" />
+                        <p:inputText id="clientId" value="#{dsoSimpleRuleController.selected.clientId}" title="#{bundle.CreateDsoSimpleRuleTitle_clientId}" />
+                        <p:outputLabel value="#{bundle.CreateDsoSimpleRuleLabel_deviceId}" for="deviceId" />
+                        <p:inputText id="deviceId" value="#{dsoSimpleRuleController.selected.deviceId}" title="#{bundle.CreateDsoSimpleRuleTitle_deviceId}" />
+                        <p:outputLabel value="#{bundle.CreateDsoSimpleRuleLabel_severity}" for="severity" />
+                        <p:inputText id="severity" value="#{dsoSimpleRuleController.selected.severity}" title="#{bundle.CreateDsoSimpleRuleTitle_severity}" />
+                        <p:outputLabel value="#{bundle.CreateDsoSimpleRuleLabel_message}" for="message" />
+                        <p:inputText id="message" value="#{dsoSimpleRuleController.selected.message}" title="#{bundle.CreateDsoSimpleRuleTitle_message}" />
+                        <p:outputLabel value="#{bundle.CreateDsoSimpleRuleLabel_ruleType}" for="ruleType" />
+                        <p:selectOneMenu id="ruleType" value="#{dsoSimpleRuleController.selected.ruleType}" >
+                            <f:selectItems value="#{nRuleDomainController.itemsAvailableSelectOne}"
+                                           var="ruleTypeItem"
+                                           itemValue="#{ruleTypeItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateDsoSimpleRuleLabel_operand1}" for="operand1" />
+                        <p:selectOneMenu id="operand1" value="#{dsoSimpleRuleController.selected.operand1}" >
+                            <f:selectItems value="#{nRuleOperandController.itemsAvailableSelectOne}"
+                                           var="operand1Item"
+                                           itemValue="#{operand1Item}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateDsoSimpleRuleLabel_operand2}" for="operand2" />
+                        <p:selectOneMenu id="operand2" value="#{dsoSimpleRuleController.selected.operand2}" >
+                            <f:selectItems value="#{nRuleOperandController.itemsAvailableSelectOne}"
+                                           var="operand2Item"
+                                           itemValue="#{operand2Item}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{dsoSimpleRuleController.create}" value="#{bundle.Save}" update="display,:DsoSimpleRuleListForm:datalist,:growl" oncomplete="handleSubmit(args,'DsoSimpleRuleCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="DsoSimpleRuleCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

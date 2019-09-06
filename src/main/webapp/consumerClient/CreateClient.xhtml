@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <ui:define name="header">
+            <h:outputStylesheet library="css" name="integridt-main-style.css"/>
+        </ui:define>
+
+        <p:dialog id="ConsumerClientCreateDlg" widgetVar="ConsumerClientCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateConsumerClientTitle}">
+            <h:form id="ConsumerClientCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{consumerClientController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateConsumerClientLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{consumerClientController.selected.id}" title="#{bundle.CreateConsumerClientTitle_id}" required="true" requiredMessage="#{bundle.CreateConsumerClientRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.CreateConsumerClientLabel_fullName}" for="fullName" />
+                        <p:inputText id="fullName" value="#{consumerClientController.selected.fullName}" title="#{bundle.CreateConsumerClientTitle_fullName}" required="true" requiredMessage="#{bundle.CreateConsumerClientRequiredMessage_fullName}"/>
+                        <p:outputLabel value="#{bundle.CreateConsumerClientLabel_consumerType}" for="consumerType" />
+                        <p:inputText id="consumerType" value="#{consumerClientController.selected.consumerType}" title="#{bundle.CreateConsumerClientTitle_consumerType}" />
+                        <p:outputLabel value="#{bundle.CreateConsumerClientLabel_billingAddress}" for="billingAddress" />
+                        <p:inputText id="billingAddress" value="#{consumerClientController.selected.billingAddress}" title="#{bundle.CreateConsumerClientTitle_billingAddress}" />
+                        <p:outputLabel value="#{bundle.CreateConsumerClientLabel_email}" for="email" />
+                        <p:inputText id="email" value="#{consumerClientController.selected.email}" title="#{bundle.CreateConsumerClientTitle_email}" />
+                        <p:outputLabel value="#{bundle.CreateConsumerClientLabel_mainPhone}" for="mainPhone" />
+                        <p:inputText id="mainPhone" value="#{consumerClientController.selected.mainPhone}" title="#{bundle.CreateConsumerClientTitle_mainPhone}" />
+                        <p:outputLabel value="#{bundle.CreateConsumerClientLabel_createdOn}" for="createdOn" />
+                        <p:calendar id="createdOn" pattern="MM/dd/yyyy HH:mm:ss" value="#{consumerClientController.selected.createdOn}" title="#{bundle.EditConsumerClientTitle_createdOn}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateConsumerClientLabel_lastUpdatedOn}" for="lastUpdatedOn" />
+                        <p:calendar id="lastUpdatedOn" pattern="MM/dd/yyyy HH:mm:ss" value="#{consumerClientController.selected.lastUpdatedOn}" title="#{bundle.EditConsumerClientTitle_lastUpdatedOn}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateConsumerClientLabel_userId}" for="userId" />
+                        <p:selectOneMenu id="userId" value="#{consumerClientController.selected.userId}" required="true" requiredMessage="#{bundle.EditConsumerClientRequiredMessage_userId}">
+                            <f:selectItems value="#{usersController.itemsAvailableSelectOne}"
+                                           var="userIdItem"
+                                           itemValue="#{userIdItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{consumerClientController.create}" value="#{bundle.Save}" update="display,:ConsumerClientListForm:datalist,:growl" oncomplete="handleSubmit(args,'ConsumerClientCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ConsumerClientCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

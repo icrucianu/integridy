@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="OptimumClientEditDlg" widgetVar="OptimumClientEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditOptimumClientTitle}">
+            <h:form id="OptimumClientEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{optimumClientController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditOptimumClientLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{optimumClientController.selected.id}" title="#{bundle.EditOptimumClientTitle_id}" required="true" requiredMessage="#{bundle.EditOptimumClientRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.EditOptimumClientLabel_activePow}" for="activePow" />
+                        <p:inputText id="activePow" value="#{optimumClientController.selected.activePow}" title="#{bundle.EditOptimumClientTitle_activePow}" />
+                        <p:outputLabel value="#{bundle.EditOptimumClientLabel_co2}" for="co2" />
+                        <p:inputText id="co2" value="#{optimumClientController.selected.co2}" title="#{bundle.EditOptimumClientTitle_co2}" />
+                        <p:outputLabel value="#{bundle.EditOptimumClientLabel_consumedActivePow}" for="consumedActivePow" />
+                        <p:inputText id="consumedActivePow" value="#{optimumClientController.selected.consumedActivePow}" title="#{bundle.EditOptimumClientTitle_consumedActivePow}" />
+                        <p:outputLabel value="#{bundle.EditOptimumClientLabel_consumedReactivePow}" for="consumedReactivePow" />
+                        <p:inputText id="consumedReactivePow" value="#{optimumClientController.selected.consumedReactivePow}" title="#{bundle.EditOptimumClientTitle_consumedReactivePow}" />
+                        <p:outputLabel value="#{bundle.EditOptimumClientLabel_createdTime}" for="createdTime" />
+                        <p:calendar id="createdTime" pattern="MM/dd/yyyy HH:mm:ss" value="#{optimumClientController.selected.createdTime}" title="#{bundle.EditOptimumClientTitle_createdTime}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditOptimumClientLabel_dayCost}" for="dayCost" />
+                        <p:inputText id="dayCost" value="#{optimumClientController.selected.dayCost}" title="#{bundle.EditOptimumClientTitle_dayCost}" />
+                        <p:outputLabel value="#{bundle.EditOptimumClientLabel_deviceNumber}" for="deviceNumber" />
+                        <p:inputText id="deviceNumber" value="#{optimumClientController.selected.deviceNumber}" title="#{bundle.EditOptimumClientTitle_deviceNumber}" />
+                        <p:outputLabel value="#{bundle.EditOptimumClientLabel_downTime}" for="downTime" />
+                        <p:inputText id="downTime" value="#{optimumClientController.selected.downTime}" title="#{bundle.EditOptimumClientTitle_downTime}" />
+                        <p:outputLabel value="#{bundle.EditOptimumClientLabel_energyMismatch}" for="energyMismatch" />
+                        <p:inputText id="energyMismatch" value="#{optimumClientController.selected.energyMismatch}" title="#{bundle.EditOptimumClientTitle_energyMismatch}" />
+                        <p:outputLabel value="#{bundle.EditOptimumClientLabel_energyMismatchRatio}" for="energyMismatchRatio" />
+                        <p:inputText id="energyMismatchRatio" value="#{optimumClientController.selected.energyMismatchRatio}" title="#{bundle.EditOptimumClientTitle_energyMismatchRatio}" />
+                        <p:outputLabel value="#{bundle.EditOptimumClientLabel_nightCost}" for="nightCost" />
+                        <p:inputText id="nightCost" value="#{optimumClientController.selected.nightCost}" title="#{bundle.EditOptimumClientTitle_nightCost}" />
+                        <p:outputLabel value="#{bundle.EditOptimumClientLabel_saidi}" for="saidi" />
+                        <p:inputText id="saidi" value="#{optimumClientController.selected.saidi}" title="#{bundle.EditOptimumClientTitle_saidi}" />
+                        <p:outputLabel value="#{bundle.EditOptimumClientLabel_phaseVoltage}" for="phaseVoltage" />
+                        <p:inputText id="phaseVoltage" value="#{optimumClientController.selected.phaseVoltage}" title="#{bundle.EditOptimumClientTitle_phaseVoltage}" />
+                        <p:outputLabel value="#{bundle.EditOptimumClientLabel_reactivePow}" for="reactivePow" />
+                        <p:inputText id="reactivePow" value="#{optimumClientController.selected.reactivePow}" title="#{bundle.EditOptimumClientTitle_reactivePow}" />
+                        <p:outputLabel value="#{bundle.EditOptimumClientLabel_sendInterval}" for="sendInterval" />
+                        <p:inputText id="sendInterval" value="#{optimumClientController.selected.sendInterval}" title="#{bundle.EditOptimumClientTitle_sendInterval}" />
+                        <p:outputLabel value="#{bundle.EditOptimumClientLabel_thdd}" for="thdd" />
+                        <p:inputText id="thdd" value="#{optimumClientController.selected.thdd}" title="#{bundle.EditOptimumClientTitle_thdd}" />
+                        <p:outputLabel value="#{bundle.EditOptimumClientLabel_upTime}" for="upTime" />
+                        <p:inputText id="upTime" value="#{optimumClientController.selected.upTime}" title="#{bundle.EditOptimumClientTitle_upTime}" />
+                        <p:outputLabel value="#{bundle.EditOptimumClientLabel_voltageDeviation}" for="voltageDeviation" />
+                        <p:inputText id="voltageDeviation" value="#{optimumClientController.selected.voltageDeviation}" title="#{bundle.EditOptimumClientTitle_voltageDeviation}" />
+                        <p:outputLabel value="#{bundle.EditOptimumClientLabel_idx12hours}" for="idx12hours" />
+                        <p:inputText id="idx12hours" value="#{optimumClientController.selected.idx12hours}" title="#{bundle.EditOptimumClientTitle_idx12hours}" />
+                        <p:outputLabel value="#{bundle.EditOptimumClientLabel_idx15minutes}" for="idx15minutes" />
+                        <p:inputText id="idx15minutes" value="#{optimumClientController.selected.idx15minutes}" title="#{bundle.EditOptimumClientTitle_idx15minutes}" />
+                        <p:outputLabel value="#{bundle.EditOptimumClientLabel_idx1day}" for="idx1day" />
+                        <p:inputText id="idx1day" value="#{optimumClientController.selected.idx1day}" title="#{bundle.EditOptimumClientTitle_idx1day}" />
+                        <p:outputLabel value="#{bundle.EditOptimumClientLabel_idx1hour}" for="idx1hour" />
+                        <p:inputText id="idx1hour" value="#{optimumClientController.selected.idx1hour}" title="#{bundle.EditOptimumClientTitle_idx1hour}" />
+                        <p:outputLabel value="#{bundle.EditOptimumClientLabel_idx1month}" for="idx1month" />
+                        <p:inputText id="idx1month" value="#{optimumClientController.selected.idx1month}" title="#{bundle.EditOptimumClientTitle_idx1month}" />
+                        <p:outputLabel value="#{bundle.EditOptimumClientLabel_idx1week}" for="idx1week" />
+                        <p:inputText id="idx1week" value="#{optimumClientController.selected.idx1week}" title="#{bundle.EditOptimumClientTitle_idx1week}" />
+                        <p:outputLabel value="#{bundle.EditOptimumClientLabel_idx1year}" for="idx1year" />
+                        <p:inputText id="idx1year" value="#{optimumClientController.selected.idx1year}" title="#{bundle.EditOptimumClientTitle_idx1year}" />
+                        <p:outputLabel value="#{bundle.EditOptimumClientLabel_idx3month}" for="idx3month" />
+                        <p:inputText id="idx3month" value="#{optimumClientController.selected.idx3month}" title="#{bundle.EditOptimumClientTitle_idx3month}" />
+                        <p:outputLabel value="#{bundle.EditOptimumClientLabel_idx6hours}" for="idx6hours" />
+                        <p:inputText id="idx6hours" value="#{optimumClientController.selected.idx6hours}" title="#{bundle.EditOptimumClientTitle_idx6hours}" />
+                        <p:outputLabel value="#{bundle.EditOptimumClientLabel_idx6month}" for="idx6month" />
+                        <p:inputText id="idx6month" value="#{optimumClientController.selected.idx6month}" title="#{bundle.EditOptimumClientTitle_idx6month}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{optimumClientController.update}" value="#{bundle.Save}" update="display,:OptimumClientListForm:datalist,:growl" oncomplete="handleSubmit(args, 'OptimumClientEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="OptimumClientEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

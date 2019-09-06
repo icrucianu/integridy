@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListClientComplexRuleTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="ClientComplexRuleListForm">
+                <p:panel header="#{bundle.ListClientComplexRuleTitle}">
+                    <p:dataTable id="datalist" value="#{clientComplexRuleController.items}" var="item"
+                                 selectionMode="single" selection="#{clientComplexRuleController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.id}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListClientComplexRuleTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListClientComplexRuleTitle_ruleName}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.ruleName}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListClientComplexRuleTitle_ruleType}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.ruleType}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListClientComplexRuleTitle_rule1}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.rule1}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListClientComplexRuleTitle_rule2}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.rule2}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListClientComplexRuleTitle_operator}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.operator}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListClientComplexRuleTitle_createdOn}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.createdOn}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListClientComplexRuleTitle_lastUpdatedOn}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.lastUpdatedOn}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListClientComplexRuleTitle_validityStart}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.validityStart}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListClientComplexRuleTitle_validityEnd}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.validityEnd}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListClientComplexRuleTitle_clientId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.clientId}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{clientComplexRuleController.prepareCreate}" update=":ClientComplexRuleCreateForm" oncomplete="PF('ClientComplexRuleCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":ClientComplexRuleViewForm" oncomplete="PF('ClientComplexRuleViewDialog').show()" disabled="#{empty clientComplexRuleController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":ClientComplexRuleEditForm" oncomplete="PF('ClientComplexRuleEditDialog').show()" disabled="#{empty clientComplexRuleController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{clientComplexRuleController.destroy}" update=":growl,datalist" disabled="#{empty clientComplexRuleController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ConsumptionRecordViewDlg" widgetVar="ConsumptionRecordViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewConsumptionRecordTitle}">
+            <h:form id="ConsumptionRecordViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{consumptionRecordController.selected != null}">
+                        <h:outputText value="#{bundle.ViewConsumptionRecordLabel_id}"/>
+                        <h:outputText value="#{consumptionRecordController.selected.id}" title="#{bundle.ViewConsumptionRecordTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewConsumptionRecordLabel_activePow}"/>
+                        <h:outputText value="#{consumptionRecordController.selected.activePow}" title="#{bundle.ViewConsumptionRecordTitle_activePow}"/>
+                        <h:outputText value="#{bundle.ViewConsumptionRecordLabel_co2}"/>
+                        <h:outputText value="#{consumptionRecordController.selected.co2}" title="#{bundle.ViewConsumptionRecordTitle_co2}"/>
+                        <h:outputText value="#{bundle.ViewConsumptionRecordLabel_consumedActivePow}"/>
+                        <h:outputText value="#{consumptionRecordController.selected.consumedActivePow}" title="#{bundle.ViewConsumptionRecordTitle_consumedActivePow}"/>
+                        <h:outputText value="#{bundle.ViewConsumptionRecordLabel_consumedReactivePow}"/>
+                        <h:outputText value="#{consumptionRecordController.selected.consumedReactivePow}" title="#{bundle.ViewConsumptionRecordTitle_consumedReactivePow}"/>
+                        <h:outputText value="#{bundle.ViewConsumptionRecordLabel_createdTime}"/>
+                        <h:outputText value="#{consumptionRecordController.selected.createdTime}" title="#{bundle.ViewConsumptionRecordTitle_createdTime}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewConsumptionRecordLabel_dayCost}"/>
+                        <h:outputText value="#{consumptionRecordController.selected.dayCost}" title="#{bundle.ViewConsumptionRecordTitle_dayCost}"/>
+                        <h:outputText value="#{bundle.ViewConsumptionRecordLabel_deviceNumber}"/>
+                        <h:outputText value="#{consumptionRecordController.selected.deviceNumber}" title="#{bundle.ViewConsumptionRecordTitle_deviceNumber}"/>
+                        <h:outputText value="#{bundle.ViewConsumptionRecordLabel_downTime}"/>
+                        <h:outputText value="#{consumptionRecordController.selected.downTime}" title="#{bundle.ViewConsumptionRecordTitle_downTime}"/>
+                        <h:outputText value="#{bundle.ViewConsumptionRecordLabel_energyMismatch}"/>
+                        <h:outputText value="#{consumptionRecordController.selected.energyMismatch}" title="#{bundle.ViewConsumptionRecordTitle_energyMismatch}"/>
+                        <h:outputText value="#{bundle.ViewConsumptionRecordLabel_energyMismatchRatio}"/>
+                        <h:outputText value="#{consumptionRecordController.selected.energyMismatchRatio}" title="#{bundle.ViewConsumptionRecordTitle_energyMismatchRatio}"/>
+                        <h:outputText value="#{bundle.ViewConsumptionRecordLabel_nightCost}"/>
+                        <h:outputText value="#{consumptionRecordController.selected.nightCost}" title="#{bundle.ViewConsumptionRecordTitle_nightCost}"/>
+                        <h:outputText value="#{bundle.ViewConsumptionRecordLabel_saidi}"/>
+                        <h:outputText value="#{consumptionRecordController.selected.saidi}" title="#{bundle.ViewConsumptionRecordTitle_saidi}"/>
+                        <h:outputText value="#{bundle.ViewConsumptionRecordLabel_phaseVoltage}"/>
+                        <h:outputText value="#{consumptionRecordController.selected.phaseVoltage}" title="#{bundle.ViewConsumptionRecordTitle_phaseVoltage}"/>
+                        <h:outputText value="#{bundle.ViewConsumptionRecordLabel_reactivePow}"/>
+                        <h:outputText value="#{consumptionRecordController.selected.reactivePow}" title="#{bundle.ViewConsumptionRecordTitle_reactivePow}"/>
+                        <h:outputText value="#{bundle.ViewConsumptionRecordLabel_sendInterval}"/>
+                        <h:outputText value="#{consumptionRecordController.selected.sendInterval}" title="#{bundle.ViewConsumptionRecordTitle_sendInterval}"/>
+                        <h:outputText value="#{bundle.ViewConsumptionRecordLabel_thdd}"/>
+                        <h:outputText value="#{consumptionRecordController.selected.thdd}" title="#{bundle.ViewConsumptionRecordTitle_thdd}"/>
+                        <h:outputText value="#{bundle.ViewConsumptionRecordLabel_upTime}"/>
+                        <h:outputText value="#{consumptionRecordController.selected.upTime}" title="#{bundle.ViewConsumptionRecordTitle_upTime}"/>
+                        <h:outputText value="#{bundle.ViewConsumptionRecordLabel_voltageDeviation}"/>
+                        <h:outputText value="#{consumptionRecordController.selected.voltageDeviation}" title="#{bundle.ViewConsumptionRecordTitle_voltageDeviation}"/>
+                        <h:outputText value="#{bundle.ViewConsumptionRecordLabel_idx12hours}"/>
+                        <h:outputText value="#{consumptionRecordController.selected.idx12hours}" title="#{bundle.ViewConsumptionRecordTitle_idx12hours}"/>
+                        <h:outputText value="#{bundle.ViewConsumptionRecordLabel_idx15minutes}"/>
+                        <h:outputText value="#{consumptionRecordController.selected.idx15minutes}" title="#{bundle.ViewConsumptionRecordTitle_idx15minutes}"/>
+                        <h:outputText value="#{bundle.ViewConsumptionRecordLabel_idx1day}"/>
+                        <h:outputText value="#{consumptionRecordController.selected.idx1day}" title="#{bundle.ViewConsumptionRecordTitle_idx1day}"/>
+                        <h:outputText value="#{bundle.ViewConsumptionRecordLabel_idx1hour}"/>
+                        <h:outputText value="#{consumptionRecordController.selected.idx1hour}" title="#{bundle.ViewConsumptionRecordTitle_idx1hour}"/>
+                        <h:outputText value="#{bundle.ViewConsumptionRecordLabel_idx1month}"/>
+                        <h:outputText value="#{consumptionRecordController.selected.idx1month}" title="#{bundle.ViewConsumptionRecordTitle_idx1month}"/>
+                        <h:outputText value="#{bundle.ViewConsumptionRecordLabel_idx1week}"/>
+                        <h:outputText value="#{consumptionRecordController.selected.idx1week}" title="#{bundle.ViewConsumptionRecordTitle_idx1week}"/>
+                        <h:outputText value="#{bundle.ViewConsumptionRecordLabel_idx1year}"/>
+                        <h:outputText value="#{consumptionRecordController.selected.idx1year}" title="#{bundle.ViewConsumptionRecordTitle_idx1year}"/>
+                        <h:outputText value="#{bundle.ViewConsumptionRecordLabel_idx3month}"/>
+                        <h:outputText value="#{consumptionRecordController.selected.idx3month}" title="#{bundle.ViewConsumptionRecordTitle_idx3month}"/>
+                        <h:outputText value="#{bundle.ViewConsumptionRecordLabel_idx6hours}"/>
+                        <h:outputText value="#{consumptionRecordController.selected.idx6hours}" title="#{bundle.ViewConsumptionRecordTitle_idx6hours}"/>
+                        <h:outputText value="#{bundle.ViewConsumptionRecordLabel_idx6month}"/>
+                        <h:outputText value="#{consumptionRecordController.selected.idx6month}" title="#{bundle.ViewConsumptionRecordTitle_idx6month}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="ConsumptionRecordViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

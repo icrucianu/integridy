@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DsoSimpleRuleViewDlg" widgetVar="DsoSimpleRuleViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewDsoSimpleRuleTitle}">
+            <h:form id="DsoSimpleRuleViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{dsoSimpleRuleController.selected != null}">
+                        <h:outputText value="#{bundle.ViewDsoSimpleRuleLabel_id}"/>
+                        <h:outputText value="#{dsoSimpleRuleController.selected.id}" title="#{bundle.ViewDsoSimpleRuleTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewDsoSimpleRuleLabel_ruleName}"/>
+                        <h:outputText value="#{dsoSimpleRuleController.selected.ruleName}" title="#{bundle.ViewDsoSimpleRuleTitle_ruleName}"/>
+                        <h:outputText value="#{bundle.ViewDsoSimpleRuleLabel_operator}"/>
+                        <h:outputText value="#{dsoSimpleRuleController.selected.operator}" title="#{bundle.ViewDsoSimpleRuleTitle_operator}"/>
+                        <h:outputText value="#{bundle.ViewDsoSimpleRuleLabel_vald1}"/>
+                        <h:outputText value="#{dsoSimpleRuleController.selected.vald1}" title="#{bundle.ViewDsoSimpleRuleTitle_vald1}"/>
+                        <h:outputText value="#{bundle.ViewDsoSimpleRuleLabel_vald2}"/>
+                        <h:outputText value="#{dsoSimpleRuleController.selected.vald2}" title="#{bundle.ViewDsoSimpleRuleTitle_vald2}"/>
+                        <h:outputText value="#{bundle.ViewDsoSimpleRuleLabel_createdOn}"/>
+                        <h:outputText value="#{dsoSimpleRuleController.selected.createdOn}" title="#{bundle.ViewDsoSimpleRuleTitle_createdOn}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewDsoSimpleRuleLabel_lastUpdatedOn}"/>
+                        <h:outputText value="#{dsoSimpleRuleController.selected.lastUpdatedOn}" title="#{bundle.ViewDsoSimpleRuleTitle_lastUpdatedOn}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewDsoSimpleRuleLabel_validityStart}"/>
+                        <h:outputText value="#{dsoSimpleRuleController.selected.validityStart}" title="#{bundle.ViewDsoSimpleRuleTitle_validityStart}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewDsoSimpleRuleLabel_validityEnd}"/>
+                        <h:outputText value="#{dsoSimpleRuleController.selected.validityEnd}" title="#{bundle.ViewDsoSimpleRuleTitle_validityEnd}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewDsoSimpleRuleLabel_numberOfRegistrations}"/>
+                        <h:outputText value="#{dsoSimpleRuleController.selected.numberOfRegistrations}" title="#{bundle.ViewDsoSimpleRuleTitle_numberOfRegistrations}"/>
+                        <h:outputText value="#{bundle.ViewDsoSimpleRuleLabel_startCronFormat}"/>
+                        <h:outputText value="#{dsoSimpleRuleController.selected.startCronFormat}" title="#{bundle.ViewDsoSimpleRuleTitle_startCronFormat}"/>
+                        <h:outputText value="#{bundle.ViewDsoSimpleRuleLabel_endCronFormat}"/>
+                        <h:outputText value="#{dsoSimpleRuleController.selected.endCronFormat}" title="#{bundle.ViewDsoSimpleRuleTitle_endCronFormat}"/>
+                        <h:outputText value="#{bundle.ViewDsoSimpleRuleLabel_clientId}"/>
+                        <h:outputText value="#{dsoSimpleRuleController.selected.clientId}" title="#{bundle.ViewDsoSimpleRuleTitle_clientId}"/>
+                        <h:outputText value="#{bundle.ViewDsoSimpleRuleLabel_deviceId}"/>
+                        <h:outputText value="#{dsoSimpleRuleController.selected.deviceId}" title="#{bundle.ViewDsoSimpleRuleTitle_deviceId}"/>
+                        <h:outputText value="#{bundle.ViewDsoSimpleRuleLabel_severity}"/>
+                        <h:outputText value="#{dsoSimpleRuleController.selected.severity}" title="#{bundle.ViewDsoSimpleRuleTitle_severity}"/>
+                        <h:outputText value="#{bundle.ViewDsoSimpleRuleLabel_message}"/>
+                        <h:outputText value="#{dsoSimpleRuleController.selected.message}" title="#{bundle.ViewDsoSimpleRuleTitle_message}"/>
+                        <h:outputText value="#{bundle.ViewDsoSimpleRuleLabel_ruleType}"/>
+                        <h:outputText value="#{dsoSimpleRuleController.selected.ruleType}" title="#{bundle.ViewDsoSimpleRuleTitle_ruleType}"/>
+                        <h:outputText value="#{bundle.ViewDsoSimpleRuleLabel_operand1}"/>
+                        <h:outputText value="#{dsoSimpleRuleController.selected.operand1}" title="#{bundle.ViewDsoSimpleRuleTitle_operand1}"/>
+                        <h:outputText value="#{bundle.ViewDsoSimpleRuleLabel_operand2}"/>
+                        <h:outputText value="#{dsoSimpleRuleController.selected.operand2}" title="#{bundle.ViewDsoSimpleRuleTitle_operand2}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="DsoSimpleRuleViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

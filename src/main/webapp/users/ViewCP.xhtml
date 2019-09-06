@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ConsumptionPointViewDlg" widgetVar="ConsumptionPointViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewConsumptionPointTitle}">
+            <h:form id="ConsumptionPointViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{consumerClientController.selectedConsumptionPoint != null}">
+                        <h:outputText value="#{bundle.ViewConsumptionPointLabel_id}"/>
+                        <h:outputText value="#{consumerClientController.selectedConsumptionPoint.id}" title="#{bundle.ViewConsumptionPointTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewConsumptionPointLabel_pointName}"/>
+                        <h:outputText value="#{consumerClientController.selectedConsumptionPoint.pointName}" title="#{bundle.ViewConsumptionPointTitle_pointName}"/>
+                        <h:outputText value="#{bundle.ViewConsumptionPointLabel_pointType}"/>
+                        <h:outputText value="#{consumerClientController.selectedConsumptionPoint.pointType}" title="#{bundle.ViewConsumptionPointTitle_pointType}"/>
+                        <h:outputText value="#{bundle.ViewConsumptionPointLabel_address}"/>
+                        <h:outputText value="#{consumerClientController.selectedConsumptionPoint.address}" title="#{bundle.ViewConsumptionPointTitle_address}"/>
+                        <h:outputText value="#{bundle.ViewConsumptionPointLabel_validityStart}"/>
+                        <h:outputText value="#{consumerClientController.selectedConsumptionPoint.validityStart}" title="#{bundle.ViewConsumptionPointTitle_validityStart}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewConsumptionPointLabel_validityEnd}"/>
+                        <h:outputText value="#{consumerClientController.selectedConsumptionPoint.validityEnd}" title="#{bundle.ViewConsumptionPointTitle_validityEnd}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewConsumptionPointLabel_clientId}"/>
+                        <h:outputText value="#{consumerClientController.selectedConsumptionPoint.clientId}" title="#{bundle.ViewConsumptionPointTitle_clientId}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="ConsumptionPointViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

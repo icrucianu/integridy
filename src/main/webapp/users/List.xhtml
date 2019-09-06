@@ -1,0 +1,496 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+
+
+    <ui:composition template="/mainframe.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListUsersTitle}"></h:outputText>
+            <h:outputStylesheet library="css" name="bootstrap.css"/>
+            <h:outputStylesheet library="css" name="tabstyle.css"/>
+            <h:outputStylesheet library="css" name="integridy-main-style.css"/>
+        </ui:define>
+
+        <ui:define name="body">
+            <div class="tableContainer">
+                <div id="navTab">
+                    <ul class="nav nav-pills">
+                        <li class="active">
+                            <a href="#registeredUsers" class="tabHeader" data-toggle="tab">USERS</a>
+                        </li>
+                        <li>
+                            <a href="#registeredClients" class="tabHeader" data-toggle="tab">CONSUMERS</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content clearfix">
+                        <div class="tab-pane active" id="registeredUsers">
+
+                            <h:form id="UsersListForm">
+                                <div class="integridy-datatable-wrapper">
+
+                                    <div class="integridy-datable-header">
+                                        <span> <h:outputText value="Users list"></h:outputText></span>
+                                    </div>
+                                    <br/>
+                                    <p:panel >
+                                        <f:facet name="header">
+                                            <p:commandButton id="toggler" type="button" value="Columns" style="float:right" icon="ui-icon-calculator" />
+                                            <p:columnToggler datasource="datalist" trigger="toggler" />
+                                        </f:facet>
+
+                                        <p:dataTable id="datalist" value="#{UsersView.usersList}" var="item"
+                                                     selectionMode="single" selection="#{usersController.selected}"
+                                                     paginator="true"
+                                                     rowKey="#{item.id}"
+                                                     rows="20"
+                                                     
+                                                     rowsPerPageTemplate="10,20,30,40,50"
+                                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} Exporters"
+                                                     paginatorPosition="bottom"
+                                                     styleClass="integridy-datatable"
+                                                     scrollable="true"
+                                                    
+                                                     >
+
+                                            <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                                            <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+                                            <f:facet name="Exporters">
+                                                       <h:commandLink>
+                                                          <p:graphicImage library="images" name="excel.png"/>
+                                                          <p:dataExporter type="xls" target="datalist" fileName="#{usersController.fileName}" />
+                                                       </h:commandLink>
+
+                                                       <h:commandLink>
+                                                           <p:graphicImage library="images" name="pdf.png" width="24"/>
+                                                           <p:dataExporter type="pdf" target="datalist" fileName="#{usersController.fileName}"/>
+                                                       </h:commandLink>
+
+                                                       <h:commandLink>
+                                                           <p:graphicImage library="images" name="csv.png" width="24"/>
+                                                           <p:dataExporter type="csv" target="datalist" fileName="#{usersController.fileNam}" />
+                                                       </h:commandLink>
+
+                                                       <h:commandLink>
+                                                           <p:graphicImage library="images" name="xml.png" width="24"/>
+                                                           <p:dataExporter type="xml" target="datalist" fileName="#{usersController.fileName}" />
+                                                       </h:commandLink>
+                                               </f:facet>
+                                            <p:column sortBy="#{item.firstName}" filterBy="#{item.firstName}" >
+                                                <f:facet name="header">
+                                                    <h:outputText  value="#{bundle.ListUsersTitle_firstName}"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.firstName}"/>
+                                            </p:column>
+                                            
+                                            <p:column sortBy="#{item.lastName}" filterBy="#{item.lastName}">
+                                                <f:facet name="header">
+                                                    <h:outputText value="#{bundle.ListUsersTitle_lastName}"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.lastName}"/>
+                                            </p:column>        
+                                            
+                                            <p:column visible="false" >
+                                                <f:facet name="header">
+                                                    <h:outputText value="#{bundle.ListUsersTitle_id}"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.id}"/>
+                                            </p:column>
+                                            <p:column visible="false" >
+                                                <f:facet name="header">
+                                                    <h:outputText value="#{bundle.ListUsersTitle_version}"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.version}"/>
+                                            </p:column>
+                                            <p:column visible="false" >
+                                                <f:facet name="header">
+                                                    <h:outputText value="#{bundle.ListUsersTitle_createdBy}"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.createdBy}"/>
+                                            </p:column>
+                                            <p:column visible="false" >
+                                                <f:facet name="header">
+                                                    <h:outputText value="#{bundle.ListUsersTitle_creationDate}"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.creationDate}">
+                                                    <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                                                </h:outputText>
+                                            </p:column>
+                                            <p:column visible="false" >
+                                                <f:facet name="header">
+                                                    <h:outputText value="#{bundle.ListUsersTitle_modificationDate}"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.modificationDate}">
+                                                    <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                                                </h:outputText>
+                                            </p:column>
+                                            <p:column visible="false" >
+                                                <f:facet name="header">
+                                                    <h:outputText value="#{bundle.ListUsersTitle_modifiedBy}"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.modifiedBy}"/>
+                                            </p:column>
+                                            <p:column  sortBy="#{item.email}" filterBy="#{item.email}">
+                                                <f:facet name="header">
+                                                    <h:outputText value="#{bundle.ListUsersTitle_email}" style="text-align: left;"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.email}"/>
+                                            </p:column>
+                                            <p:column visible="false" >
+                                                <f:facet name="header">
+                                                    <h:outputText value="#{bundle.ListUsersTitle_enabled}"/>
+                                                </f:facet>
+                                                <p:selectBooleanCheckbox value="#{item.enabled}" disabled="true"/>
+                                            </p:column>
+
+                                            <p:column sortBy="#{item.username}" filterBy="#{item.username}">
+                                                <f:facet name="header">
+                                                    <h:outputText value="#{bundle.ListUsersTitle_username}" style="text-align: left;"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.username}"/>
+                                            </p:column>
+                                            <p:column visible="false">
+                                                <f:facet name="header">
+                                                    <h:outputText value="#{bundle.ListUsersTitle_active}"/>
+                                                </f:facet>
+                                                <p:selectBooleanCheckbox value="#{item.active}" disabled="true"/>
+                                            </p:column>
+                                            <p:column >
+                                                <f:facet name="header">
+                                                    <h:outputText value="#{bundle.ListUsersTitle_endDate}"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.endDate}">
+                                                    <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                                                </h:outputText>
+                                            </p:column>
+                                            <p:column >
+                                                <f:facet name="header">
+                                                    <h:outputText value="#{bundle.ListUsersTitle_startDate}"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.startDate}">
+                                                    <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                                                </h:outputText>
+                                            </p:column>
+                                            <p:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="#{bundle.ListUsersTitle_role}"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.role}"/>
+                                            </p:column>
+                                            <f:facet name="footer">
+                                                <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{usersController.prepareCreate}" update=":UsersCreateForm" oncomplete="PF('UsersCreateDialog').show()"/>
+                                                <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":UsersViewForm" oncomplete="PF('UsersViewDialog').show()" disabled="#{empty usersController.selected}"/>
+                                                <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":UsersEditForm" oncomplete="PF('UsersEditDialog').show()" disabled="#{empty usersController.selected}"/>
+                                                <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{usersController.destroy}" update=":growl,datalist" disabled="#{empty usersController.selected}"/>
+                                            </f:facet>
+                                        </p:dataTable>
+
+                                    </p:panel>
+                                </div>
+                            </h:form>
+                        </div>
+                        <div class="tab-pane" id="registeredClients">
+
+                            <h:form id="ConsumerClientListForm">
+
+                                <div class="integridy-datatable-wrapper">
+
+                                    <div class="integridy-datable-header">
+                                        <span> <h:outputText value="Consumers list"></h:outputText></span>
+                                    </div>
+                                    <p:panel>
+                                        <f:facet name="header">
+                                            <p:commandButton id="toggler" type="button" value="Columns" style="float:right" icon="ui-icon-calculator" />
+                                            <p:columnToggler datasource="datalistClient" trigger="toggler" />
+                                        </f:facet>
+
+                                        <p:dataTable id="datalistClient" value="#{ConsumerClientView.consumerClientList}" var="item"
+                                                     selectionMode="single" selection="#{consumerClientController.selected}"
+                                                     rowKey="#{item.id}"
+                                                     rows="10"
+                                                     paginator="true"
+                                                     rowsPerPageTemplate="10,20,30,40,50"
+                                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} Exporters"
+                                                     styleClass="integridy-datatable"
+                                                     paginatorPosition="bottom"
+                                                     resizableColumns="true"
+                                                     liveResize="true"
+                                                     >
+
+                                            <p:ajax event="rowSelect"  listener="#{consumerClientController.onSelectClient()}" update=":ConsumerClientListForm:panelDevices :ConsumerClientListForm:datalistConsumptionPoint  :ConsumerClientListForm:panelConsumptionPoint :ConsumerClientListForm:panelSmartMeter createClientButton viewClientButton editClientButton deleteClientButton"/>
+                                            <p:ajax event="rowUnselect" listener="#{consumerClientController.onUnselectClient()}" update=":ConsumerClientListForm:panelDevices createClientButton viewClientButton editClientButton deleteClientButton :ConsumerClientListForm:panelSmartMeter :ConsumerClientListForm:panelConsumptionPoint"/>
+                                            
+                                            
+                                            <f:facet name="Exporters">
+                                                       <h:commandLink>
+                                                          <p:graphicImage library="images" name="excel.png"/>
+                                                          <p:dataExporter type="xls" target="datalistClient" fileName="#{consumerClientController.fileName}" />
+                                                       </h:commandLink>
+
+                                                       <h:commandLink>
+                                                           <p:graphicImage library="images" name="pdf.png" width="24"/>
+                                                           <p:dataExporter type="pdf" target="datalistClient" fileName="#{consumerClientController.fileName}"/>
+                                                       </h:commandLink>
+
+                                                       <h:commandLink>
+                                                           <p:graphicImage library="images" name="csv.png" width="24"/>
+                                                           <p:dataExporter type="csv" target="datalistClient" fileName="#{consumerClientController.fileNam}" />
+                                                       </h:commandLink>
+
+                                                       <h:commandLink>
+                                                           <p:graphicImage library="images" name="xml.png" width="24"/>
+                                                           <p:dataExporter type="xml" target="datalistClient" fileName="#{consumerClientController.fileName}" />
+                                                       </h:commandLink>
+                                               </f:facet>                                            
+                                            <p:column sortBy="#{item.fullName}" filterBy="#{item.fullName}"  filterMatchMode="contains">
+                                                <f:facet name="header">
+                                                    <h:outputText value="#{bundle.ListConsumerClientTitle_fullName}"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.fullName}"/>
+                                            </p:column>
+                                            <p:column sortBy="#{item.consumerType}" filterBy="#{item.consumerType}"  filterMatchMode="contains">
+                                                <f:facet name="header">
+                                                    <h:outputText value="#{bundle.ListConsumerClientTitle_consumerType}"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.consumerType}"/>
+                                            </p:column>
+                                            <p:column sortBy="#{item.billingAddress}" filterBy="#{item.billingAddress}"  filterMatchMode="contains">
+                                                <f:facet name="header">
+                                                    <h:outputText value="#{bundle.ListConsumerClientTitle_billingAddress}"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.billingAddress}"/>
+                                            </p:column>
+                                            <p:column sortBy="#{item.email}" filterBy="#{item.email}"  filterMatchMode="contains">
+                                                <f:facet name="header">
+                                                    <h:outputText value="#{bundle.ListConsumerClientTitle_email}"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.email}"/>
+                                            </p:column>
+                                            <p:column filterBy="#{item.mainPhone}"  filterMatchMode="contains">
+                                                <f:facet name="header">
+                                                    <h:outputText value="#{bundle.ListConsumerClientTitle_mainPhone}"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.mainPhone}"/>
+                                            </p:column>
+                                            <p:column visible="false">
+                                                <f:facet name="header">
+                                                    <h:outputText value="#{bundle.ListConsumerClientTitle_createdOn}"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.createdOn}">
+                                                    <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                                                </h:outputText>
+                                            </p:column>
+                                            <p:column visible="false">
+                                                <f:facet name="header">
+                                                    <h:outputText value="#{bundle.ListConsumerClientTitle_lastUpdatedOn}"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.lastUpdatedOn}">
+                                                    <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                                                </h:outputText>
+                                            </p:column>
+                                            <p:column visible="false" sortBy="#{item.userId}" filterBy="#{item.userId}"  filterMatchMode="contains">
+                                                <f:facet name="header">
+                                                    <h:outputText value="#{bundle.ListConsumerClientTitle_userId}"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.userId}"/>
+                                            </p:column>
+                                            <f:facet name="footer">
+                                                <p:commandButton id="createClientButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{consumerClientController.prepareCreate}" update=":ConsumerClientCreateForm" oncomplete="PF('ConsumerClientCreateDialog').show()"/>
+                                                <p:commandButton id="viewClientButton"   icon="ui-icon-search" value="#{bundle.View}" update=":ConsumerClientViewForm" oncomplete="PF('ConsumerClientViewDialog').show()" disabled="#{empty consumerClientController.selected}"/>
+                                                <p:commandButton id="editClientButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":ConsumerClientEditForm" oncomplete="PF('ConsumerClientEditDialog').show()" disabled="#{empty consumerClientController.selected}"/>
+                                                <p:commandButton id="deleteClientButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{consumerClientController.destroy}" update=":growl,datalistClient" disabled="#{empty consumerClientController.selected}"/>
+                                            </f:facet>
+                                        </p:dataTable>
+
+                                    </p:panel>
+                                </div>
+
+                                <p:panel id="panelDevices">
+                                    <div class="#{(consumerClientController.selected==null)? none : 'integridy-datatable-wrapper'}"  >
+
+                                        <p:panel id="panelConsumptionPoint"   rendered="#{consumerClientController.selected!=null}" style="empty-cells: hide" >
+                                            <div class="integridy-datable-header">
+                                                <span> <h:outputText value="Consumption Points"></h:outputText></span>
+                                            </div>
+                                            <p:dataTable id="datalistConsumptionPoint" 
+                                                         value="#{consumerClientController.clientConsumptionPointList}" var="item"
+                                                         selectionMode="single" 
+                                                         selection="#{consumerClientController.selectedConsumptionPoint}"
+                                                         paginator="true"
+                                                         rowKey="#{item.id}"
+                                                         rows="10"
+                                                         rendered="#{consumerClientController.selected!=null}"
+                                                         paginatorPosition="bottom"
+                                                         rowsPerPageTemplate="10,20,30,40,50"
+                                                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
+                                                         styleClass="integridy-datatable"
+                                                         resizableColumns="true"
+                                                         liveResize="true"
+                                                         >
+                                                <p:ajax event="rowSelect"  listener="#{consumerClientController.onSelectConsumptionPoint()}" update=":ConsumerClientListForm:panelDevices :ConsumerClientListForm:datalistSmartMeter :ConsumerClientListForm:panelSmartMeter"/>         
+                                                <p:ajax event="rowUnselect"  update=":ConsumerClientListForm:panelDevices :ConsumerClientListForm :ConsumerClientListForm:datalistSmartMeter :ConsumerClientListForm:panelSmartMeter"/>         
+                                                <p:column>
+                                                    <f:facet name="header">
+                                                        <h:outputText value="#{bundle.ListConsumptionPointTitle_id}"/>
+                                                    </f:facet>
+                                                    <h:outputText value="#{item.id}"/>
+                                                </p:column>
+                                                <p:column>
+                                                    <f:facet name="header">
+                                                        <h:outputText value="#{bundle.ListConsumptionPointTitle_pointName}"/>
+                                                    </f:facet>
+                                                    <h:outputText value="#{item.pointName}"/>
+                                                </p:column>
+                                                <p:column>
+                                                    <f:facet name="header">
+                                                        <h:outputText value="#{bundle.ListConsumptionPointTitle_pointType}"/>
+                                                    </f:facet>
+                                                    <h:outputText value="#{item.pointType}"/>
+                                                </p:column>
+                                                <p:column>
+                                                    <f:facet name="header">
+                                                        <h:outputText value="#{bundle.ListConsumptionPointTitle_address}"/>
+                                                    </f:facet>
+                                                    <h:outputText value="#{item.address}"/>
+                                                </p:column>
+                                                <p:column>
+                                                    <f:facet name="header">
+                                                        <h:outputText value="#{bundle.ListConsumptionPointTitle_validityStart}"/>
+                                                    </f:facet>
+                                                    <h:outputText value="#{item.validityStart}">
+                                                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                                                    </h:outputText>
+                                                </p:column>
+                                                <p:column>
+                                                    <f:facet name="header">
+                                                        <h:outputText value="#{bundle.ListConsumptionPointTitle_validityEnd}"/>
+                                                    </f:facet>
+                                                    <h:outputText value="#{item.validityEnd}">
+                                                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                                                    </h:outputText>
+                                                </p:column>
+                                                <p:column>
+                                                    <f:facet name="header">
+                                                        <h:outputText value="#{bundle.ListConsumptionPointTitle_clientId}"/>
+                                                    </f:facet>
+                                                    <h:outputText value="#{item.clientId}"/>
+                                                </p:column>
+                                                <f:facet name="footer">
+                                                    <p:commandButton id="createCPButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{consumerClientController.prepareCreateConsumptionPoint()}" update=":ConsumptionPointCreateForm" oncomplete="PF('ConsumptionPointCreateDialog').show()"/>
+                                                    <p:commandButton id="viewCPButton"   icon="ui-icon-search" value="#{bundle.View}" update=":ConsumptionPointViewForm" oncomplete="PF('ConsumptionPointViewDialog').show()" disabled="#{empty consumerClientController.selectedConsumptionPoint}"/>
+                                                    <p:commandButton id="editCPButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":ConsumptionPointEditForm" oncomplete="PF('ConsumptionPointEditDialog').show()" disabled="#{empty consumerClientController.selectedConsumptionPoint}"/>
+                                                    <p:commandButton id="deleteCPButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{consumerClientController.destroyConsumptionPoint()}" update=":growl,:ConsumerClientListForm:panelDevices" disabled="#{empty consumerClientController.selectedConsumptionPoint}"/>
+                                                </f:facet>
+                                            </p:dataTable>
+                                        </p:panel>
+                                        <!--                                    </div>
+                                                                             <div class="integridy-datatable-wrapper">-->
+
+
+                                        <p:panel id="panelSmartMeter" rendered="#{consumerClientController.selected!=null and consumerClientController.selectedConsumptionPoint!=null}">
+                                            <div class="integridy-datable-header">
+                                                <span> <h:outputText value="Smart Sockets"></h:outputText></span>
+                                            </div>
+
+                                            <p:dataTable id="datalistSmartMeter" value="#{consumerClientController.smartMeterList}" var="item"
+                                                         selectionMode="single" selection="#{consumerClientController.selectedSmartMeter}"
+                                                         paginator="true"
+                                                         rowKey="#{item.id}"
+                                                         rows="10"
+                                                         rendered="#{consumerClientController.selected!=null and consumerClientController.selectedConsumptionPoint!=null}"
+                                                         paginatorPosition="bottom"
+                                                         rowsPerPageTemplate="10,20,30,40,50"
+                                                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
+                                                         styleClass="integridy-datatable"
+                                                         resizableColumns="true"
+                                                         liveResize="true"
+                                                         >
+
+                                                <p:ajax event="rowSelect"   update=" createSMButton viewSMButton editSMButton deleteSMButton" />         
+                                                <p:ajax event="rowUnselect"  update="createSMButton viewSMButton editSMButton deleteSMButton"/>   
+                                                <p:column>
+                                                    <f:facet name="header">
+                                                        <h:outputText value="#{bundle.ListSmartMeterTitle_id}"/>
+                                                    </f:facet>
+                                                    <h:outputText value="#{item.id}"/>
+                                                </p:column>
+                                                <p:column>
+                                                    <f:facet name="header">
+                                                        <h:outputText value="#{bundle.ListSmartMeterTitle_deviceName}"/>
+                                                    </f:facet>
+                                                    <h:outputText value="#{item.deviceName}"/>
+                                                </p:column>
+                                                <p:column>
+                                                    <f:facet name="header">
+                                                        <h:outputText value="#{bundle.ListSmartMeterTitle_serialNo}"/>
+                                                    </f:facet>
+                                                    <h:outputText value="#{item.serialNo}"/>
+                                                </p:column>
+                                                <p:column>
+                                                    <f:facet name="header">
+                                                        <h:outputText value="#{bundle.ListSmartMeterTitle_deviceType}"/>
+                                                    </f:facet>
+                                                    <h:outputText value="#{item.deviceType}"/>
+                                                </p:column>
+                                                <p:column>
+                                                    <f:facet name="header">
+                                                        <h:outputText value="#{bundle.ListSmartMeterTitle_validityFrom}"/>
+                                                    </f:facet>
+                                                    <h:outputText value="#{item.validityFrom}">
+                                                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                                                    </h:outputText>
+                                                </p:column>
+                                                <p:column>
+                                                    <f:facet name="header">
+                                                        <h:outputText value="#{bundle.ListSmartMeterTitle_validityTo}"/>
+                                                    </f:facet>
+                                                    <h:outputText value="#{item.validityTo}">
+                                                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                                                    </h:outputText>
+                                                </p:column>
+                                                <p:column>
+                                                    <f:facet name="header">
+                                                        <h:outputText value="#{bundle.ListSmartMeterTitle_consumptionPointId}"/>
+                                                    </f:facet>
+                                                    <h:outputText value="#{item.consumptionPointId}"/>
+                                                </p:column>
+                                                <f:facet name="footer">
+                                                    <p:commandButton id="createSMButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{consumerClientController.prepareCreateSmartMeter()}" update=":SmartMeterCreateForm" oncomplete="PF('SmartMeterCreateDialog').show()"/>
+                                                    <p:commandButton id="viewSMButton"   icon="ui-icon-search" value="#{bundle.View}" update=":SmartMeterViewForm" oncomplete="PF('SmartMeterViewDialog').show()" disabled="#{empty consumerClientController.selectedSmartMeter}"/>
+                                                    <p:commandButton id="editSMButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":SmartMeterEditForm" oncomplete="PF('SmartMeterEditDialog').show()" disabled="#{empty consumerClientController.selectedSmartMeter}"/>
+                                                    <p:commandButton id="deleteSMButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{consumerClientController.destroySmartMeter()}" update=":growl,:ConsumerClientListForm:panelDevices" disabled="#{empty consumerClientController.selectedSmartMeter}"/>
+                                                </f:facet>
+                                            </p:dataTable>
+                                        </p:panel>
+                                    </div>
+                                </p:panel>
+                            </h:form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <ui:include src="EditSM.xhtml"/>
+            <ui:include src="ViewSM.xhtml"/>
+            <ui:include src="CreateSM.xhtml"/>
+            <ui:include src="CreateCP.xhtml"/>
+            <ui:include src="EditCP.xhtml"/>
+            <ui:include src="ViewCP.xhtml"/>	
+            <ui:include src="CreateClient.xhtml"/>
+            <ui:include src="EditClient.xhtml"/>
+            <ui:include src="ViewClient.xhtml"/>
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+
+            <h:outputScript library="js" name="bootstrap.js" />
+        </ui:define>
+
+
+    </ui:composition>
+
+</html>

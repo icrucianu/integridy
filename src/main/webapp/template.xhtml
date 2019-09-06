@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title><ui:insert name="title">Default Title</ui:insert></title>
+        <h:outputStylesheet library="css" name="jsfcrud.css"/>
+        <h:outputScript library="js" name="jsfcrud.js"/>
+    </h:head>
+
+    <h:body>
+
+        <p:growl id="growl" life="3000" />
+
+        <p:layout fullPage="true">
+            <p:layoutUnit position="north" size="65" header="#{bundle.AppName}">
+                <h:form id="menuForm">
+                    <p:menubar>
+                        <p:menuitem value="#{bundle.Home}" outcome="/index" icon="ui-icon-home"/>
+                        <p:submenu label="#{bundle.Maintenance}">
+                            <p:menuitem value="AssocUserRole" outcome="/assocUserRole/List.xhtml" />
+                            <p:menuitem value="AuditLog" outcome="/auditLog/List.xhtml" />
+                            <p:menuitem value="ClientAddInfo" outcome="/clientAddInfo/List.xhtml" />
+                            <p:menuitem value="ClientComplexRule" outcome="/clientComplexRule/List.xhtml" />
+                            <p:menuitem value="ClientNotification" outcome="/clientNotification/List.xhtml" />
+                            <p:menuitem value="ClientSimpleRule" outcome="/clientSimpleRule/List.xhtml" />
+                            <p:menuitem value="ConsumerClient" outcome="/consumerClient/List.xhtml" />
+                            <p:menuitem value="ConsumerPrices" outcome="/consumerPrices/List.xhtml" />
+                            <p:menuitem value="ConsumptionPoint" outcome="/consumptionPoint/List.xhtml" />
+                            <p:menuitem value="ConsumptionRecord" outcome="/consumptionRecord/List.xhtml" />
+                            <p:menuitem value="CumulClientD" outcome="/cumulClientD/List.xhtml" />
+                            <p:menuitem value="CumulClientH" outcome="/cumulClientH/List.xhtml" />
+                            <p:menuitem value="CumulClientM" outcome="/cumulClientM/List.xhtml" />
+                            <p:menuitem value="CumulClientW" outcome="/cumulClientW/List.xhtml" />
+                            <p:menuitem value="CumulClientY" outcome="/cumulClientY/List.xhtml" />
+                            <p:menuitem value="CumulDsoD" outcome="/cumulDsoD/List.xhtml" />
+                            <p:menuitem value="CumulDsoH" outcome="/cumulDsoH/List.xhtml" />
+                            <p:menuitem value="CumulDsoM" outcome="/cumulDsoM/List.xhtml" />
+                            <p:menuitem value="CumulDsoW" outcome="/cumulDsoW/List.xhtml" />
+                            <p:menuitem value="CumulDsoY" outcome="/cumulDsoY/List.xhtml" />
+                            <p:menuitem value="CurentClientD" outcome="/curentClientD/List.xhtml" />
+                            <p:menuitem value="CurentDsoD" outcome="/curentDsoD/List.xhtml" />
+                            <p:menuitem value="DsoComplexRule" outcome="/dsoComplexRule/List.xhtml" />
+                            <p:menuitem value="DsoNotification" outcome="/dsoNotification/List.xhtml" />
+                            <p:menuitem value="DsoSimpleRule" outcome="/dsoSimpleRule/List.xhtml" />
+                            <p:menuitem value="ErrorLog" outcome="/errorLog/List.xhtml" />
+                            <p:menuitem value="ForecastClient" outcome="/forecastClient/List.xhtml" />
+                            <p:menuitem value="ForecastDso" outcome="/forecastDso/List.xhtml" />
+                            <p:menuitem value="GParameter" outcome="/gParameter/List.xhtml" />
+                            <p:menuitem value="GeneratedValuesInterval" outcome="/generatedValuesInterval/List.xhtml" />
+                            <p:menuitem value="IcTest" outcome="/icTest/List.xhtml" />
+                            <p:menuitem value="OptimumClient" outcome="/optimumClient/List.xhtml" />
+                            <p:menuitem value="OptimumDso" outcome="/optimumDso/List.xhtml" />
+                            <p:menuitem value="Role" outcome="/role/List.xhtml" />
+                            <p:menuitem value="SmartMeter" outcome="/smartMeter/List.xhtml" />
+                            <p:menuitem value="Users" outcome="/users/List.xhtml" />
+                            <p:menuitem value="WhatIfParameters" outcome="/whatIfParameters/List.xhtml" />
+                        </p:submenu>
+                    </p:menubar>
+                </h:form>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="south" size="60">
+                <ui:insert name="footer"/>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="center">
+                <ui:insert name="body"/>
+            </p:layoutUnit>
+
+        </p:layout>
+
+    </h:body>
+
+</html>
